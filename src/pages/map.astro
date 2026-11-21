@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.astro';
+import { primaryNavigation } from '../config/navigation';
+import { allBrands, brandComparisons } from '../data/brands';
+import { allClients } from '../data/clients';
+
+const tutorials = await getCollection('tutorials', ({ data }) => !data.draft);
+const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '全站 HTML 网站地图', href: '/map/' },
+];
+---
+
+<BaseLayout
+  title="全站网站地图（HTML Sitemap）- 十大专题、32品牌、评测与教程索引"
+  description="浏览本站全部一级专题、二级页面、32 家机场品牌档案与评测、横向对比、客户端软件与深度学习文章。"
+  pathname="/map/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">全站 HTML 网站地图</h1>
+      <p class="mt-2 text-sm text-slate-600">
+        XML 搜索引擎地图位于 <a href="/sitemap-index.xml" class="text-brand underline">/sitemap-index.xml</a>；下方为面向用户的完整页面索引。
+      </p>
+    </header>
+
+    <section>
+      <h2 class="text-xl font-bold text-slate-900 mb-4">一、十大一级主导航与全部二级专题</h2>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          primaryNavigation.map((cat) => (
+            <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-2">
+              <h3 class="font-bold text-sm text-brand">
+                <a href={cat.href} class="hover:underline">{cat.label}</a>
+              </h3>
+              <ul class="space-y-1 text-xs text-slate-700">
+                {cat.children.map((sub) => (
+                  <li><a href={sub.href} class="hover:text-brand">{sub.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-slate-200 bg-white p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-lg font-bold text-slate-900">二、32 家机场品牌档案与评测</h2>
+          <a href="/brands/planned-directory/" class="text-xs font-medium text-brand hover:underline">扩展规划池（149家）→</a>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          {
+            allBrands.map((b) => (
+              <div class="flex items-center justify-between border-b border-slate-100 py-1">
+                <a href={`/brands/${b.slug}/`} class="font-medium text-slate-800 hover:text-brand">{b.name}</a>
+                <a href={`/reviews/${b.slug}/`} class="text-brand hover:underline">评测</a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">三、客户端软件知识库</h2>
+          <div class="flex flex-wrap gap-2 text-xs">
+            {allClients.map((c) => (
+              <a href={`/clients/${c.slug}/`} class="rounded bg-slate-100 px-2.5 py-1 hover:bg-brand-soft hover:text-brand">
+                {c.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <h2 class="text-lg font-bold text-slate-900 mb-3">四、品牌横向对比与深度文章</h2>
+          <ul class="space-y-1.5 text-xs text-slate-700">
+            {brandComparisons.map((cmp) => (
+              <li><a href={`/compare/${cmp.slug}/`} class="hover:text-brand">{cmp.title}</a></li>
+            ))}
+            {tutorials.map((t) => (
+              <li><a href={`/tutorials/${t.data.topic}/${t.data.slugName}/`} class="hover:text-brand">{t.data.title}</a></li>
+            ))}
+            {articles.map((a) => (
+              <li><a href={`/articles/${a.id}/`} class="hover:text-brand">{a.data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

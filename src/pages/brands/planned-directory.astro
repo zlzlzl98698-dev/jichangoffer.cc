@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import plannedBrands from '../../data/brands/planned-brands-raw.json';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌库', href: '/brands/' },
+  { label: '扩展规划名录（149 家）', href: '/brands/planned-directory/' },
+];
+
+const coreLinkedCount = plannedBrands.filter((b) => b.alreadyInCore32).length;
+const pendingCount = plannedBrands.length - coreLinkedCount;
+---
+
+<BaseLayout
+  title="百机场扩展规划名录（149 家待核实档案索引）"
+  description="集中收录《机场名字》扩展规划中的 149 个机场品牌名称与评测选题，严格标注待核实状态，不创建空壳页面或假跳转链接。"
+  pathname="/brands/planned-directory/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 space-y-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-3">
+      <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+        <span class="rounded bg-brand-soft px-2.5 py-0.5 font-semibold text-brand">
+          Planned Directory · 待核实扩展规划池
+        </span>
+        <span class="text-slate-500">共 {plannedBrands.length} 家（{coreLinkedCount} 家已入核心 32 品牌库，{pendingCount} 家待核实资料）</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        百机场扩展规划与选题跟踪名录
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        依据“没有可靠资料和注册链接时不生成空壳页面、不用假跳转链接”的原则，本页集中归档待扩展跟踪的 {pendingCount} 个品牌名称与规划选题，并同步纳入关键词机会矩阵（<code>reports/content-opportunities.csv</code>）。待后续补齐真实套餐与测试截图后，再逐家升格为独立品牌详情与评测页。
+      </p>
+      <div class="pt-1 flex flex-wrap gap-3 text-xs">
+        <a href="/brands/" class="rounded-lg bg-brand px-4 py-2 font-semibold text-white hover:bg-brand-dark">
+          返回已核验 32 家品牌库 →
+        </a>
+        <a href="/reviews/" class="rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-800 hover:border-brand">
+          查看品牌评测矩阵 →
+        </a>
+      </div>
+    </header>
+
+    <!-- Instant Search Filter -->
+    <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+      <div class="flex-1">
+        <label for="planned-search" class="sr-only">搜索规划品牌名称</label>
+        <input
+          id="planned-search"
+          type="search"
+          placeholder="输入品牌名称快速查找（如：TAG、Nexitally、FlowerCloud、狗狗云...）"
+          class="w-full rounded-lg border border-slate-300 px-3.5 py-2 text-sm focus:border-brand focus:outline-none"
+        />
+      </div>
+      <span id="planned-count" class="font-mono text-xs text-slate-500 shrink-0">
+        显示 {plannedBrands.length} / {plannedBrands.length} 条
+      </span>
+    </div>
+
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+      <table class="w-full border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700">
+            <th class="px-4 py-3 w-16">#</th>
+            <th class="px-4 py-3">品牌名称</th>
+            <th class="px-4 py-3">规划评测选题方向</th>
+            <th class="px-4 py-3">核验与链接状态</th>
+          </tr>
+        </thead>
+        <tbody id="planned-tbody" class="divide-y divide-slate-100">
+          {
+            plannedBrands.map((item) => (
+              <tr
+                class="planned-row hover:bg-slate-50"
+                data-search={`${item.name} ${item.plannedTitle}`.toLowerCase()}
+              >
+                <td class="px-4 py-2.5 font-mono text-xs text-slate-400">{item.index}</td>
+                <td class="px-4 py-2.5 font-semibold text-slate-900">
+                  {item.alreadyInCore32 && item.coreUrl ? (
+                    <a href={item.coreUrl} class="text-brand hover:underline">{item.name}</a>
+                  ) : (
+                    <span>{item.name}</span>
+                  )}
+                </td>
+                <td class="px-4 py-2.5 text-xs text-slate-600">{item.plannedTitle}</td>
+                <td class="px-4 py-2.5 text-xs">
+                  {item.alreadyInCore32 && item.coreUrl ? (
+                    <a
+                      href={item.coreUrl}
+                      class="inline-block rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 font-medium text-emerald-700 hover:bg-emerald-100"
+                    >
+                      已入核心 32 库 →
+                    </a>
+                  ) : (
+                    <span class="inline-block rounded-full bg-slate-100 px-2.5 py-0.5 text-slate-600">
+                      待核实纯档案（无假链接）
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById('planned-search') as HTMLInputElement | null;
+  const rows = Array.from(document.querySelectorAll('.planned-row')) as HTMLElement[];
+  const countEl = document.getElementById('planned-count');
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visible = 0;
+    for (const r of rows) {
+      const match = !q || (r.dataset.search || '').includes(q);
+      r.classList.toggle('hidden', !match);
+      if (match) visible++;
+    }
+    if (countEl) countEl.textContent = `显示 ${visible} / ${rows.length} 条`;
+  });
+</script>

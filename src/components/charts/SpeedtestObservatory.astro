@@ -1,0 +1,228 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { BrandRecord } from '../../data/brands';
+
+export interface Props {
+  brand: BrandRecord;
+}
+
+const { brand } = Astro.props;
+
+// Import all real evidence images via Vite glob so astro:assets optimizes them at build time
+const evidenceImages = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/evidence/**/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+
+function resolveEvidenceImage(filename?: string): ImageMetadata | null {
+  if (!filename) return null;
+  for (const [pathKey, mod] of Object.entries(evidenceImages)) {
+    if (pathKey.endsWith(`/${filename}`) || pathKey.endsWith(filename)) {
+      return mod.default;
+    }
+  }
+  return null;
+}
+
+// Also gather extra guangsuyun 2026-08-19 screenshots if brand is guangsuyun
+const extraGuangsuyunImages =
+  brand.slug === 'guangsuyun'
+    ? Object.entries(evidenceImages)
+        .filter(([k]) => k.includes('guangsuyun-2026-08-19'))
+        .map(([k, mod]) => ({
+          filename: k.split('/').pop() || k,
+          meta: mod.default,
+        }))
+    : [];
+
+const hasReports = brand.testReports.length > 0;
+---
+
+<section
+  class="rounded-2xl border border-observatory-border bg-observatory text-slate-100 p-5 sm:p-7 observatory-grid shadow-lg"
+  style={`border-top: 3px solid ${brand.brandColor};`}
+  aria-label={`${brand.name} 节点测速监测报告`}
+>
+  <div class="flex flex-col gap-3 border-b border-slate-800 pb-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span
+          class="inline-block h-2.5 w-2.5 rounded-full"
+          style={`background-color: ${hasReports ? '#10B981' : '#64748B'};`}
+        ></span>
+        <span class="font-mono text-xs uppercase tracking-wider text-slate-400">
+          Performance Monitoring Report · 测速证据观测台
+        </span>
+      </div>
+      <h2 class="mt-1 text-lg sm:text-xl font-bold text-white">
+        {brand.name} 节点延迟与吞吐实测数据
+      </h2>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <span
+        class:list={[
+          'rounded-full px-3 py-1 font-mono text-xs border',
+          hasReports
+            ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+            : 'border-slate-700 bg-slate-800/70 text-slate-300',
+        ]}
+      >
+        {hasReports ? 'Measured Data (含实测记录)' : 'Not Tested (暂无可核实实测)'}
+      </span>
+    </div>
+  </div>
+
+  {!hasReports ? (
+    <div class="mt-5 rounded-xl border border-slate-800 bg-observatory-surface/80 p-5 text-sm text-slate-300">
+      <p class="font-semibold text-white">暂无可核实实测数据</p>
+      <p class="mt-1.5 leading-relaxed text-slate-400">
+        当前资料库尚未收录 {brand.name} 的第三方节点测速截图或统一批次实测数值。本站严格遵守“不将模拟值或商家宣传写为实测”的原则，后续补充实测样本后将在此面板更新完整延迟与吞吐报告。
+      </p>
+    </div>
+  ) : (
+    <div class="mt-5 space-y-6">
+      {brand.testReports.map((report) => {
+        const imgMeta = resolveEvidenceImage(report.evidenceImage);
+        const maxSpeed = Math.max(
+          ...report.snapshots.map((s) => s.downloadMbps || 0),
+          100
+        );
+        return (
+          <div class="rounded-xl border border-slate-800 bg-observatory-surface/90 p-4 sm:p-5 space-y-4">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-800 pb-3">
+              <div class="space-y-1">
+                <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+                  <span class="rounded bg-slate-800 px-2 py-0.5 text-slate-200">{report.date}</span>
+                  <span class="text-slate-400">{report.timeWindow}</span>
+                  <span class="rounded bg-blue-500/15 border border-blue-500/30 px-2 py-0.5 text-blue-300">
+                    {report.protocolDisplayed}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-400">
+                  测试环境：{report.location} · {report.isp} · {report.software}
+                </p>
+              </div>
+              <span
+                class:list={[
+                  'self-start rounded px-2.5 py-0.5 font-mono text-[11px] border',
+                  report.reviewStatus === 'approved'
+                    ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                    : 'border-amber-500/30 bg-amber-500/10 text-amber-300',
+                ]}
+              >
+                {report.reviewStatus === 'approved' ? 'Verified Snapshot' : 'Review-Required 原始截图'}
+              </span>
+            </div>
+
+            {report.snapshots.length > 0 && (
+              <div class="space-y-2.5">
+                {report.snapshots.map((snap) => {
+                  const pct = snap.downloadMbps
+                    ? Math.min(100, Math.max(4, Math.round((snap.downloadMbps / maxSpeed) * 100)))
+                    : 0;
+                  const latencyColor =
+                    snap.latencyMs === null
+                      ? 'text-slate-400'
+                      : snap.latencyMs <= 60
+                      ? 'text-emerald-400'
+                      : snap.latencyMs <= 120
+                      ? 'text-amber-300'
+                      : 'text-slate-300';
+                  return (
+                    <div class="grid grid-cols-12 items-center gap-3 text-xs sm:text-sm">
+                      <div class="col-span-4 sm:col-span-3 font-medium text-slate-200 truncate">
+                        {snap.region}
+                      </div>
+                      <div class={`col-span-3 sm:col-span-2 font-mono tabular-nums ${latencyColor}`}>
+                        {snap.latencyMs !== null ? `${snap.latencyMs} ms` : '—'}
+                      </div>
+                      <div class="col-span-5 sm:col-span-7 flex items-center gap-3">
+                        <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-800">
+                          <div
+                            class="h-full rounded-full transition-all"
+                            style={`width: ${pct}%; background-color: ${brand.brandColor};`}
+                          ></div>
+                        </div>
+                        <span class="w-20 text-right font-mono tabular-nums text-slate-200">
+                          {snap.downloadMbps !== null ? `${snap.downloadMbps} Mbps` : '—'}
+                        </span>
+                      </div>
+                      {snap.note && (
+                        <div class="col-span-12 text-[11px] text-slate-400 -mt-1 pl-1">
+                          ↳ {snap.note}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <p class="text-xs leading-relaxed text-slate-300">
+              <strong class="text-white">记录摘要：</strong>{report.summaryNote}
+            </p>
+
+            {imgMeta && (
+              <details class="rounded-lg border border-slate-700/80 bg-slate-900/70 p-3">
+                <summary class="cursor-pointer text-xs font-medium text-blue-300 hover:text-blue-200">
+                  查看原始实测截图证据（{report.evidenceImage} · 保持原图未经篡改）
+                </summary>
+                <div class="mt-3 space-y-2">
+                  <Image
+                    src={imgMeta}
+                    alt={`${brand.name} ${report.date} 节点测速截图，包含节点地区、协议、延迟和速度结果。`}
+                    class="w-full max-w-2xl rounded-lg border border-slate-700"
+                    loading="lazy"
+                  />
+                  <p class="text-[11px] text-slate-400">
+                    测试时间：{report.date} {report.timeWindow}。本图仅记录当次测试环境下的节点延迟与吞吐结果，不代表长期表现或所有宽带用户体验。
+                  </p>
+                </div>
+              </details>
+            )}
+
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px] text-slate-400">
+              <span class="font-semibold text-slate-300">数据边界：</span>
+              {report.limitations.map((lim) => (
+                <span class="rounded bg-slate-800/80 px-2 py-0.5">{lim}</span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      {extraGuangsuyunImages.length > 0 && (
+        <div class="rounded-xl border border-slate-800 bg-observatory-surface/90 p-4 sm:p-5">
+          <h3 class="text-sm font-bold text-white mb-2">
+            光速云 2026-08-19 多运营商 MiaoKo 实测证据图库（5 张原图）
+          </h3>
+          <p class="text-xs text-slate-400 mb-4">
+            涵盖长沙电信@2Gbps、广西移动@2Gbps、河北联通@2Gbps（62 节点测速与 AI/流媒体解锁）及珠海联通 9Gbps 单线程（70 节点流媒体/速度测试）。
+          </p>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {extraGuangsuyunImages.map((item) => (
+              <a
+                href={item.meta.src}
+                target="_blank"
+                rel="noopener"
+                class="group block overflow-hidden rounded-lg border border-slate-700 bg-slate-900 p-2 hover:border-blue-400 transition-colors"
+              >
+                <Image
+                  src={item.meta}
+                  alt={`光速云 2026-08-19 MiaoKo 实测原始截图 ${item.filename}`}
+                  class="h-44 w-full object-cover object-top rounded"
+                  loading="lazy"
+                />
+                <span class="mt-2 block truncate font-mono text-[11px] text-slate-300 group-hover:text-blue-300">
+                  {item.filename} ↗
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+</section>

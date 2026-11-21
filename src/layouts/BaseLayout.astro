@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import SEOHead, { type BreadcrumbItem } from '../components/seo/SEOHead.astro';
+import Header from '../components/navigation/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  faqs?: Array<{ question: string; answer: string }>;
+  jsonLdExtra?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const props = Astro.props;
+const { analytics } = siteConfig;
+---
+
+<!doctype html>
+<html lang={siteConfig.language}>
+  <head>
+    <SEOHead {...props} />
+    {analytics.enabled && analytics.provider === 'umami' && analytics.scriptUrl && analytics.websiteId && (
+      <script defer src={analytics.scriptUrl} data-website-id={analytics.websiteId} />
+    )}
+    {analytics.enabled && analytics.provider === 'plausible' && analytics.scriptUrl && analytics.domain && (
+      <script defer data-domain={analytics.domain} src={analytics.scriptUrl} />
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-slate-900 antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+    >
+      跳至正文内容
+    </a>
+
+    <Header currentPath={props.pathname} />
+
+    <main id="main-content" class="flex-1" {...(!props.noindex ? { 'data-pagefind-body': '' } : {})}>
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Privacy-safe CTA & Coupon Conversion Hook (Umami / Plausible / Custom Beacon) -->
+    <script
+      is:inline
+      define:vars={{
+        analyticsEnabled: analytics.enabled,
+        analyticsProvider: analytics.provider,
+        analyticsEndpoint: analytics.endpoint || '',
+        trackOutboundCta: analytics.trackOutboundCta,
+      }}
+    >
+      document.addEventListener('click', (e) => {
+        if (!trackOutboundCta) return;
+        const el = e.target instanceof Element ? e.target.closest('[data-cta-track]') : null;
+        if (!el) return;
+        const payload = {
+          brand: el.getAttribute('data-cta-brand') || '',
+          placement: el.getAttribute('data-cta-placement') || '',
+          contentType: el.getAttribute('data-cta-content-type') || '',
+          sourcePage: window.location.pathname,
+          targetUrl: el.getAttribute('href') || '',
+          timestamp: new Date().toISOString(),
+        };
+
+        if (!analyticsEnabled) return;
+
+        if (analyticsProvider === 'umami' && typeof window.umami?.track === 'function') {
+          window.umami.track('cta_click', payload);
+        } else if (analyticsProvider === 'plausible' && typeof window.plausible === 'function') {
+          window.plausible('cta_click', { props: payload });
+        } else if (analyticsEndpoint && navigator.sendBeacon) {
+          navigator.sendBeacon(
+            analyticsEndpoint,
+            new Blob([JSON.stringify(payload)], { type: 'application/json' })
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

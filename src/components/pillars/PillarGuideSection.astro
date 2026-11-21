@@ -1,0 +1,225 @@
+---
+import type { BrandRecord } from '../../data/brands';
+import { getBrandLink, AFFILIATE_REL } from '../../data/links/brands';
+import { siteConfig } from '../../config/site';
+import { renderInlineMarkdown } from '../../lib/inlineMarkdown';
+
+export interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface CrossPillarItem {
+  label: string;
+  href: string;
+  reason: string;
+}
+
+export interface Props {
+  headings: HeadingItem[];
+  recommendedBrands: BrandRecord[];
+  crossPillarLinks: CrossPillarItem[];
+  faqs: Array<{ question: string; answer: string }>;
+  dataGapNotes?: string[];
+  sources?: string[];
+  pillarLabel: string;
+  updatedAt?: string;
+}
+
+const {
+  headings,
+  recommendedBrands,
+  crossPillarLinks,
+  faqs,
+  dataGapNotes = [],
+  sources = [],
+  pillarLabel,
+  updatedAt = '2026-11-21',
+} = Astro.props;
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+<div class="space-y-10">
+  <!-- Mobile Collapsible TOC -->
+  {
+    tocHeadings.length > 0 && (
+      <details class="lg:hidden rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <summary class="cursor-pointer font-bold text-sm text-slate-900 select-none">
+          本专题深度指南目录（共 {tocHeadings.length} 个核心章节 · 点击展开）
+        </summary>
+        <nav aria-label="移动端专题目录" class="mt-3 border-t border-slate-200 pt-3">
+          <ul class="space-y-2 text-xs">
+            {tocHeadings.map((h) => (
+              <li class:list={[h.depth === 3 ? 'pl-4 text-slate-500' : 'font-medium text-slate-800']}>
+                <a href={`#${h.slug}`} class="hover:text-brand hover:underline block py-0.5">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    )
+  }
+
+  <!-- Desktop 2-Column Editorial Layout -->
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18.5rem] lg:items-start">
+    <!-- Main Long-Form Prose -->
+    <section
+      data-pillar-prose
+      class="min-w-0 w-full overflow-x-hidden prose prose-slate max-w-none prose-zh rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 shadow-sm"
+    >
+      <slot />
+    </section>
+
+    <!-- Sticky Right Rail Sidebar -->
+    <aside class="space-y-5 lg:sticky lg:top-20">
+      {
+        tocHeadings.length > 0 && (
+          <nav aria-label="专题大纲目录" class="hidden lg:block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <h2 class="text-xs font-mono uppercase tracking-wider font-bold text-slate-500 mb-3">
+              On This Page · 专题导航
+            </h2>
+            <ul class="space-y-1.5 text-xs max-h-[48vh] overflow-y-auto pr-1">
+              {tocHeadings.map((h) => (
+                <li class:list={[h.depth === 3 ? 'pl-3.5 text-slate-500' : 'font-medium text-slate-800']}>
+                  <a href={`#${h.slug}`} class="block py-0.5 hover:text-brand transition-colors leading-snug">
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+              {faqs.length > 0 && (
+                <li class="font-medium text-brand pt-1.5 border-t border-slate-100">
+                  <a href="#pillar-faq" class="block py-0.5 hover:underline">
+                    常见核心问答 ({faqs.length} 题)
+                  </a>
+                </li>
+              )}
+            </ul>
+          </nav>
+        )
+      }
+
+      {
+        recommendedBrands.length > 0 && (
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xs font-bold text-slate-900">参考品牌官网与优惠直达</h2>
+              <span class="font-mono text-[10px] text-slate-500">含推广披露</span>
+            </div>
+            <ul class="space-y-2.5 text-xs">
+              {recommendedBrands.slice(0, 4).map((b) => {
+                const linkInfo = getBrandLink(b.slug);
+                const ctaUrl =
+                  linkInfo?.affiliateUrl && linkInfo.linkStatus !== 'format-anomaly'
+                    ? linkInfo.affiliateUrl
+                    : null;
+                return (
+                  <li class="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5">
+                    <div class="flex items-center justify-between gap-2">
+                      <a href={`/brands/${b.slug}/`} class="font-bold text-slate-900 hover:text-brand">
+                        {b.name}
+                      </a>
+                      <span class="font-mono text-[11px] text-slate-600">{b.lowestMonthlyLabel}</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+                      <a href={b.hasDeepReview ? `/reviews/${b.slug}/` : `/brands/${b.slug}/`} class="text-brand hover:underline">
+                        {b.hasDeepReview ? '看评测 →' : '看档案 →'}
+                      </a>
+                      {ctaUrl ? (
+                        <a
+                          href={ctaUrl}
+                          target="_blank"
+                          rel={AFFILIATE_REL}
+                          data-affiliate-brand={b.slug}
+                          data-affiliate-placement={`pillar-sidebar-${pillarLabel}`}
+                          class="rounded bg-brand px-2 py-0.5 font-semibold text-white hover:bg-brand-dark"
+                        >
+                          注册入口 ↗
+                        </a>
+                      ) : (
+                        <a href={`/brands/${b.slug}/`} class="text-slate-500 hover:underline">
+                          核对官网状态
+                        </a>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <p class="text-[11px] leading-relaxed text-slate-500">
+              {siteConfig.affiliateDisclosure}
+            </p>
+          </div>
+        )
+      }
+
+      {
+        dataGapNotes.length > 0 && (
+          <div class="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 space-y-2">
+            <h2 class="text-xs font-bold text-amber-900">实测边界与数据说明</h2>
+            <ul class="space-y-1.5 text-[11px] leading-relaxed text-amber-900/90 list-disc pl-4">
+              {dataGapNotes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+            {sources.length > 0 && (
+              <p class="pt-1 border-t border-amber-200/80 text-[10px] font-mono text-amber-800/80">
+                核验更新 {updatedAt} · 依据：{sources[0]}
+              </p>
+            )}
+          </div>
+        )
+      }
+    </aside>
+  </div>
+
+  <!-- Structured FAQs (Matches FAQPage Schema) -->
+  {
+    faqs.length > 0 && (
+      <section id="pillar-faq" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-5 scroll-mt-24">
+        <div class="space-y-1">
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+            Frequently Asked Questions · 结构化问答
+          </span>
+          <h2 class="text-xl font-bold text-slate-900">
+            关于「{pillarLabel}」的 {faqs.length} 个核心高频问题
+          </h2>
+        </div>
+        <div class="divide-y divide-slate-100">
+          {faqs.map((faq, idx) => (
+            <details open={idx < 2} class="group py-3.5 first:pt-0 last:pb-0">
+              <summary class="flex cursor-pointer items-start justify-between gap-4 font-semibold text-sm sm:text-base text-slate-900 hover:text-brand select-none">
+                <span>{idx + 1}. {faq.question}</span>
+                <span class="shrink-0 font-mono text-xs text-slate-400 group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="mt-2.5 text-sm leading-relaxed text-slate-600 pl-1" set:html={renderInlineMarkdown(faq.answer)} />
+            </details>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Cross-Pillar Bridge Links -->
+  {
+    crossPillarLinks.length > 0 && (
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+        <h2 class="text-lg font-bold text-slate-900">跨体系关联专题与延伸阅读</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {crossPillarLinks.map((link) => (
+            <a
+              href={link.href}
+              class="rounded-xl border border-slate-200 bg-white p-4 hover:border-brand transition-colors block space-y-1"
+            >
+              <div class="text-sm font-bold text-slate-900 hover:text-brand">{link.label} →</div>
+              <p class="text-xs leading-relaxed text-slate-600">{link.reason}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+</div>

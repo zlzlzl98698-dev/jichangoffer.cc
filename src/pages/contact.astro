@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '联系我们与勘误反馈', href: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="联系编辑部与品牌资料勘误反馈"
+  description="向机场优惠编辑部提交套餐价格变更、失效链接反馈、最新实测投稿或客户端教程勘误。"
+  pathname="/contact/"
+  breadcrumbs={breadcrumbs}
+>
+  <article class="mx-auto max-w-4xl px-4 py-8 sm:px-6 space-y-6 prose-zh">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1>联系编辑部与资料勘误</h1>
+    <p>
+      代理服务商的价格、优惠码、协议栈及客户端版本处于高频变化之中。如果您在查阅本站档案时发现以下情况，欢迎随时联系我们核实更新：
+    </p>
+    <ul>
+      <li>某品牌已停服、官网域名变更或推广注册链接无法正常打开；</li>
+      <li>某品牌套餐流量、月付价格或优惠码适用规则已发生调整；</li>
+      <li>您持有可追溯测试时间、环境与工具版本的最新三网实测记录愿意补充；</li>
+      <li>开源客户端仓库地址或操作系统兼容性出现重大版本更替。</li>
+    </ul>
+    <div class="rounded-xl border border-slate-200 bg-slate-50 p-5 not-prose text-sm">
+      <p><strong>编辑部联系邮箱：</strong><code class="font-mono text-brand">{siteConfig.contactEmail}</code></p>
+      <p class="mt-2 text-xs text-slate-600">
+        提示：本站仅提供纯静态内容指南，不直接运营任何机场节点或代收任何用户套餐款项；如需处理具体账号充值或工单售后，请直接联系对应品牌官方客服。
+      </p>
+    </div>
+  </article>
+</BaseLayout>

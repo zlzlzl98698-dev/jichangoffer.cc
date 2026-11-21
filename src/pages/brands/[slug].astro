@@ -1,0 +1,411 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import BrandCtaBanner from '../../components/conversion/BrandCtaBanner.astro';
+import SpeedtestObservatory from '../../components/charts/SpeedtestObservatory.astro';
+import UnlockMatrixObservatory from '../../components/charts/UnlockMatrixObservatory.astro';
+import RouteTopologyObservatory from '../../components/charts/RouteTopologyObservatory.astro';
+import { allBrands, getSimilarBrands, type BrandRecord } from '../../data/brands';
+import { getBrandLink } from '../../data/links/brands';
+import { siteConfig, getCanonicalUrl } from '../../config/site';
+import { findBrandComparisons, pickRepresentativePlans, formatCostPerGb } from '../../lib/contentLinks';
+
+export function getStaticPaths() {
+  return allBrands.map((brand) => ({
+    params: { slug: brand.slug },
+    props: { brand },
+  }));
+}
+
+interface Props {
+  brand: BrandRecord;
+}
+
+const { brand } = Astro.props;
+const link = getBrandLink(brand.slug);
+const similarBrands = getSimilarBrands(brand.slug, 4);
+const relatedComparisons = findBrandComparisons(brand.slug);
+const repPlans = pickRepresentativePlans(brand.pricingPlans, 5);
+const logos = import.meta.glob<{ default: ImageMetadata }>('../../assets/logos/*.{png,jpg,jpeg,webp}', { eager: true });
+const brandLogo = Object.entries(logos).find(([k]) => k.includes(`${brand.slug}-icon`))?.[1]?.default;
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌数据库', href: '/brands/' },
+  { label: brand.name, href: `/brands/${brand.slug}/` },
+];
+
+const brandFaqs = [
+  {
+    question: `${brand.name} 支持哪些客户端，需要购买第三方软件吗？`,
+    answer: `${brand.name} 当前资料记录为「${brand.clientModeLabel}」，适配列表：${brand.clients.join('、')}。如果您使用 iPhone 且需要导入通用订阅，Shadowrocket 在海外 App Store 属于付费应用；如果品牌提供自研客户端则通常直接登录即可。`,
+  },
+  {
+    question: `${brand.name} 的起步价格是按月付还是年付计算的？`,
+    answer: `当前记录为：${brand.lowestMonthlyLabel}。注意年付折算月价必须一次性支付全年费用，并非每月小额扣费，购买前请在下方套餐表核对具体计费周期。`,
+  },
+  {
+    question: `${brand.name} 有哪些最新优惠码，使用条件是什么？`,
+    answer: link?.couponCode
+      ? `资料记录优惠码为 ${link.couponCode}（${link.couponDiscountNote || '适用范围以结算页为准'}）。部分品牌的轻量特价年付或一次性永久流量包不支持叠加折扣，请在官网提交订单前核对实际减免金额。`
+      : `当前资料库尚未核实到 ${brand.name} 公开有效优惠码，下单请以官网实时结账金额为准。`,
+  },
+  {
+    question: `购买 ${brand.name} 前需要注意哪些退款与链接风险？`,
+    answer:
+      `${brand.riskNotes[0] || '虚拟流量消耗类服务通常设有严格退订限制，首单建议先按月付验证本地网络与 AI 兼容性。'}${
+        link?.linkStatus === 'format-anomaly'
+          ? ` 另需注意：当前资料收录链接存在格式异常备注（${link.linkFormatNote || '建议核对官网入口'}）。`
+          : ''
+      }`,
+  },
+];
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${brand.name} 品牌档案与套餐价格`,
+  description: brand.summary,
+  datePublished: brand.verifiedAt,
+  dateModified: brand.updatedAt,
+  author: {
+    '@type': 'Organization',
+    name: siteConfig.editorialEntity,
+    url: getCanonicalUrl('/about/'),
+  },
+  mainEntityOfPage: getCanonicalUrl(`/brands/${brand.slug}/`),
+};
+---
+
+<BaseLayout
+  title={`${brand.name}官网入口、套餐价格表与优惠码（${brand.verifiedAt}核验）`}
+  description={`${brand.name}完整结构化档案：包含最新核验套餐价目、计费周期、优惠码 ${link?.couponCode || '待核实'}、线路协议、测速证据与风险提示。`}
+  pathname={`/brands/${brand.slug}/`}
+  ogType="article"
+  publishedTime={brand.verifiedAt}
+  modifiedTime={brand.updatedAt}
+  breadcrumbs={breadcrumbs}
+  faqs={brandFaqs}
+  jsonLdExtra={pageSchema}
+>
+  <article class="mx-auto max-w-6xl px-4 py-8 sm:px-6 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Hero Brand Header -->
+    <header class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div class="flex items-start gap-4">
+          {brandLogo ? (
+            <Image
+              src={brandLogo}
+              alt={`${brand.name} 品牌图标`}
+              class="h-14 w-14 shrink-0 rounded-xl object-cover shadow border border-slate-200"
+            />
+          ) : (
+            <span
+              class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl font-mono text-lg font-bold text-white shadow"
+              style={`background-color: ${brand.brandColor};`}
+            >
+              {brand.logoMonogram}
+            </span>
+          )}
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                {brand.name} 品牌档案与套餐价格
+              </h1>
+              {brand.aliases.length > 0 && (
+                <span class="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
+                  别名：{brand.aliases.join(' / ')}
+                </span>
+              )}
+            </div>
+            <p class="max-w-3xl text-sm sm:text-base leading-relaxed text-slate-600">
+              {brand.summary}
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1 text-xs font-mono text-slate-500">
+              <span>成立/运营：{brand.foundedYear ? `${brand.foundedYear} 年` : brand.foundedYearNote}</span>
+              <span>·</span>
+              <span>资料核实：{brand.verifiedAt}</span>
+              <span>·</span>
+              <span>数据状态：{brand.dataStatus}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="shrink-0 flex flex-wrap gap-2.5">
+          <a
+            href={`/reviews/${brand.slug}/`}
+            class="rounded-lg border border-brand bg-brand-soft px-4 py-2.5 text-sm font-semibold text-brand hover:bg-blue-100 transition-colors"
+          >
+            阅读深度评测正文 →
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Spec Matrix -->
+      <dl class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 border-t border-slate-100 pt-5 text-xs">
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">线路架构</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{brand.routeTypes.join(' / ')}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">支持协议</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{brand.protocols.join('、')}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">节点规模</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{brand.nodeCountLabel}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">客户端模式</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{brand.clientModeLabel}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <!-- Official Link & Coupon Banner -->
+    <BrandCtaBanner
+      brandSlug={brand.slug}
+      placement="brand-detail-top"
+      contentType="brand-detail"
+      brandColor={brand.brandColor}
+      lowestMonthlyLabel={brand.lowestMonthlyLabel}
+    />
+
+    <!-- Representative 4-5 Package Cards when >= 4 plans exist -->
+    {brand.pricingPlans.length >= 4 && (
+      <section class="space-y-4">
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">{brand.name} 代表性主力套餐精选卡片（{repPlans.length} 档）</h2>
+            <p class="text-xs text-slate-500">
+              从完整价目中抽取不同付费周期与流量层级，方便按预算快速对比单 GB 真实成本。
+            </p>
+          </div>
+          <a href={`/reviews/${brand.slug}/`} class="text-xs font-semibold text-brand hover:underline">
+            读{brand.name}深度评测看实测限制 →
+          </a>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {repPlans.map((plan) => {
+            const perGb = formatCostPerGb(plan);
+            return (
+              <div class="rounded-xl border border-slate-200 bg-white p-4 flex flex-col justify-between shadow-sm">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="rounded bg-brand-soft px-2 py-0.5 text-[11px] font-semibold text-brand">
+                      {plan.billingLabel}
+                    </span>
+                    <span class="font-mono text-[11px] text-slate-500">
+                      {plan.multiplier || plan.deviceLimit || '常规口径'}
+                    </span>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900 leading-snug">{plan.name}</h3>
+                  <div class="pt-1">
+                    <span class="font-mono text-2xl font-extrabold text-slate-900">¥{plan.priceCny}</span>
+                    {plan.monthlyEquivalentCny && (
+                      <span class="block text-[11px] font-mono text-slate-500">
+                        折合 ¥{plan.monthlyEquivalentCny}/月（一次性付清）
+                      </span>
+                    )}
+                  </div>
+                  <p class="text-xs font-mono text-slate-700 pt-1">
+                    {plan.trafficDisplay} · {plan.trafficCycle}
+                  </p>
+                  {perGb && <p class="text-[11px] font-mono text-emerald-700">{perGb}</p>}
+                </div>
+                {plan.suitableFor && (
+                  <p class="mt-3 pt-2.5 border-t border-slate-100 text-[11px] leading-relaxed text-slate-500">
+                    适用：{plan.suitableFor}
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    <!-- Pricing Plans Section -->
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between mb-5">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">{brand.name} 套餐与计费方式明细</h2>
+          <p class="mt-1 text-xs text-slate-500">
+            严格区分月付、年付总价与永久一次性流量包，未确认或缺失档位绝不凭空补齐。
+          </p>
+        </div>
+        <span class="font-mono text-xs text-slate-500">支付方式：{brand.paymentMethods.join(' / ')}</span>
+      </div>
+
+      {brand.pricingPlans.length === 0 ? (
+        <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-600">
+          当前资料库仅保留了 {brand.name} 的实测截图证据，尚未收录到可核验的完整套餐价格表（标注：待核实）。
+        </div>
+      ) : (
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-left text-sm">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-xs font-semibold text-slate-700">
+                <th class="px-3 py-3">套餐名称</th>
+                <th class="px-3 py-3">计费周期</th>
+                <th class="px-3 py-3">实际应付标价</th>
+                <th class="px-3 py-3">月均折算</th>
+                <th class="px-3 py-3">流量规格</th>
+                <th class="px-3 py-3">补充说明 / 倍率与设备</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              {brand.pricingPlans.map((plan) => (
+                <tr class="hover:bg-slate-50/70">
+                  <td class="px-3 py-3 font-semibold text-slate-900">{plan.name}</td>
+                  <td class="px-3 py-3">
+                    <span
+                      class:list={[
+                        'inline-block rounded px-2 py-0.5 text-xs font-medium',
+                        plan.billingCycle === 'monthly'
+                          ? 'bg-blue-50 text-blue-700'
+                          : plan.billingCycle === 'one-time'
+                          ? 'bg-emerald-50 text-emerald-700'
+                          : 'bg-slate-100 text-slate-700',
+                      ]}
+                    >
+                      {plan.billingLabel}
+                    </span>
+                  </td>
+                  <td class="px-3 py-3 font-mono font-bold text-slate-900">¥{plan.priceCny}</td>
+                  <td class="px-3 py-3 font-mono text-xs text-slate-600">
+                    {plan.monthlyEquivalentCny
+                      ? `约 ¥${plan.monthlyEquivalentCny}/月`
+                      : plan.billingCycle === 'monthly'
+                      ? `¥${plan.priceCny}/月`
+                      : '按总流量摊薄'}
+                  </td>
+                  <td class="px-3 py-3 font-mono text-slate-800">
+                    {plan.trafficDisplay}
+                    <span class="block text-[11px] text-slate-400">{plan.trafficCycle}</span>
+                  </td>
+                  <td class="px-3 py-3 text-xs text-slate-600">
+                    {[plan.multiplier, plan.deviceLimit, plan.suitableFor].filter(Boolean).join(' · ') || '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+
+    <!-- Observatory Data Visualizations -->
+    <SpeedtestObservatory brand={brand} />
+    <UnlockMatrixObservatory brand={brand} />
+    <RouteTopologyObservatory brand={brand} />
+
+    <!-- Advantages, Limitations, Conflicts -->
+    <section class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="text-lg font-bold text-slate-900 mb-3">核心优势与适用点</h2>
+        <ul class="space-y-2 text-sm text-slate-700 list-disc pl-5">
+          {brand.advantages.map((a) => <li>{a}</li>)}
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="text-lg font-bold text-slate-900 mb-3">已知限制与风险提醒</h2>
+        <ul class="space-y-2 text-sm text-slate-700 list-disc pl-5">
+          {brand.limitations.map((l) => <li>{l}</li>)}
+          {brand.riskNotes.map((r) => <li class="text-amber-800">{r}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    {brand.conflictNotes.length > 0 && (
+      <section class="rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-900">
+        <h2 class="font-bold mb-2">资料冲突审计记录（透明披露）</h2>
+        <ul class="space-y-1.5 list-disc pl-5 text-xs sm:text-sm">
+          {brand.conflictNotes.map((c) => <li>{c}</li>)}
+        </ul>
+      </section>
+    )}
+
+    <!-- Client Compatibility & Pre-purchase Notice -->
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 grid gap-5 md:grid-cols-2">
+      <div class="space-y-2">
+        <h2 class="text-base font-bold text-slate-900">客户端兼容性与购买前核对</h2>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          接入模式：<strong>{brand.clientModeLabel}</strong>；记录兼容端：{brand.clients.join('、')}。
+          购买前请先确定自己的常用设备（Windows / macOS / iOS / Android / 软路由）是否在允许列表内。
+        </p>
+        <div class="flex flex-wrap gap-2 pt-1 text-xs">
+          <a href="/clients/" class="font-semibold text-brand hover:underline">查看客户端软件下载指南 →</a>
+          <a href="/tutorials/subscription/" class="font-semibold text-slate-700 hover:text-brand">订阅导入教程 →</a>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="text-base font-bold text-slate-900">横向对比与深度评测入口</h2>
+        {relatedComparisons.length > 0 ? (
+          <ul class="space-y-1.5 text-xs">
+            {relatedComparisons.map((cmp) => (
+              <li>
+                <a href={`/compare/${cmp.slug}/`} class="font-semibold text-brand hover:underline">
+                  → 对比：{cmp.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-xs text-slate-600">
+            暂未配置两两专项对比文章，可在下方查看同价位近似方案或前往 <a href="/compare/" class="text-brand underline">对比决策中心</a>。
+          </p>
+        )}
+        <p class="text-xs text-slate-500 pt-1">
+          想了解协议底层与实测截图深度解读？阅读 <a href={`/reviews/${brand.slug}/`} class="font-semibold text-brand underline">{brand.name} 完整评测正文 →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="rounded-2xl border border-slate-200 bg-white p-6">
+      <h2 class="text-lg font-bold text-slate-900 mb-4">{brand.name} 常见问题（{brandFaqs.length} 题）</h2>
+      <div class="space-y-3">
+        {brandFaqs.map((f, idx) => (
+          <details open={idx === 0} class="rounded-lg border border-slate-200 p-3.5">
+            <summary class="cursor-pointer font-semibold text-sm text-slate-900">{f.question}</summary>
+            <p class="mt-2 text-sm text-slate-600 leading-relaxed">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Similar Brands & Sources -->
+    <section class="grid gap-6 lg:grid-cols-12">
+      <div class="lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6">
+        <h2 class="text-lg font-bold text-slate-900 mb-3">同价位替代与对比参考</h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {similarBrands.map((sb) => (
+            <a href={`/brands/${sb.slug}/`} class="rounded-lg border border-slate-200 p-3 hover:border-brand transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-slate-900">{sb.name}</span>
+                <span class="font-mono text-xs text-slate-600">
+                  {sb.lowestMonthlyCny !== null ? `¥${sb.lowestMonthlyCny}/月起` : '待核实'}
+                </span>
+              </div>
+              <p class="mt-1 text-xs text-slate-500 line-clamp-1">{sb.routeTypes.join(' / ')}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-xs text-slate-600 space-y-2">
+        <h2 class="text-sm font-bold text-slate-900">数据来源与更新时间</h2>
+        <ul class="list-disc pl-4 space-y-1">
+          {brand.sourceReferences.map((s) => <li>{s}</li>)}
+        </ul>
+        <p class="pt-2">最后核实：{brand.verifiedAt} · 页面更新：{brand.updatedAt}</p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,455 @@
+---
+import type { BrandRecord } from '../../data/brands';
+import ComparisonMatrixTable from '../comparison/ComparisonMatrixTable.astro';
+import TechnicalDiagramSvg from '../charts/TechnicalDiagramSvg.astro';
+
+export interface Props {
+  layoutMode:
+    | 'selection-comparison'
+    | 'pricing-decision'
+    | 'brand-directory'
+    | 'product-comparison'
+    | 'client-operations'
+    | 'scenario-validation'
+    | 'technical-testing'
+    | 'step-by-step-task'
+    | 'diagnostic-triage'
+    | 'risk-and-alternatives';
+  brands: BrandRecord[];
+  pillarLabel: string;
+}
+
+const { layoutMode, brands, pillarLabel } = Astro.props;
+---
+
+{
+  layoutMode === 'selection-comparison' && (
+    <section class="space-y-6">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-block rounded bg-brand-soft px-2 py-0.5 text-[11px] font-semibold text-brand">
+            老牌主力 · 双端支持
+          </span>
+          <h3 class="text-sm font-bold text-slate-900">光速云 · 星岛梦</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            均含 2020 年运营记录与实测图；光速云支持自研端+第三方且含¥147永久包，星岛梦全节点 1x 不限设备。
+          </p>
+          <div class="pt-1 text-xs">
+            <a href="/reviews/guangsuyun/" class="font-semibold text-brand hover:underline mr-3">光速云评测 →</a>
+            <a href="/reviews/xingdaomeng/" class="font-semibold text-brand hover:underline">星岛梦评测 →</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-block rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+            月付试错 · 高性价比
+          </span>
+          <h3 class="text-sm font-bold text-slate-900">一翻云 · 唯兔云</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            ¥19.9–¥20/月提供 150GB 常规月包，支持第三方通用订阅、Hysteria2/Trojan/VLESS 协议与 AI 场景分流。
+          </p>
+          <div class="pt-1 text-xs">
+            <a href="/reviews/yifan/" class="font-semibold text-brand hover:underline mr-3">一翻云评测 →</a>
+            <a href="/reviews/weitu/" class="font-semibold text-brand hover:underline">唯兔云评测 →</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-block rounded bg-sky-50 px-2 py-0.5 text-[11px] font-semibold text-sky-700">
+            零基础小白 · 一键端
+          </span>
+          <h3 class="text-sm font-bold text-slate-900">飞猫云 · 梯子云</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            无需先学复杂 YAML 规则即可用官方客户端一键登录，同时保留第三方订阅能力，成长无壁垒。
+          </p>
+          <div class="pt-1 text-xs">
+            <a href="/reviews/feimao/" class="font-semibold text-brand hover:underline mr-3">飞猫云评测 →</a>
+            <a href="/brands/tiziyun/" class="font-semibold text-brand hover:underline">梯子云档案 →</a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-block rounded bg-amber-50 px-2 py-0.5 text-[11px] font-semibold text-amber-800">
+            低频备用 · 永久不限时
+          </span>
+          <h3 class="text-sm font-bold text-slate-900">致敬147包 · 100GB包</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            月用不足 20GB 选光速云 ¥147/247GB（约 ¥0.595/GB）或二猫云 ¥99/100GB，不限时不过期最划算。
+          </p>
+          <div class="pt-1 text-xs">
+            <a href="/pricing/unlimited-time/" class="font-semibold text-brand hover:underline">不限时专题 →</a>
+          </div>
+        </div>
+      </div>
+
+      <ComparisonMatrixTable
+        brands={brands}
+        title="2026 机场推荐代表品牌核心条件横向总表（商业主推与客观档案已透明标注）"
+        placement="pillar-jichang-matrix"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'pricing-decision' && (
+    <section class="space-y-6">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="font-mono text-xs font-bold text-amber-700">¥5.6/月档（年付约 ¥67）</span>
+          <h3 class="text-sm font-bold text-slate-900">高同质化观察区间</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            大佬云、闪电鼠、云界线、榴莲云、环球梯同属此档。全需年付起购且缺测速 PNG，下沉仅作观察参考。
+          </p>
+          <a href="/articles/five-six-yuan-budget-tier-comparison/" class="inline-block pt-1 text-xs font-semibold text-brand hover:underline">
+            5.6 元档深度比较 →
+          </a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="font-mono text-xs font-bold text-emerald-700">¥7–¥12/月（年付 ¥84–¥137）</span>
+          <h3 class="text-sm font-bold text-slate-900">老牌轻量年付区间</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            飞猫云 ¥84/年、星岛梦 ¥96/年、光速云轻量版 ¥99/年。实测资料较全，适合长期轻度日用。
+          </p>
+          <a href="/pricing/cheap/" class="inline-block pt-1 text-xs font-semibold text-brand hover:underline">
+            平价与便宜专题 →
+          </a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="font-mono text-xs font-bold text-brand">¥14.9–¥25/月（真实月付）</span>
+          <h3 class="text-sm font-bold text-slate-900">低沉没试错主力区间</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            唯兔云 ¥19.9/150G（节假日 ¥14.9）、极连云 ¥18、一翻云 ¥20/150G、光速云 ¥25/168G。推荐新手首月由此起步。
+          </p>
+          <a href="/pricing/monthly/" class="inline-block pt-1 text-xs font-semibold text-brand hover:underline">
+            支持月付品牌汇总 →
+          </a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="font-mono text-xs font-bold text-sky-700">¥96–¥160（一次性不限时）</span>
+          <h3 class="text-sm font-bold text-slate-900">不过期永久流量包</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            光速云 ¥147/247GB（¥0.595/GB）、唯兔云 ¥100/100GB、二猫云 ¥99/100GB，专为低频 AI 与主线失联应急设防。
+          </p>
+          <a href="/brands/pricing-table/" class="inline-block pt-1 text-xs font-semibold text-brand hover:underline">
+            全库 32 家价格总表 →
+          </a>
+        </div>
+      </div>
+
+      <ComparisonMatrixTable
+        brands={brands}
+        title="不同计费周期代表品牌价格与单 GB 核算对照"
+        placement="pillar-pricing-matrix"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'product-comparison' && (
+    <section class="space-y-6">
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-2">
+          <span class="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-mono text-slate-700">L3 整机网络隧道</span>
+          <h3 class="text-base font-bold text-slate-900">传统海外商业 VPN</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            基于 OpenVPN / WireGuard 接管全系统所有流量。公网特征明显，在国内晚高峰极易断连且会把微信淘宝一并拖慢，优势在于海外出差防公共 Wi-Fi 嗅探。
+          </p>
+        </div>
+        <div class="rounded-xl border-2 border-brand/30 bg-brand-soft/30 p-5 space-y-2">
+          <span class="rounded bg-brand-soft px-2 py-0.5 text-[11px] font-mono font-semibold text-brand">规则分流 + 专线中转</span>
+          <h3 class="text-base font-bold text-slate-900">分流代理机场（推荐主力）</h3>
+          <p class="text-xs leading-relaxed text-slate-700">
+            采用 VLESS / Trojan / Hysteria2 配合 Mihomo/sing-box 精细分流。国内直连零减速，同时可按域名锁定香港刷网页 + 新加坡用 AI，晚高峰可用率远高。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-2">
+          <span class="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-mono text-emerald-700">进程级 FullCone UDP</span>
+          <h3 class="text-base font-bold text-slate-900">外服专业游戏加速器</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            专攻外服 FPS/主机端低抖动与 UDP 联机网关。不可与机场客户端系统代理/TUN 同时并发运行，避免虚拟网卡路由相互抢占导致掉线。
+          </p>
+        </div>
+      </div>
+
+      <TechnicalDiagramSvg variant="tun-vs-proxy" />
+      <ComparisonMatrixTable
+        brands={brands}
+        title="支持自研一键端 / 第三方通用客户端的主力参考品牌"
+        placement="pillar-vpn-matrix"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'client-operations' && (
+    <section class="grid gap-4 md:grid-cols-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-2">
+        <span class="rounded bg-brand-soft px-2 py-0.5 text-[11px] font-mono font-semibold text-brand">桌面与软路由生态绝对主流</span>
+        <h3 class="text-base font-bold text-slate-900">Mihomo 内核（原 Clash.Meta）</h3>
+        <p class="text-xs leading-relaxed text-slate-600">
+          完美继承并扩展 Clash YAML 规则集，原生支持 VLESS-Reality、Hysteria2 与覆写脚本。对应主流桌面端 <a href="/clients/clash-verge-rev/" class="text-brand underline">Clash Verge Rev</a> / <a href="/clients/flclash/" class="text-brand underline">FlClash</a> 及安卓 <a href="/clients/clash-meta/" class="text-brand underline">CMFA</a>。
+        </p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-2">
+        <span class="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-mono font-semibold text-emerald-700">新一代高性能多端通用平台</span>
+        <h3 class="text-base font-bold text-slate-900">sing-box 内核阵营</h3>
+        <p class="text-xs leading-relaxed text-slate-600">
+          结构化 JSON 配置与二进制规则集 `.srs` 性能卓越，iOS 端官方 <a href="/clients/sing-box/" class="text-brand underline">SFI</a> 完全免费且省电，并驱动全平台免费开源工具 <a href="/clients/hiddify/" class="text-brand underline">Hiddify</a> 与 <a href="/clients/karing/" class="text-brand underline">Karing</a>。
+        </p>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-2">
+        <span class="rounded bg-slate-100 px-2 py-0.5 text-[11px] font-mono text-slate-700">经典高兼容性与技术自建核心</span>
+        <h3 class="text-base font-bold text-slate-900">Xray-core / 多核心调度</h3>
+        <p class="text-xs leading-relaxed text-slate-600">
+          专注 VLESS + XTLS-Vision + Reality 抗特征识别。搭配跨平台 <a href="/clients/v2rayn/" class="text-brand underline">v2rayN</a>（桌面双核心）与安卓轻量标杆 <a href="/clients/v2rayng/" class="text-brand underline">v2rayNG</a> 稳定性极佳。
+        </p>
+      </div>
+    </section>
+  )
+}
+
+{
+  layoutMode === 'scenario-validation' && (
+    <section class="space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2 class="text-lg font-bold text-slate-900">2026-08-19 实测证据规律：香港 vs 新加坡 vs 日本 vs 美国解锁对照</h2>
+          <a href="/reviews/guangsuyun/" class="text-xs font-semibold text-brand hover:underline">查看光速云 5 张原始实测截图 →</a>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-left text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 font-semibold text-slate-700">
+                <th class="py-2.5 px-3">落地地区</th>
+                <th class="py-2.5 px-3">ChatGPT / OpenAI</th>
+                <th class="py-2.5 px-3">Claude</th>
+                <th class="py-2.5 px-3">Google Gemini</th>
+                <th class="py-2.5 px-3">Netflix / 流媒体</th>
+                <th class="py-2.5 px-3">推荐分流职责</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr>
+                <td class="py-2.5 px-3 font-semibold text-slate-900">香港 (HK)</td>
+                <td class="py-2.5 px-3 text-amber-700">网页常受限 / 仅 App 兼容</td>
+                <td class="py-2.5 px-3 text-rose-700">受限</td>
+                <td class="py-2.5 px-3 text-rose-700">实测失败</td>
+                <td class="py-2.5 px-3">多自制剧或依赖 DNS 解锁</td>
+                <td class="py-2.5 px-3 font-medium">日常高速浏览 / GitHub</td>
+              </tr>
+              <tr class="bg-emerald-50/30">
+                <td class="py-2.5 px-3 font-semibold text-slate-900">新加坡 (SG)</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-700">实测多节点全绿</td>
+                <td class="py-2.5 px-3 text-emerald-700">可用地区</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-700">实测全绿可用</td>
+                <td class="py-2.5 px-3 text-emerald-700">解锁率高 + YT Premium</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-800">AI 工具固定首选主节点</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold text-slate-900">日本 (JP)</td>
+                <td class="py-2.5 px-3 text-emerald-700">支持稳定</td>
+                <td class="py-2.5 px-3 text-emerald-700">可用地区</td>
+                <td class="py-2.5 px-3 text-emerald-700">常规支持</td>
+                <td class="py-2.5 px-3">日漫片库丰富</td>
+                <td class="py-2.5 px-3 font-medium">AI 备份区 + 追日区番剧</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-semibold text-slate-900">美国 (US)</td>
+                <td class="py-2.5 px-3 text-emerald-700">原生腹地支持</td>
+                <td class="py-2.5 px-3 text-emerald-700">原生支持</td>
+                <td class="py-2.5 px-3 text-emerald-700">原生支持</td>
+                <td class="py-2.5 px-3">美剧全片库 + TikTok 美区</td>
+                <td class="py-2.5 px-3 font-medium">AI 新功能测试 + 美区跨境</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ComparisonMatrixTable
+        brands={brands}
+        title="明确提供非港台节点且支持 AI / 流媒体场景分流品牌参考"
+        placement="pillar-ai-matrix"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'technical-testing' && (
+    <section class="space-y-6">
+      <TechnicalDiagramSvg variant="iepl-vs-transit" />
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-emerald-700">0.5x ~ 1x 倍率（透明消耗）</span>
+          <h3 class="text-sm font-bold text-slate-900">常规与减半省流计费</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            如星岛梦标注“全节点 1x 流量”。消耗 10GB 真实流量即严格扣 10GB，适合日常看视频与大流量同步。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-amber-700">2x ~ 5x 倍率（需隔离）</span>
+          <h3 class="text-sm font-bold text-slate-900">高成本稀缺或家宽节点</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            跑 1GB 扣除 2–5GB 账户额度。务必在 Clash 策略组隔离仅分配给轻量 AI 或精细办公，避免挂着下大包。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-brand">2026-08-11 测速批次口径</span>
+          <h3 class="text-sm font-bold text-slate-900">看时间与后端上限</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            不同测速图采集于 00:21 凌晨或 22:08 晚高峰且分属 5G/9G 后端，看均速与红叉率远比看最高单线峰值重要。
+          </p>
+        </div>
+      </div>
+
+      <ComparisonMatrixTable
+        brands={brands}
+        title="IEPL / IPLC / BGP 专线代表品牌路线与协议对照"
+        placement="pillar-routes-matrix"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'step-by-step-task' && (
+    <section class="space-y-6">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">1</span>
+          <h3 class="text-sm font-bold text-slate-900">安装 GitHub / 商店正版</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            核对系统与 CPU 架构（Mac M系列用 arm64），绝不下载百度广告站自带病毒的“中文安装包”。
+          </p>
+          <a href="/clients/" class="inline-block text-xs font-semibold text-brand hover:underline">去下载渠道总表 →</a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">2</span>
+          <h3 class="text-sm font-bold text-slate-900">粘贴并选中机场订阅</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            拷贝后台一键 Clash/通用 URL 导入软件刷新，务必鼠标点击选中那张配置卡片使其亮起激活。
+          </p>
+          <a href="/tutorials/subscription/subscription-troubleshooting/" class="inline-block text-xs font-semibold text-brand hover:underline">导入报错排错 →</a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">3</span>
+          <h3 class="text-sm font-bold text-slate-900">开启 Rule 规则与系统代理</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            先测速确认绿灯延迟，锁定为「规则模式」防止国内网页卡顿，打开系统代理开关即可上网。
+          </p>
+          <a href="/tutorials/clash-config/clash-verge-rev-guide/" class="inline-block text-xs font-semibold text-brand hover:underline">Clash 图文指南 →</a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1.5">
+          <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">4</span>
+          <h3 class="text-sm font-bold text-slate-900">按需开 TUN + AI 覆写</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            终端 git/curl 需安装服务模式开 TUN；用 AI 务必添加覆写规则锁定新加坡/日本出口节点。
+          </p>
+          <a href="/tutorials/routing-rules/clash-verge-override-ai-routing/" class="inline-block text-xs font-semibold text-brand hover:underline">抄 AI 覆写作业 →</a>
+        </div>
+      </div>
+
+      <TechnicalDiagramSvg variant="tun-vs-proxy" />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'diagnostic-triage' && (
+    <section class="space-y-6">
+      <div class="rounded-2xl border border-amber-200 bg-amber-50/60 p-5 sm:p-6 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h2 class="text-lg font-bold text-slate-900">30 秒紧急症状定位看板（超过 85% 属本地设置断点）</h2>
+          <a href="/tutorials/subscription/subscription-troubleshooting/" class="text-xs font-semibold text-brand hover:underline">
+            订阅拉取失败专篇 →
+          </a>
+        </div>
+        <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4 text-xs">
+          <div class="rounded-xl border border-amber-200 bg-white p-3.5 space-y-1">
+            <div class="font-bold text-rose-700">1. 全节点红字 Timeout</div>
+            <p class="text-slate-600">先校对电脑系统时间误差是否在 60 秒内 → 登录官网查是否过期/耗尽流量 → 更新订阅。</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-white p-3.5 space-y-1">
+            <div class="font-bold text-amber-800">2. 订阅更新 Network Error</div>
+            <p class="text-slate-600">先关掉软件里的「系统代理」再刷新订阅，防止套娃失败；必要时手机开 5G 热点拉一次。</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-white p-3.5 space-y-1">
+            <div class="font-bold text-brand">3. 绿灯有延迟却彻底断网</div>
+            <p class="text-slate-600">检查任务栏是否同时开了另一款代理/游戏加速器打架，或关了软件残留系统代理端口。</p>
+          </div>
+          <div class="rounded-xl border border-amber-200 bg-white p-3.5 space-y-1">
+            <div class="font-bold text-emerald-700">4. 终端不走/学校网断线</div>
+            <p class="text-slate-600">命令行超时须装服务模式开 TUN；校园网限 UDP 时切 Trojan/VLESS 走 TCP 443 端口。</p>
+          </div>
+        </div>
+      </div>
+
+      <TechnicalDiagramSvg variant="dns-fakeip" />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'risk-and-alternatives' && (
+    <section class="space-y-6">
+      <div class="grid gap-4 md:grid-cols-4">
+        <div class="rounded-xl border border-rose-200 bg-rose-50/40 p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-rose-700">L1 高危红线（立即远离）</span>
+          <h3 class="text-sm font-bold text-slate-900">山寨官网 &amp; 异常暴力充送</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            非 GitHub 源中文假安装包、充百送三百永久清仓活动、工单连月无人答复。
+          </p>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50/40 p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-amber-800">L2 合同条款与资金预期差</span>
+          <h3 class="text-sm font-bold text-slate-900">年付拆月字 &amp; 不支持退款</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            绝大多数虚拟订阅耗流量后不退款；新牌一律先用 ¥15–¥25 月付实测一周再考虑年付。
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-slate-700">L3 文档口径/数据待核实</span>
+          <h3 class="text-sm font-bold text-slate-900">如实披露冲突与缺口</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            微风/灵猫优惠冲突、云界线/环球梯链缺 `#/`、10 家无测速 PNG 均透明公开，绝不美化。
+          </p>
+        </div>
+        <div class="rounded-xl border border-emerald-200 bg-emerald-50/40 p-4 space-y-1">
+          <span class="font-mono text-xs font-bold text-emerald-700">L4 稳健防断流备份机制</span>
+          <h3 class="text-sm font-bold text-slate-900">异源永久流量双保险</h3>
+          <p class="text-xs leading-relaxed text-slate-600">
+            主力专线之外常备另一独立品牌一次性不限时包（如 ¥99–¥147），遇波动 2 秒切换顶替。
+          </p>
+        </div>
+      </div>
+
+      <ComparisonMatrixTable
+        brands={brands}
+        title="信息完整度与替代参考池（老站点断流/失联后的优先转移对象）"
+        placement="pillar-risks-alternatives"
+      />
+    </section>
+  )
+}
+
+{
+  layoutMode === 'brand-directory' && (
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-5 flex flex-wrap items-center justify-between gap-4">
+      <div class="space-y-1">
+        <span class="font-mono text-xs font-semibold text-brand">Database Audit Status · 数据治理规范</span>
+        <p class="text-xs sm:text-sm text-slate-600">
+          已完成 Firefly 同源合并与「快狸」纯图补录；{pillarLabel} 页面与各子表严格同步所有价格冲突、优惠限制及直链状态。
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <a href="/compare/" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+          跨品牌同档横向对比 →
+        </a>
+        <a href="/reviews/" class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+          12 家已发布长文评测 →
+        </a>
+      </div>
+    </section>
+  )
+}

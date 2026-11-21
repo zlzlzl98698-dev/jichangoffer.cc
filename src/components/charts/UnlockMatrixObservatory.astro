@@ -1,0 +1,110 @@
+---
+import type { BrandRecord, ServiceSupportStatus, UnlockServiceStatus } from '../../data/brands';
+
+export interface Props {
+  brand: BrandRecord;
+}
+
+const { brand } = Astro.props;
+
+const statusMeta: Record<
+  ServiceSupportStatus,
+  { label: string; badgeClass: string; dotClass: string }
+> = {
+  'verified-supported': {
+    label: '已验证支持',
+    badgeClass: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300',
+    dotClass: 'bg-emerald-400',
+  },
+  'partial-or-node-dependent': {
+    label: '部分/视节点而定',
+    badgeClass: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+    dotClass: 'bg-amber-400',
+  },
+  'verified-unsupported': {
+    label: '实测多失败',
+    badgeClass: 'border-rose-500/40 bg-rose-500/10 text-rose-300',
+    dotClass: 'bg-rose-400',
+  },
+  'vendor-claimed': {
+    label: '品牌资料宣称',
+    badgeClass: 'border-sky-500/40 bg-sky-500/10 text-sky-300',
+    dotClass: 'bg-sky-400',
+  },
+  'not-tested': {
+    label: '尚未实测',
+    badgeClass: 'border-slate-700 bg-slate-800 text-slate-400',
+    dotClass: 'bg-slate-500',
+  },
+};
+
+const coreServices: Array<UnlockServiceStatus['service']> = [
+  'ChatGPT',
+  'Claude',
+  'Gemini',
+  'Netflix',
+  'Disney+',
+  'YouTube',
+  'TikTok',
+  'Spotify',
+];
+
+const mergedList = [...brand.aiCompatibility, ...brand.streamingCompatibility];
+
+function getItem(service: UnlockServiceStatus['service']): UnlockServiceStatus {
+  const found = mergedList.find((x) => x.service === service);
+  if (found) return found;
+  return {
+    service,
+    status: 'not-tested',
+    detail: '当前资料库尚未收录该平台的独立实测或明确声明',
+    sourceType: 'not-tested',
+  };
+}
+---
+
+<section
+  class="rounded-2xl border border-observatory-border bg-observatory text-slate-100 p-5 sm:p-7 observatory-grid"
+  aria-label={`${brand.name} AI 与流媒体可用性矩阵`}
+>
+  <div class="flex flex-col gap-2 border-b border-slate-800 pb-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <span class="font-mono text-xs uppercase tracking-wider text-slate-400">
+        Service Availability Matrix · AI 与流媒体兼容性矩阵
+      </span>
+      <h2 class="mt-1 text-lg sm:text-xl font-bold text-white">
+        {brand.name} AI 工具与流媒体解锁状态
+      </h2>
+    </div>
+    <span class="font-mono text-xs text-slate-400">
+      严格区分「已验证实测」与「品牌宣称」
+    </span>
+  </div>
+
+  <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      coreServices.map((svc) => {
+        const item = getItem(svc);
+        const meta = statusMeta[item.status];
+        return (
+          <div class="rounded-xl border border-slate-800 bg-observatory-surface/90 p-3.5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-semibold text-sm text-white">{svc}</span>
+                <span class={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[10px] ${meta.badgeClass}`}>
+                  <span class={`h-1.5 w-1.5 rounded-full ${meta.dotClass}`}></span>
+                  {meta.label}
+                </span>
+              </div>
+              <p class="mt-2 text-xs leading-relaxed text-slate-300">{item.detail}</p>
+            </div>
+            <div class="mt-3 border-t border-slate-800 pt-2 flex items-center justify-between text-[10px] font-mono text-slate-400">
+              <span>来源: {item.sourceType === 'measured' ? 'Measured' : item.sourceType === 'vendor' ? 'Vendor' : 'Not Tested'}</span>
+              {item.testedAt && <span>{item.testedAt}</span>}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>

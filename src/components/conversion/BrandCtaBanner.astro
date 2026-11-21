@@ -1,0 +1,134 @@
+---
+import { getBrandLink, AFFILIATE_REL } from '../../data/links/brands';
+import { siteConfig } from '../../config/site';
+
+export interface Props {
+  brandSlug: string;
+  placement?: string;
+  contentType?: string;
+  brandColor?: string;
+  lowestMonthlyLabel?: string;
+}
+
+const {
+  brandSlug,
+  placement = 'brand-cta-banner',
+  contentType = 'brand-page',
+  brandColor = '#0F52BA',
+  lowestMonthlyLabel,
+} = Astro.props;
+
+const linkRecord = getBrandLink(brandSlug);
+---
+
+{
+  linkRecord && (
+    <aside
+      class="rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-6"
+      style={`border-left: 4px solid ${brandColor};`}
+    >
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="space-y-1.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-base font-bold text-slate-900">{linkRecord.brandName} 官方注册与优惠入口</span>
+            {linkRecord.linkStatus === 'verified-from-source' && (
+              <span class="rounded-full bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700">
+                核验来源：{linkRecord.verifiedAt}
+              </span>
+            )}
+            {linkRecord.linkStatus === 'format-anomaly' && (
+              <span class="rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-[11px] font-medium text-amber-800">
+                链接格式提示（核验需注意）
+              </span>
+            )}
+            {linkRecord.linkStatus === 'missing-affiliate' && (
+              <span class="rounded-full bg-slate-200 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">
+                暂缺注册入口（纯档案）
+              </span>
+            )}
+          </div>
+
+          {lowestMonthlyLabel && (
+            <p class="text-sm text-slate-700">
+              参考起步：<span class="font-mono font-semibold text-slate-900">{lowestMonthlyLabel}</span>
+            </p>
+          )}
+
+          {linkRecord.couponCode && (
+            <div class="flex flex-wrap items-center gap-2 text-sm text-slate-700">
+              <span>参考优惠码：</span>
+              <code class="rounded bg-white border border-slate-300 px-2 py-0.5 font-mono text-xs font-bold text-slate-900">
+                {linkRecord.couponCode}
+              </code>
+              <button
+                type="button"
+                data-copy-coupon={linkRecord.couponCode}
+                class="copy-coupon-btn rounded border border-slate-300 bg-white px-2 py-0.5 text-xs font-medium text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                复制优惠码
+              </button>
+              {linkRecord.couponDiscountNote && (
+                <span class="text-xs text-slate-500">（{linkRecord.couponDiscountNote}）</span>
+              )}
+            </div>
+          )}
+
+          {linkRecord.linkFormatNote && (
+            <p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded px-2.5 py-1.5">
+              提示：{linkRecord.linkFormatNote}
+            </p>
+          )}
+
+          {linkRecord.officialDomainNote && (
+            <p class="text-xs text-slate-600">{linkRecord.officialDomainNote}</p>
+          )}
+        </div>
+
+        <div class="shrink-0 flex flex-col items-stretch sm:items-end gap-2">
+          {linkRecord.affiliateUrl ? (
+            <a
+              href={linkRecord.affiliateUrl}
+              target="_blank"
+              rel={AFFILIATE_REL}
+              data-cta-track
+              data-cta-brand={brandSlug}
+              data-cta-placement={placement}
+              data-cta-content-type={contentType}
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-dark transition-colors"
+            >
+              <span>前往 {linkRecord.brandName} 注册官网</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <span class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-xs font-medium text-slate-500">
+              暂无已核验注册链接
+            </span>
+          )}
+        </div>
+      </div>
+
+      <p class="mt-3 border-t border-slate-200 pt-2.5 text-[11.5px] leading-relaxed text-slate-500">
+        {siteConfig.shortDisclosure} 来源记录：{linkRecord.sourceRef}。
+      </p>
+    </aside>
+  )
+}
+
+<script>
+  document.addEventListener('click', async (e) => {
+    const btn = e.target instanceof Element ? e.target.closest('.copy-coupon-btn') : null;
+    if (!btn) return;
+    const code = btn.getAttribute('data-copy-coupon');
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      const original = btn.textContent;
+      btn.textContent = '已复制';
+      setTimeout(() => {
+        btn.textContent = original || '复制优惠码';
+      }, 1500);
+    } catch {
+      btn.textContent = code;
+    }
+  });
+</script>

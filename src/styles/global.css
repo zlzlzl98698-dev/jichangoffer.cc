@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand: #0f52ba;
+  --color-brand-dark: #0a3a8a;
+  --color-brand-soft: #eff6ff;
+  --color-observatory: #0b1220;
+  --color-observatory-surface: #111a2e;
+  --color-observatory-border: #1e293b;
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    line-height: 1.75;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f172a;
+    letter-spacing: -0.015em;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.observatory-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Prose refinement for long-form Chinese articles */
+.prose-zh {
+  color: #1e293b;
+  font-size: 1.03125rem;
+  line-height: 1.85;
+}
+
+.prose-zh h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 1.45rem;
+  font-weight: 700;
+  scroll-margin-top: 5.5rem;
+}
+
+.prose-zh h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.65rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  scroll-margin-top: 5.5rem;
+}
+
+.prose-zh p {
+  margin-bottom: 1.1rem;
+}
+
+.prose-zh table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: 1.25rem 0;
+}
+
+.prose-zh pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose-zh th {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #e2e8f0;
+}
+
+.prose-zh td {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #e2e8f0;
+}

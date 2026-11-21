@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '推广披露规范', href: '/disclosure/' },
+];
+---
+
+<BaseLayout
+  title="商业合作与推广链接披露声明"
+  description="公开说明本站的联盟推广佣金模式、主推品牌标识规则，以及推广关系不影响客观评测数据的独立原则。"
+  pathname="/disclosure/"
+  breadcrumbs={breadcrumbs}
+>
+  <article class="mx-auto max-w-4xl px-4 py-8 sm:px-6 space-y-6 prose-zh">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1>商业合作与推广链接披露声明</h1>
+    <div class="rounded-xl border border-blue-200 bg-brand-soft p-5 not-prose text-sm text-slate-800">
+      {siteConfig.affiliateDisclosure}
+    </div>
+    <h2>我们的三条商业透明原则</h2>
+    <ol>
+      <li><strong>清晰标记商业属性</strong>：全站所有品牌推广注册 URL 均集中管理于 <code>src/data/links/brands.ts</code>，并统一使用 <code>target="_blank" rel="nofollow sponsored noopener"</code>，同时在链接旁展示利益披露提示。</li>
+      <li><strong>主推品牌不享实测豁免权</strong>：即便商业合作优先推荐光速云，其评测正文与矩阵仍会如实披露“香港节点 Gemini 失败、OpenAI 仅 APP、历史文档价格曾调整、特殊商品不支持退款”等全部客观局限。</li>
+      <li><strong>不因缺链删减档案</strong>：对于暂缺有效推广链接的品牌（如“快狸”仅保留 2026-08-11 测速截图），本站依然保留其真实档案，只标记为“暂缺注册入口”而非人为删除或替换成其他品牌链接。</li>
+    </ol>
+  </article>
+</BaseLayout>

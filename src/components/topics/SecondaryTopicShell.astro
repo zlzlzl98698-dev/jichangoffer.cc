@@ -1,0 +1,304 @@
+---
+import type { BrandRecord } from '../../data/brands';
+import { getBrandLink, AFFILIATE_REL } from '../../data/links/brands';
+import { siteConfig } from '../../config/site';
+import { renderInlineMarkdown } from '../../lib/inlineMarkdown';
+
+export interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface ArticleClusterItem {
+  title: string;
+  keyword: string;
+  intent: string;
+  href?: string;
+  status: 'published' | 'planned';
+}
+
+export interface ArticleClusterGroup {
+  clusterName: string;
+  clusterDesc: string;
+  articles: ArticleClusterItem[];
+}
+
+export interface CrossTopicItem {
+  label: string;
+  href: string;
+  reason: string;
+}
+
+export interface Props {
+  headings: HeadingItem[];
+  recommendedBrands: BrandRecord[];
+  articleClusters: ArticleClusterGroup[];
+  crossTopicLinks: CrossTopicItem[];
+  decisionCriteria?: string[];
+  dataGapNotes?: string[];
+  sources?: string[];
+  topicLabel: string;
+  parentHref: string;
+  parentLabel: string;
+  updatedAt: string;
+}
+
+const {
+  headings,
+  recommendedBrands,
+  articleClusters,
+  crossTopicLinks,
+  decisionCriteria = [],
+  dataGapNotes = [],
+  sources = [],
+  topicLabel,
+  parentHref,
+  parentLabel,
+  updatedAt,
+} = Astro.props;
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+<div class="space-y-10">
+  {
+    decisionCriteria.length > 0 && (
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6 space-y-3">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800">
+          本专题核心筛选与判断边界（Decision Criteria）
+        </h2>
+        <div class="grid gap-2.5 sm:grid-cols-2">
+          {decisionCriteria.map((item, idx) => (
+            <div class="rounded-xl border border-slate-200 bg-white p-3.5 text-xs sm:text-sm leading-relaxed text-slate-700 flex gap-2.5">
+              <span class="shrink-0 font-mono font-bold text-brand">0{idx + 1}.</span>
+              <span set:html={renderInlineMarkdown(item)} />
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Mobile Collapsible TOC -->
+  {
+    tocHeadings.length > 0 && (
+      <details class="lg:hidden rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <summary class="cursor-pointer font-bold text-sm text-slate-900 select-none">
+          「{topicLabel}」深度攻略目录（共 {tocHeadings.length} 个章节 · 点击展开）
+        </summary>
+        <nav aria-label="移动端二级专题目录" class="mt-3 border-t border-slate-200 pt-3">
+          <ul class="space-y-2 text-xs">
+            {tocHeadings.map((h) => (
+              <li class:list={[h.depth === 3 ? 'pl-4 text-slate-500' : 'font-medium text-slate-800']}>
+                <a href={`#${h.slug}`} class="hover:text-brand hover:underline block py-0.5">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    )
+  }
+
+  <!-- Desktop 2-Column Editorial Layout -->
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+    <section
+      data-topic-prose
+      class="min-w-0 w-full overflow-x-hidden prose prose-slate max-w-none prose-zh rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 shadow-sm"
+    >
+      <slot />
+    </section>
+
+    <aside class="space-y-5 lg:sticky lg:top-20">
+      {
+        tocHeadings.length > 0 && (
+          <nav aria-label="二级专题页面目录" class="hidden lg:block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <h2 class="text-xs font-mono uppercase tracking-wider font-bold text-slate-500 mb-3">
+              Topic Outline · 本页导读
+            </h2>
+            <ul class="space-y-1.5 text-xs max-h-[46vh] overflow-y-auto pr-1">
+              {tocHeadings.map((h) => (
+                <li class:list={[h.depth === 3 ? 'pl-3.5 text-slate-500' : 'font-medium text-slate-800']}>
+                  <a href={`#${h.slug}`} class="block py-0.5 hover:text-brand transition-colors leading-snug">
+                    {h.text}
+                  </a>
+                </li>
+              ))}
+              {articleClusters.length > 0 && (
+                <li class="font-medium text-slate-800 pt-1.5 border-t border-slate-100">
+                  <a href="#level3-clusters" class="block py-0.5 hover:text-brand">
+                    三级长尾内容集群 ({articleClusters.length} 组)
+                  </a>
+                </li>
+              )}
+              <li class="font-medium text-brand">
+                <a href="#topic-faq" class="block py-0.5 hover:underline">
+                  专业 FAQ 解答
+                </a>
+              </li>
+            </ul>
+          </nav>
+        )
+      }
+
+      {
+        recommendedBrands.length > 0 && (
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xs font-bold text-slate-900">对照品牌评测与官方入口</h2>
+              <span class="font-mono text-[10px] text-slate-500">含推广披露</span>
+            </div>
+            <ul class="space-y-2.5 text-xs">
+              {recommendedBrands.slice(0, 4).map((b) => {
+                const linkInfo = getBrandLink(b.slug);
+                const ctaUrl =
+                  linkInfo?.affiliateUrl && linkInfo.linkStatus !== 'format-anomaly'
+                    ? linkInfo.affiliateUrl
+                    : null;
+                return (
+                  <li class="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5">
+                    <div class="flex items-center justify-between gap-2">
+                      <a href={`/brands/${b.slug}/`} class="font-bold text-slate-900 hover:text-brand">
+                        {b.name}
+                      </a>
+                      <span class="font-mono text-[11px] text-slate-600">{b.lowestMonthlyLabel}</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+                      <a href={b.hasDeepReview ? `/reviews/${b.slug}/` : `/brands/${b.slug}/`} class="text-brand hover:underline">
+                        {b.hasDeepReview ? '深度评测 →' : '品牌档案 →'}
+                      </a>
+                      {ctaUrl ? (
+                        <a
+                          href={ctaUrl}
+                          target="_blank"
+                          rel={AFFILIATE_REL}
+                          data-affiliate-brand={b.slug}
+                          data-affiliate-placement={`topic-sidebar-${topicLabel}`}
+                          class="rounded bg-brand px-2 py-0.5 font-semibold text-white hover:bg-brand-dark"
+                        >
+                          官方入口 ↗
+                        </a>
+                      ) : (
+                        <a href={`/brands/${b.slug}/`} class="text-slate-500 hover:underline">
+                          查状态提示
+                        </a>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <p class="text-[11px] leading-relaxed text-slate-500">
+              {siteConfig.affiliateDisclosure}
+            </p>
+          </div>
+        )
+      }
+
+      {
+        dataGapNotes.length > 0 && (
+          <div class="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 space-y-2">
+            <h2 class="text-xs font-bold text-amber-900">数据边界与客观提示</h2>
+            <ul class="space-y-1.5 text-[11px] leading-relaxed text-amber-900/90 list-disc pl-4">
+              {dataGapNotes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+            {sources.length > 0 && (
+              <p class="pt-1 border-t border-amber-200/80 text-[10px] font-mono text-amber-800/80">
+                核验 {updatedAt} · {sources[0]}
+              </p>
+            )}
+          </div>
+        )
+      }
+
+      <div class="rounded-xl border border-slate-200 bg-white p-3.5 text-xs">
+        <span class="block text-slate-500 mb-1">返回所属一级枢纽</span>
+        <a href={parentHref} class="font-bold text-brand hover:underline">
+          ← {parentLabel}专题总览
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Level-3 Article Clusters Mapping (Published Links + Planned Roadmap without Dead Links) -->
+  {
+    articleClusters.length > 0 && (
+      <section id="level3-clusters" class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-6 scroll-mt-24">
+        <div class="space-y-1">
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-brand">
+            Level-3 Content Clusters · 下属三级长尾内容集群
+          </span>
+          <h2 class="text-xl font-bold text-slate-900">
+            围绕「{topicLabel}」的细分子问题与延展集群规划
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600">
+            已上线文章与评测可直接点击阅读；标注为「规划选题」的条目仅展示内容边界路线，不生成空白 SEO 页面。
+          </p>
+        </div>
+
+        <div class="grid gap-5 lg:grid-cols-3">
+          {articleClusters.map((group) => (
+            <div class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col space-y-3">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">{group.clusterName}</h3>
+                <p class="mt-1 text-xs leading-relaxed text-slate-500">{group.clusterDesc}</p>
+              </div>
+              <ul class="space-y-2.5 border-t border-slate-100 pt-3 text-xs">
+                {group.articles.map((art) => (
+                  <li class="space-y-0.5">
+                    <div class="flex items-start justify-between gap-2">
+                      {art.status === 'published' && art.href ? (
+                        <a href={art.href} class="font-semibold text-brand hover:underline leading-snug">
+                          {art.title} →
+                        </a>
+                      ) : (
+                        <span class="font-medium text-slate-700 leading-snug">{art.title}</span>
+                      )}
+                      <span
+                        class:list={[
+                          'shrink-0 rounded px-1.5 py-0.5 text-[10px] font-mono',
+                          art.status === 'published' && art.href
+                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            : 'bg-slate-100 text-slate-500',
+                        ]}
+                      >
+                        {art.status === 'published' && art.href ? '已发布' : '规划选题'}
+                      </span>
+                    </div>
+                    <div class="text-[11px] text-slate-400 font-mono">
+                      关键词：{art.keyword} · {art.intent}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Cross-Topic Bridge -->
+  {
+    crossTopicLinks.length > 0 && (
+      <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+        <h2 class="text-lg font-bold text-slate-900">关联专题与下一步决策推荐</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {crossTopicLinks.map((link) => (
+            <a
+              href={link.href}
+              class="rounded-xl border border-slate-200 bg-slate-50 p-4 hover:border-brand transition-colors block space-y-1"
+            >
+              <div class="text-sm font-bold text-slate-900 hover:text-brand">{link.label} →</div>
+              <p class="text-xs leading-relaxed text-slate-600">{link.reason}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+</div>

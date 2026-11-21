@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import { allBrands } from '../../data/brands';
+import { brandLinks, AFFILIATE_REL } from '../../data/links/brands';
+import { siteConfig, getCanonicalUrl } from '../../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌', href: '/brands/' },
+  { label: '机场优惠码汇总', href: '/brands/coupons/' },
+];
+
+const couponBrands = allBrands.filter((b) => Boolean(brandLinks[b.slug]?.couponCode));
+
+const faqs = [
+  {
+    question: '为什么有些 8 折优惠码输入结账页提示无效或不可用？',
+    answer:
+      '最常见原因是该券存在周期或最低档排他条件。例如库内记录 Firefly（萤火虫）与闪跃的 8 折优惠码均明确标注“年付轻量版不可用”，部分优惠码也可能限首单新人或特定节假日窗口激活，请先对照卡片下方的折扣限制说明。',
+  },
+  {
+    question: '如何应对同一个品牌在正文与总表出现两个不同优惠码的冲突记录？',
+    answer:
+      '在核对 32 家原始资料时，我们如实保留了如暮光加速（总表 muguang5555 与介绍称未查到公开码）、灵猫云等双口径记录，不擅自删掉其一。建议复制后在实际官网下单收银台依次尝试，并保留无优惠原价预算预期。',
+  },
+  {
+    question: '长期续费的时候优惠码还能生效吗？',
+    answer:
+      '大部分新人优惠码属于“一次性首单优惠”（只在首次购买或首次升档时扣减一次），后续按月或按年原价续费；因此评估长期支出时应重点对比官网无折扣正价（可在价格总表查阅）。',
+  },
+];
+
+const jsonLdExtra = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '2026 机场优惠码与新人折扣核验清单',
+  description: '集中展示各品牌已收录折扣代码、适用条件约束及多文档文本冲突备注。',
+  url: getCanonicalUrl('/brands/coupons/'),
+};
+---
+
+<BaseLayout
+  title="2026 机场优惠码与新人折扣汇总（含适用限制与冲突说明）"
+  description="汇总光速云 AMM、Firefly、闪跃、飞猫云、一翻云等 27 个品牌已记录优惠码，并诚实标明适用周期限制与文档冲突。"
+  pathname="/brands/coupons/"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 space-y-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        机场优惠码汇总：折扣代码、适用限制与冲突核验
+      </h1>
+      <p class="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
+        部分优惠码明确限定“年付轻量版不适用”（例如 Firefly 8 折码、闪跃 8 折码），部分品牌在清单正文与总表之间存在两套代码记录（已明确列明）。{siteConfig.shortDisclosure}
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {
+        couponBrands.map((b) => {
+          const rec = brandLinks[b.slug]!;
+          return (
+            <div class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2">
+                  <h2 class="text-base font-bold text-slate-900">
+                    <a href={`/brands/${b.slug}/`} class="hover:text-brand">{b.name}</a>
+                  </h2>
+                  <span class="font-mono text-[11px] text-slate-400">{rec.verifiedAt}</span>
+                </div>
+                <div class="mt-3 flex items-center gap-2">
+                  <code class="rounded bg-slate-100 border border-slate-200 px-3 py-1 font-mono text-sm font-bold text-slate-900">
+                    {rec.couponCode}
+                  </code>
+                  <button
+                    type="button"
+                    data-copy-coupon={rec.couponCode}
+                    class="copy-coupon-btn rounded border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                  >
+                    复制
+                  </button>
+                </div>
+                <p class="mt-2.5 text-xs leading-relaxed text-slate-600">{rec.couponDiscountNote}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <a href={`/brands/${b.slug}/`} class="font-medium text-slate-700 hover:text-brand">查看套餐明细</a>
+                {rec.affiliateUrl && (
+                  <a
+                    href={rec.affiliateUrl}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    data-cta-track
+                    data-cta-brand={b.slug}
+                    data-cta-placement="coupons-page"
+                    data-cta-content-type="coupons"
+                    class="font-semibold text-brand hover:underline"
+                  >
+                    去使用 ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">用券避坑核查规则</h2>
+        <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <li><strong>核对最低套餐限制</strong>：入门年付轻量包通常已属底价，不可叠加 8 折码。</li>
+          <li><strong>首单券 vs 循环券</strong>：除非特别写明循环折扣，常规均按首单有效理解。</li>
+          <li><strong>不要为凑用券门槛盲目买三年长包</strong>：首单立省十几元不如先用月付测试本地晚高峰稳定度安全。</li>
+        </ul>
+      </section>
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">关联价格与选型专题</h2>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          <li><a href="/brands/pricing-table/" class="font-semibold text-brand hover:underline">→ 32 家品牌正价套餐总表（对比打折前后实付）</a></li>
+          <li><a href="/pricing/cheap/" class="font-semibold text-brand hover:underline">→ 便宜机场真实门槛（区分年付折算与月付）</a></li>
+          <li><a href="/pricing/value/" class="font-semibold text-brand hover:underline">→ 性价比精算公式与倍率排查</a></li>
+          <li><a href="/risks/avoid-traps/" class="font-semibold text-brand hover:underline">→ 购买避坑指南：防低价与不退陷阱</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">优惠码使用常见问题</h2>
+      <div class="space-y-2.5">
+        {faqs.map((f, idx) => (
+          <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-900">{idx + 1}. {f.question}</summary>
+            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('click', async (e) => {
+    const btn = e.target instanceof Element ? e.target.closest('.copy-coupon-btn') : null;
+    if (!btn) return;
+    const code = btn.getAttribute('data-copy-coupon');
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      btn.textContent = '已复制';
+      setTimeout(() => { btn.textContent = '复制'; }, 1500);
+    } catch {
+      btn.textContent = code;
+    }
+  });
+</script>

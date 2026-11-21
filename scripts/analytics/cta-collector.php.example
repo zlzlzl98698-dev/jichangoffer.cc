@@ -1,0 +1,38 @@
+<?php
+/**
+ * 轻量级 Apache + PHP CTA 点击转化收集示例脚本（可选）
+ * 部署用法：重命名为 cta-collect.php 放入站点目录 /api/cta-collect.php，
+ * 并在 src/config/site.ts 将 analytics.enabled 设为 true、provider 设为 'custom'。
+ * 注：不存储用户 IP 与 Cookie，仅记录品牌、来源页面与模块位置，符合隐私最小化。
+ */
+header('Content-Type: application/json; charset=utf-8');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method Not Allowed']);
+    exit;
+}
+
+$raw = file_get_contents('php://input');
+$data = json_decode($raw, true);
+if (!is_array($data) || empty($data['brand'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid payload']);
+    exit;
+}
+
+$record = [
+    'ts'          => gmdate('c'),
+    'brand'       => substr(preg_replace('/[^a-z0-9_-]/i', '', (string)$data['brand']), 0, 40),
+    'placement'   => substr((string)($data['placement'] ?? ''), 0, 64),
+    'contentType' => substr((string)($data['contentType'] ?? ''), 0, 40),
+    'sourcePage'  => substr((string)($data['sourcePage'] ?? ''), 0, 180),
+];
+
+$logDir = __DIR__ . '/../logs';
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0750, true);
+}
+$logFile = $logDir . '/cta-events-' . gmdate('Y-m') . '.jsonl';
+file_put_contents($logFile, json_encode($record, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+echo json_encode(['ok' => true]);

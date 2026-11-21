@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { primaryNavigation } from '../config/navigation';
+---
+
+<BaseLayout
+  title="页面未找到 (404)"
+  description="请求的页面不存在或路径已调整，可通过十大专题或站内搜索继续访问。"
+  pathname="/404.html"
+  noindex={true}
+>
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 text-center space-y-6">
+    <span class="inline-block rounded-full bg-slate-100 px-4 py-1 font-mono text-sm font-bold text-slate-700">
+      HTTP 404 · Not Found
+    </span>
+    <h1 class="text-3xl font-extrabold text-slate-900">未找到您访问的页面</h1>
+    <p class="text-sm sm:text-base text-slate-600">
+      该页面可能尚未发布或 URL 已调整。您可以直接使用全站搜索，或进入下方的十大专题入口：
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-3 pt-2">
+      <a href="/" class="rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-dark">
+        返回首页
+      </a>
+      <a href="/brands/" class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50">
+        32 家品牌库
+      </a>
+      <a href="/search/" class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50">
+        站内搜索
+      </a>
+    </div>
+
+    <div class="mt-8 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs pt-6 border-t border-slate-200">
+      {primaryNavigation.map((cat) => (
+        <a href={cat.href} class="rounded-lg border border-slate-200 bg-white px-2.5 py-2 font-medium text-slate-700 hover:border-brand hover:text-brand">
+          {cat.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

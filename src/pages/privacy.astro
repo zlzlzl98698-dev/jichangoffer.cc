@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '隐私政策', href: '/privacy/' },
+];
+---
+
+<BaseLayout
+  title="隐私政策"
+  description="机场优惠静态网站隐私保护声明：无强制登录、无隐藏追踪、不收集个人浏览历史。"
+  pathname="/privacy/"
+  breadcrumbs={breadcrumbs}
+>
+  <article class="mx-auto max-w-4xl px-4 py-8 sm:px-6 space-y-6 prose-zh">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1>隐私政策（Privacy Policy）</h1>
+    <p>
+      本站（<strong>{siteConfig.name}</strong>）为纯静态 HTML 内容网站，不设用户注册、登录系统或数据库账户，不会主动收集、存储或出售您的个人身份信息。
+    </p>
+    <h2>1. 站内搜索与本地交互</h2>
+    <p>
+      全站搜索功能由本地静态索引（Pagefind）在您的浏览器端完成检索，您的搜索词不会上传至第三方广告分析平台。品牌库的筛选与排序同样完全在本地浏览器内存执行。
+    </p>
+    <h2>2. 外部推广链接跳转</h2>
+    <p>
+      当您点击品牌官网或注册按钮跳转至第三方服务商网站时，将离开本站并受目标站点的隐私条款约束。本站所有外部推广链接均标注 <code>rel="nofollow sponsored noopener"</code>。
+    </p>
+  </article>
+</BaseLayout>

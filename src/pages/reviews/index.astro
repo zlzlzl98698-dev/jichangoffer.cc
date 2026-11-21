@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import { allBrands } from '../../data/brands';
+import { getCanonicalUrl } from '../../config/site';
+
+const reviewEntries = await getCollection('reviews', ({ data }) => !data.draft);
+const deepCompletedSlugs = new Set(
+  reviewEntries.filter((r) => r.data.reviewDepthStatus === 'deep-completed').map((r) => r.data.brandSlug)
+);
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌', href: '/brands/' },
+  { label: '品牌评测中心', href: '/reviews/' },
+];
+
+const sortedBrands = [...allBrands].sort((a, b) => b.editorialPriority - a.editorialPriority);
+
+const faqs = [
+  {
+    question: '为什么评测卡片上有“深度完稿”、“含实测图·持续扩写”和“结构化档案·待补测”三种不同标签？',
+    answer:
+      '为了严守“有实测才下结论、缺资料如实标注”原则：例如光速云与 12 篇长文评测依据 2026-08-19 解锁矩阵或 2026-08-11 实测 PNG 已成体系；对尚未配齐独立测图的 10 家品牌，本站绝不靠替换品牌名伪造同样话术凑篇幅，因此统一标注为结构化待补测档。',
+  },
+  {
+    question: '看一篇单品牌评测时，最应该核对哪三项核心事实防止被广告过滤？',
+    answer:
+      '第一看“客户端支持方式（是否兼容 Clash/Shadowrocket 等第三方开放订阅）”；第二看“实际起购周期总价（是否把年付拆成月均价展示）及节点倍率”；第三看页面最底部的“实测原图时间戳、后端规格与已查明冲突备注（例如折扣券限定范围）”。',
+  },
+  {
+    question: '光速云作为合作主推位出现在前面，它的客观评测也会写它的缺点吗？',
+    answer:
+      '必须如实披露。在光速云深度评测页中，除了展示 2020 年起记录、双支持及 2026-08-19 实测原图之外，同样明确指出了其香港专线对 Gemini 失败、OpenAI 仅限 App、月付 ¥25 起高于 ¥20 档以及特殊商品不支持退款条款。',
+  },
+];
+
+const jsonLdExtra = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '2026 机场品牌深度评测矩阵（32家独立实证档案）',
+  description: '区分品牌官方宣称与独立实测截图的 32 家机场深度评测与档案导航。',
+  url: getCanonicalUrl('/reviews/'),
+};
+---
+
+<BaseLayout
+  title="机场品牌评测中心：32家独立实证评测与进度矩阵"
+  description="汇总 32 家机场品牌评测文章：优先展示光速云万字深度实测，并为其余 31 家提供区分品牌宣称与实测截图的结构化评测档案。"
+  pathname="/reviews/"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+      <span class="inline-block rounded bg-brand-soft px-2.5 py-0.5 font-mono text-xs font-semibold text-brand">
+        System B · 品牌评测与决策支持矩阵
+      </span>
+      <h1 class="mt-2 text-2xl sm:text-3xl font-extrabold text-slate-900">
+        机场品牌深度评测矩阵（实测证据与进展透明管理）
+      </h1>
+      <p class="mt-2.5 max-w-3xl text-sm sm:text-base text-slate-600 leading-relaxed">
+        全站坚持“有实测才写实测、缺资料标明待补充、绝不用替换品牌名凑数”的原则。每篇评测均配有 Dark Network Observatory 测速面板、AI/流媒体可用性矩阵与链路示意。
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        sortedBrands.map((b) => {
+          const isDeep = deepCompletedSlugs.has(b.slug);
+          const hasPng = b.testReports.some((r) => Boolean(r.evidenceImage));
+          return (
+            <article class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div>
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2.5">
+                    <span
+                      class="inline-flex h-9 w-9 items-center justify-center rounded-lg font-mono text-xs font-bold text-white"
+                      style={`background-color: ${b.brandColor};`}
+                    >
+                      {b.logoMonogram}
+                    </span>
+                    <h2 class="text-base font-bold text-slate-900">
+                      <a href={`/reviews/${b.slug}/`} class="hover:text-brand">{b.name}评测</a>
+                    </h2>
+                  </div>
+                  <span
+                    class:list={[
+                      'rounded-full px-2 py-0.5 text-[11px] font-mono border',
+                      isDeep
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold'
+                        : hasPng
+                        ? 'bg-sky-50 text-sky-700 border-sky-200'
+                        : 'bg-slate-100 text-slate-600 border-slate-200',
+                    ]}
+                  >
+                    {isDeep ? '深度完稿' : hasPng ? '含实测图·持续扩写' : '结构化档案·待补测'}
+                  </span>
+                </div>
+
+                <p class="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-3">{b.summary}</p>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <a href={`/reviews/${b.slug}/`} class="font-semibold text-brand hover:underline">
+                  阅读{b.name}评测 →
+                </a>
+                <a href={`/brands/${b.slug}/`} class="text-slate-500 hover:text-slate-800">
+                  套餐档案
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">本站品牌评测方法与实测口径准则</h2>
+        <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <li><strong>资料来源分离</strong>：严格区分商家官网宣称条款、2026-08-11 测速切片与 2026-08-19 逐地区解锁原图。</li>
+          <li><strong>如实暴露冲突</strong>：跨文档价格分歧（微风 7 元 vs ¥137/年、灵猫 19 vs 25 元）与跳转链接格式隐患均于评测内坦白标明。</li>
+          <li><strong>拒绝同模板洗稿</strong>：不依靠同一段空洞套话批量替换品牌名生成伪万字长文。</li>
+        </ul>
+      </section>
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">相关选型与交叉比较专题</h2>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          <li><a href="/compare/" class="font-semibold text-brand hover:underline">→ 机场横向对比与平替中心（两两同台对比细节差异）</a></li>
+          <li><a href="/jichang/ranking/" class="font-semibold text-brand hover:underline">→ 2026 机场综合排行榜（透明公布排序口径与梯队划分）</a></li>
+          <li><a href="/jichang/reliable/" class="font-semibold text-brand hover:underline">→ 靠谱机场审核规范（多年运维记录与售后边界筛选）</a></li>
+          <li><a href="/articles/how-to-read-speedtest-charts/" class="font-semibold text-brand hover:underline">→ 如何科学判读测速原图（凌晨 vs 晚高峰、5G vs 9G 后端）</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">品牌评测常见疑问</h2>
+      <div class="space-y-2.5">
+        {faqs.map((f, idx) => (
+          <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-900">{idx + 1}. {f.question}</summary>
+            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,260 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import BrandCtaBanner from '../../components/conversion/BrandCtaBanner.astro';
+import { brandComparisons, getBrandBySlug, type BrandComparisonPair } from '../../data/brands';
+import { getBrandLink } from '../../data/links/brands';
+import { getCanonicalUrl } from '../../config/site';
+import { renderInlineMarkdown, stripInlineMarkdown } from '../../lib/inlineMarkdown';
+
+export async function getStaticPaths() {
+  const mdComparisons = await getCollection('comparisons', ({ data }) => !data.draft);
+  const mdBySlug = new Map(mdComparisons.map((c) => [c.data.comparisonSlug, c]));
+  return brandComparisons.map((cmp) => ({
+    params: { slug: cmp.slug },
+    props: {
+      cmp,
+      comparisonEntry: mdBySlug.get(cmp.slug) || null,
+    },
+  }));
+}
+
+interface Props {
+  cmp: BrandComparisonPair;
+  comparisonEntry: Awaited<ReturnType<typeof getCollection<'comparisons'>>>[number] | null;
+}
+
+const { cmp, comparisonEntry } = Astro.props;
+const rendered = comparisonEntry ? await render(comparisonEntry) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings ?? [];
+
+const brandA = getBrandBySlug(cmp.brandASlug)!;
+const brandB = getBrandBySlug(cmp.brandBSlug)!;
+const linkA = getBrandLink(brandA.slug);
+const linkB = getBrandLink(brandB.slug);
+
+const pathname = `/compare/${cmp.slug}/`;
+const pageTitle = comparisonEntry?.data.title ?? cmp.title;
+const pageDescription = comparisonEntry?.data.description ?? cmp.description;
+const answerFirst = comparisonEntry?.data.answerFirst ?? cmp.description;
+
+const rawFaqs = comparisonEntry?.data.faqs?.length
+  ? comparisonEntry.data.faqs
+  : [
+      {
+        question: `${brandA.name} 和 ${brandB.name} 最核心的区别是什么？`,
+        answer: `${cmp.focusDimension}。具体选型建议先核对各自的最短起步付费周期、是否兼容 Clash/Shadowrocket 第三方订阅，以及是否存在可核实实测截图。`,
+      },
+      {
+        question: `如果两家都不想踩长期套牢风险，应该怎样起步试用？`,
+        answer: `优先选具备真月付且支持第三方订阅的套餐先跑 1 个月验证本地运营商晚高峰与 AI 需求，避免首单盲买多年度合约。`,
+      },
+    ];
+
+const faqs = rawFaqs.map((f) => ({
+  question: stripInlineMarkdown(f.question),
+  answer: stripInlineMarkdown(f.answer),
+}));
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '品牌对比', href: '/compare/' },
+  { label: `${brandA.name} vs ${brandB.name}`, href: pathname },
+];
+
+const compareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: comparisonEntry?.data.h1 || pageTitle,
+  description: pageDescription,
+  datePublished: comparisonEntry?.data.pubDate.toISOString().slice(0, 10) ?? '2026-11-21',
+  dateModified: comparisonEntry?.data.updatedDate.toISOString().slice(0, 10) ?? '2026-11-21',
+  author: {
+    '@type': 'Organization',
+    name: comparisonEntry?.data.author ?? '机场优惠评测编辑部',
+    url: getCanonicalUrl('/about/'),
+  },
+  mainEntityOfPage: getCanonicalUrl(pathname),
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  pathname={pathname}
+  ogType="article"
+  publishedTime={comparisonEntry?.data.pubDate.toISOString().slice(0, 10) ?? '2026-11-21'}
+  modifiedTime={comparisonEntry?.data.updatedDate.toISOString().slice(0, 10) ?? '2026-11-21'}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={compareSchema}
+>
+  <article class="mx-auto max-w-6xl px-4 py-8 sm:px-6 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+        <span class="font-semibold text-brand uppercase">
+          Head-to-Head Comparison · 同类决策对比
+        </span>
+        <span class="text-slate-500">核心比较维度：{cmp.focusDimension}</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        {comparisonEntry?.data.h1 || pageTitle}
+      </h1>
+      <div class="rounded-xl border border-blue-200 bg-brand-soft/60 p-4">
+        <span class="block font-mono text-xs font-bold uppercase tracking-wider text-brand mb-1">
+          Answer-First · 简明对比结论
+        </span>
+        <p
+          class="text-sm sm:text-base text-slate-800 leading-relaxed"
+          set:html={renderInlineMarkdown(answerFirst)}
+        />
+      </div>
+
+      <div class="flex flex-wrap gap-3 text-xs pt-1">
+        <a href={`/reviews/${brandA.slug}/`} class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+          读 {brandA.name} 独立评测 →
+        </a>
+        <a href={`/brands/${brandA.slug}/`} class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-slate-700 hover:border-brand hover:text-brand">
+          {brandA.name} 套餐与官网详情
+        </a>
+        <a href={`/reviews/${brandB.slug}/`} class="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+          读 {brandB.name} 独立评测 →
+        </a>
+        <a href={`/brands/${brandB.slug}/`} class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-slate-700 hover:border-brand hover:text-brand">
+          {brandB.name} 套餐与官网详情
+        </a>
+      </div>
+    </header>
+
+    <!-- Structured Comparison Matrix -->
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+      <table class="w-full border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 bg-slate-50 text-xs font-bold text-slate-800">
+            <th class="px-4 py-3.5 w-1/5">同口径核心比较维度</th>
+            <th class="px-4 py-3.5 w-2/5 text-brand">{brandA.name}</th>
+            <th class="px-4 py-3.5 w-2/5 text-slate-900">{brandB.name}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">运营起始时间</td>
+            <td class="px-4 py-3">{brandA.foundedYear ? `${brandA.foundedYear} 年` : brandA.foundedYearNote}</td>
+            <td class="px-4 py-3">{brandB.foundedYear ? `${brandB.foundedYear} 年` : brandB.foundedYearNote}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">线路与协议</td>
+            <td class="px-4 py-3">{brandA.routeTypes.join(' / ')} · {brandA.protocols.join('、')}</td>
+            <td class="px-4 py-3">{brandB.routeTypes.join(' / ')} · {brandB.protocols.join('、')}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">客户端模式</td>
+            <td class="px-4 py-3">{brandA.clientModeLabel}</td>
+            <td class="px-4 py-3">{brandB.clientModeLabel}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">最低参考起步</td>
+            <td class="px-4 py-3 font-mono text-xs">{brandA.lowestMonthlyLabel}</td>
+            <td class="px-4 py-3 font-mono text-xs">{brandB.lowestMonthlyLabel}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">优惠码与状态</td>
+            <td class="px-4 py-3 font-mono text-xs">
+              {linkA?.couponCode ? `${linkA.couponCode}（${linkA.couponDiscountNote || '以官网为准'}）` : '暂无公开码'}
+            </td>
+            <td class="px-4 py-3 font-mono text-xs">
+              {linkB?.couponCode ? `${linkB.couponCode}（${linkB.couponDiscountNote || '以官网为准'}）` : '暂无公开码'}
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">实测证据状态</td>
+            <td class="px-4 py-3 text-xs">{brandA.testReports.length > 0 ? `含 ${brandA.testReports.length} 批实测记录` : '暂无可核实实测图'}</td>
+            <td class="px-4 py-3 text-xs">{brandB.testReports.length > 0 ? `含 ${brandB.testReports.length} 批实测记录` : '暂无可核实实测图'}</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">主要优势</td>
+            <td class="px-4 py-3 text-xs leading-relaxed">
+              <ul class="list-disc pl-4 space-y-1">{brandA.advantages.map((x) => <li>{x}</li>)}</ul>
+            </td>
+            <td class="px-4 py-3 text-xs leading-relaxed">
+              <ul class="list-disc pl-4 space-y-1">{brandB.advantages.map((x) => <li>{x}</li>)}</ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-slate-700">已知限制与测试边界</td>
+            <td class="px-4 py-3 text-xs leading-relaxed">
+              <ul class="list-disc pl-4 space-y-1">{brandA.limitations.map((x) => <li>{x}</li>)}</ul>
+            </td>
+            <td class="px-4 py-3 text-xs leading-relaxed">
+              <ul class="list-disc pl-4 space-y-1">{brandB.limitations.map((x) => <li>{x}</li>)}</ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {Content && (
+      <div class="space-y-6">
+        {headings.length > 0 && (
+          <details class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary class="cursor-pointer font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+              展开深度对比分析目录（{headings.filter((h) => h.depth <= 3).length} 节）
+            </summary>
+            <ul class="mt-3 grid gap-1.5 sm:grid-cols-2 text-xs border-t border-slate-200 pt-3">
+              {headings.filter((h) => h.depth <= 3).map((h) => (
+                <li class={h.depth === 3 ? 'pl-3' : ''}>
+                  <a href={`#${h.slug}`} class="text-slate-700 hover:text-brand">{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 prose-zh max-w-none">
+          <Content />
+        </section>
+      </div>
+    )}
+
+    {comparisonEntry?.data.dataGapNotes && comparisonEntry.data.dataGapNotes.length > 0 && (
+      <section class="rounded-xl border border-amber-200 bg-amber-50 p-5 text-xs sm:text-sm text-amber-900 space-y-1.5">
+        <h2 class="font-bold">对比口径与资料限制说明</h2>
+        <ul class="list-disc pl-5 space-y-1">
+          {comparisonEntry.data.dataGapNotes.map((g) => <li>{g}</li>)}
+        </ul>
+      </section>
+    )}
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <BrandCtaBanner
+        brandSlug={brandA.slug}
+        placement="comparison-left"
+        contentType="comparison"
+        brandColor={brandA.brandColor}
+        lowestMonthlyLabel={brandA.lowestMonthlyLabel}
+      />
+      <BrandCtaBanner
+        brandSlug={brandB.slug}
+        placement="comparison-right"
+        contentType="comparison"
+        brandColor={brandB.brandColor}
+        lowestMonthlyLabel={brandB.lowestMonthlyLabel}
+      />
+    </div>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-3">
+      <h2 class="text-lg font-bold text-slate-900">{brandA.name} vs {brandB.name} 常见对比疑问（{rawFaqs.length} 题）</h2>
+      <div class="space-y-2.5">
+        {rawFaqs.map((f, idx) => (
+          <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+            <summary class="cursor-pointer font-semibold text-sm text-slate-900">{f.question}</summary>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600" set:html={renderInlineMarkdown(f.answer)} />
+          </details>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

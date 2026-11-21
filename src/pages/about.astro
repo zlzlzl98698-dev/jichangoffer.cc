@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.astro';
+import { siteConfig, getCanonicalUrl } from '../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '关于我们与评测方法', href: '/about/' },
+];
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: '关于机场优惠与评测方法论',
+  url: getCanonicalUrl('/about/'),
+  inLanguage: 'zh-CN',
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.editorialEntity,
+    url: getCanonicalUrl('/about/'),
+    email: siteConfig.contactEmail,
+  },
+};
+---
+
+<BaseLayout
+  title="关于我们与评测方法论：测试规范与冲突披露机制"
+  description="机场优惠评测编辑部（editorial@jichangoffer.cc）官方说明：三套独立内容体系、五类证据标签、MiaoKo 测速溯源局限及跨文档冲突审核机制。"
+  pathname="/about/"
+  breadcrumbs={breadcrumbs}
+  jsonLdExtra={aboutSchema}
+>
+  <article class="mx-auto max-w-4xl px-4 py-8 sm:px-6 space-y-6 prose-zh">
+    <Breadcrumbs items={breadcrumbs} />
+    <h1>关于「{siteConfig.name}」与评测方法论</h1>
+    <p>
+      {siteConfig.name}（<code>{siteConfig.siteUrl}</code>）由 <strong>{siteConfig.editorialEntity}</strong> 维护，致力于为中文互联网用户提供结构化、可追溯、绝不捏造跑分或虚假评分星级的跨境网络工具知识库、品牌信息档案与客观决策参考。全站所有评测页面与技术文档均遵循公开可查的数据核验标准，反对为提高转化率而隐瞒缺陷或篡改历史价格口径。
+    </p>
+
+    <h2>一、编辑部分工与三套独立内容体系</h2>
+    <p>
+      为避免商业推广干扰纯粹的技术指导，我们将全站内容划分为三套严格隔离的编辑流水线：
+    </p>
+    <ul>
+      <li><strong>体系 A（知识教程与流量获取）</strong>：专注 Windows / macOS / iOS / Android / OpenWrt 客户端安装、订阅导入、TUN 模式原理、三网路由知识与断连故障排查。纯操作排错页面启用商业降噪策略，保持教学流畅无广告干扰。</li>
+      <li><strong>体系 B（品牌评测与跨文档冲突审计）</strong>：完整收录并持续跟踪 <code>32</code> 家去重后的机场品牌，保留原始测速截图时间、测量节点分布、单日单点测试局限，以及不同资料批次之间的价格/优惠码/客户端策略变动记录。</li>
+      <li><strong>体系 C（商业专题与注册入口核验）</strong>：围绕“真月付门槛”“百元预算单 GB 核算”“AI 工具分流”“IEPL/IPLC 专线对比”提供明确准入边界与经校验的官方链接，并为全部外链强制附带 <code>rel="nofollow sponsored noopener"</code> 属性。</li>
+    </ul>
+
+    <h2>二、五类不可混淆的数据证据标签</h2>
+    <p>
+      全站档案表、实测模块与长尾文章严格区分五类数据性质，绝不将品牌客服宣传话术包装为站点实测结果：
+    </p>
+    <ul>
+      <li><code>measured</code>（实测证据）：仅指已存档且可追溯具体日期、时段、工具或脚本截图的观测结果，例如 <code>2025-12-02</code>、<code>2026-08-11</code> 同日 16 家测速 PNG 原图、<code>2026-08-19</code> 5 组 MiaoKo 节点/流媒体面板以及 <code>2026-10-19</code> 测速快照。</li>
+      <li><code>vendor</code>（品牌官方口径）：源自服务商官网套餐页、文档公告或工单沟通中声明的参数（如标称峰值、倍率系数、声称支持的协议及专属客户端政策）。</li>
+      <li><code>commercial</code>（推广与券码）：各品牌合作邀请链接及公开/核验优惠码，具体减免范围与结算币种一律以商户实时收银台为准。</li>
+      <li><code>editorial</code>（编辑筛选结论）：编辑基于架构特征（IEPL vs IPLC vs 中转）、计费门槛与历史风险给出的条件化适用与劝退判断。</li>
+      <li><code>unverified / conflict</code>（未核验或冲突）：只要遇到测速资料空白（如未获取实机截图的 5.6 元同质化入门族群或部分历史档案）或不同来源文档自相矛盾，一律直接亮牌披露，绝不用“推荐”“满速”话术粉饰空白。</li>
+    </ul>
+
+    <h2>三、测速采样环境声明与机房偏置修正</h2>
+    <p>
+      我们在所有实测解读中均要求读者注意“机房环境 vs 家庭宽带”的客观落差：
+    </p>
+    <ol>
+      <li><strong>高带宽测试机房上限提示</strong>：常见第三方 MiaoKo / 测速机器人面板多运行于 <code>2Gbps–9Gbps</code> 商用测速入口（如珠海联通、河北联通、长沙电信等节点），采用 6 线程至 32 线程并发压测。此类图表可用于评估服务商上游骨干承载冗余度，但家庭日常单线程下载受限于本地光猫、Wi-Fi 吞吐与运营商晚高峰 QOS，实感速度通常低于面板理论峰值。</li>
+      <li><strong>单日切片与晚高峰区分</strong>：同批 <code>2026-08-11</code> 样本覆盖凌晨、上午、下午与晚间等不同触发时刻，同一机场在凌晨与 21:00 晚高峰并发表现截然不同，因此本站拒绝以单张凌晨满速截图背书全年晚高峰稳定性。</li>
+      <li><strong>拒绝虚假聚合评分</strong>：全站拒绝为任何机场强加编造的 “4.9/5 星” 或虚假 <code>AggregateRating</code> 结构化数据；所有对比结论皆锚定于可见的价格阶梯、协议透明度和历史文档完整度。</li>
+    </ol>
+
+    <h2>四、资料冲突处理机制、更新节奏与纠错反馈</h2>
+    <p>
+      由于跨境代理服务商的套餐定价、域名跳转格式（如部分后台缺失 <code>#/</code> 哈希路由）与客户端形态处于高频动态调整之中，当不同日期归档资料发生矛盾时（如光速云 9 月与 10/11 月套餐扩容及协议演进、Firefly 同源合并、二猫云新加坡节点与文案冲突、微风/暮光/隐形人起步口径差异等），编辑部统一采取<strong>“主展最新带日期口径 + 正文完整列明历史争议”</strong>的双轨处理，具体可查阅 <a href="/articles/brand-data-conflict-guide/">品牌资料冲突核对指南</a> 与 <a href="/disclosure/">商业透明与联盟披露</a>。
+    </p>
+    <p>
+      若品牌官方团队、安全研究人员或普通读者发现站内链接失效、套餐价目变动、优惠码停用或实测样本存在错漏，请携带截图或出处说明发送邮件至 <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>，编辑部将在核实后于最近一次全站数据构建周期内予以勘误并标注更新日期。
+    </p>
+  </article>
+</BaseLayout>

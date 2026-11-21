@@ -1,0 +1,384 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import BrandCard from '../../components/brands/BrandCard.astro';
+import PillarIntentModules from '../../components/pillars/PillarIntentModules.astro';
+import PillarGuideSection from '../../components/pillars/PillarGuideSection.astro';
+import { allBrands, getBrandBySlug } from '../../data/brands';
+import { siteConfig, getCanonicalUrl } from '../../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌数据库', href: '/brands/' },
+];
+
+const sortedBrands = [...allBrands].sort((a, b) => b.editorialPriority - a.editorialPriority);
+
+const allPillars = await getCollection('pillars', ({ data }) => !data.draft);
+const brandsPillar = allPillars.find((p) => p.data.pillarId === 'brands');
+const rendered = brandsPillar ? await render(brandsPillar) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings ?? [];
+const recommendedBrands = brandsPillar?.data.recommendedBrandSlugs.length
+  ? brandsPillar.data.recommendedBrandSlugs
+      .map((s) => getBrandBySlug(s))
+      .filter((b): b is NonNullable<typeof b> => Boolean(b))
+  : sortedBrands.slice(0, 4);
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: brandsPillar?.data.title ?? '机场品牌大全与数据库（32家去重核验）',
+    description:
+      brandsPillar?.data.description ??
+      '收录并去重核验 32 个机场品牌结构化档案，支持按名称搜索、价格区间、月付/年付/不限时、IEPL/IPLC线路、客户端模式及 AI/流媒体场景实时筛选。',
+    url: getCanonicalUrl('/brands/'),
+    inLanguage: 'zh-CN',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '2026 中文机场品牌数据库（32家去重核验档案）',
+    numberOfItems: sortedBrands.length,
+    itemListElement: sortedBrands.map((b, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: b.name,
+      url: getCanonicalUrl(`/brands/${b.slug}/`),
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={brandsPillar?.data.title ?? '机场品牌大全与数据库（32家去重核验）- 价格、线路、客户端与实测筛选'}
+  description={
+    brandsPillar?.data.description ??
+    '收录并去重核验 32 个机场品牌结构化档案，支持按名称搜索、价格区间、月付/年付/不限时、IEPL/IPLC线路、客户端模式及 AI/流媒体场景实时筛选。'
+  }
+  pathname="/brands/"
+  breadcrumbs={breadcrumbs}
+  faqs={brandsPillar?.data.faqs ?? []}
+  jsonLdExtra={schemas}
+  publishedTime={brandsPillar?.data.pubDate.toISOString().slice(0, 10)}
+  modifiedTime={brandsPillar?.data.updatedDate?.toISOString().slice(0, 10)}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <!-- Header & Governance Notice -->
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 mb-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl space-y-2.5">
+          <span class="inline-block rounded bg-brand-soft px-2.5 py-0.5 font-mono text-xs font-semibold text-brand">
+            Brand Database · 共收录 {sortedBrands.length} 个唯一去重品牌
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            机场品牌数据库：价格、线路、客户端与实测状态筛选
+          </h1>
+          <p class="text-sm sm:text-base leading-relaxed text-slate-600">
+            所有品牌数据均来自原始品牌清单与 2026-08-11 / 2026-08-19 实测截图包（已合并「Firefly」与「Firefly 萤火虫」同源条目并补充「快狸」纯实测档案）。缺少资料的字段统一标注为“待核实”，不虚构评分与测速数字。
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="/brands/pricing-table/" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+            套餐价格总表 →
+          </a>
+          <a href="/brands/coupons/" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+            优惠码与折扣汇总 →
+          </a>
+          <a href="/brands/official-links/" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+            官网入口与异常提示 →
+          </a>
+          <a href="/brands/planned-directory/" class="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 hover:border-brand hover:text-brand">
+            扩展规划池（149家）→
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Controls -->
+    <section
+      aria-label="品牌筛选器"
+      class="mb-8 rounded-xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm"
+    >
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+        <div class="lg:col-span-2">
+          <label for="brand-search-input" class="block text-xs font-semibold text-slate-700 mb-1">
+            搜索品牌名 / 别名 / 标签
+          </label>
+          <input
+            id="brand-search-input"
+            type="search"
+            placeholder="例如：光速云、Firefly、VLESS、TikTok..."
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="filter-price" class="block text-xs font-semibold text-slate-700 mb-1">
+            月均起步预算
+          </label>
+          <select id="filter-price" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white">
+            <option value="all">全部价格</option>
+            <option value="10">¥10/月以下</option>
+            <option value="20">¥20/月及以下</option>
+            <option value="20plus">¥20/月以上</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filter-billing" class="block text-xs font-semibold text-slate-700 mb-1">
+            计费方式
+          </label>
+          <select id="filter-billing" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white">
+            <option value="all">全部计费</option>
+            <option value="monthly">支持月付</option>
+            <option value="annual">支持年付</option>
+            <option value="unlimited">含永久不限时包</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filter-route" class="block text-xs font-semibold text-slate-700 mb-1">
+            线路类型
+          </label>
+          <select id="filter-route" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white">
+            <option value="all">全部线路</option>
+            <option value="iepl">IEPL 专线</option>
+            <option value="iplc">IPLC 专线</option>
+            <option value="bgp">BGP / 中转优化</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="filter-client" class="block text-xs font-semibold text-slate-700 mb-1">
+            客户端支持
+          </label>
+          <select id="filter-client" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm bg-white">
+            <option value="all">全部方式</option>
+            <option value="third-party">支持第三方订阅</option>
+            <option value="self-built-and-third-party">自研 + 第三方双支持</option>
+            <option value="exclusive-client-only">仅专属客户端</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-3">
+        <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-700">
+          <label class="inline-flex items-center gap-1.5 cursor-pointer">
+            <input id="filter-ai" type="checkbox" class="rounded border-slate-300 text-brand" />
+            <span>标注 AI 工具场景</span>
+          </label>
+          <label class="inline-flex items-center gap-1.5 cursor-pointer">
+            <input id="filter-streaming" type="checkbox" class="rounded border-slate-300 text-brand" />
+            <span>标注流媒体解锁</span>
+          </label>
+          <span class="text-slate-400">|</span>
+          <span id="filter-result-count" class="font-mono text-slate-600">
+            显示 {sortedBrands.length} / {sortedBrands.length} 个品牌
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <label for="filter-sort" class="text-xs text-slate-500">排序：</label>
+          <select id="filter-sort" class="rounded-md border border-slate-300 px-2.5 py-1 text-xs bg-white">
+            <option value="priority">资料完整与编辑优先级</option>
+            <option value="price-asc">参考起步价从低到高</option>
+            <option value="price-desc">参考起步价从高到低</option>
+          </select>
+          <button
+            id="filter-reset-btn"
+            type="button"
+            class="rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-600 hover:bg-slate-100"
+          >
+            重置
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Grid -->
+    <div id="brand-grid" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {sortedBrands.map((brand) => <BrandCard brand={brand} />)}
+    </div>
+
+    <!-- Empty State -->
+    <div
+      id="brand-empty-state"
+      class="hidden rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-10 text-center"
+    >
+      <p class="text-base font-bold text-slate-900">没有符合当前筛选条件的机场品牌</p>
+      <p class="mt-1.5 text-sm text-slate-600">
+        可尝试放宽月均价格上限、取消“仅限第三方订阅”条件，或点击下方按钮重置筛选。
+      </p>
+      <button
+        id="empty-reset-btn"
+        type="button"
+        class="mt-4 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark"
+      >
+        重置全部筛选条件
+      </button>
+    </div>
+
+    {
+      brandsPillar && (
+        <div class="mt-12 space-y-8">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+            <div class="rounded-xl border border-brand/20 bg-white p-4 sm:p-5 space-y-2 shadow-xs">
+              <div class="font-mono text-[11px] font-bold uppercase tracking-wider text-brand">
+                Answer-First · 32 家品牌数据库选型结论
+              </div>
+              <p class="text-sm sm:text-[15px] leading-relaxed text-slate-700">
+                {brandsPillar.data.answerFirst}
+              </p>
+            </div>
+            {brandsPillar.data.entityChain.length > 0 && (
+              <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <span class="font-semibold text-slate-500 mr-1">知识实体链：</span>
+                {brandsPillar.data.entityChain.map((item, idx) => (
+                  <>
+                    <span class="rounded-md bg-white border border-slate-200 px-2.5 py-1 text-slate-700 font-medium">
+                      {item}
+                    </span>
+                    {idx < brandsPillar.data.entityChain.length - 1 && (
+                      <span class="text-slate-400 font-mono">→</span>
+                    )}
+                  </>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <PillarIntentModules
+            layoutMode="brand-directory"
+            brands={recommendedBrands}
+            pillarLabel="机场品牌"
+          />
+
+          {Content && (
+            <PillarGuideSection
+              headings={headings}
+              recommendedBrands={recommendedBrands}
+              crossPillarLinks={brandsPillar.data.crossPillarLinks}
+              faqs={brandsPillar.data.faqs}
+              dataGapNotes={brandsPillar.data.dataGapNotes}
+              sources={brandsPillar.data.sources}
+              pillarLabel="机场品牌"
+              updatedAt={brandsPillar.data.updatedDate?.toISOString().slice(0, 10)}
+            >
+              <Content />
+            </PillarGuideSection>
+          )}
+        </div>
+      )
+    }
+
+    <!-- Risk & Disclosure Footer Note -->
+    <div class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs leading-relaxed text-slate-600">
+      <strong class="text-slate-800">数据状态与推广关系说明：</strong>
+      {siteConfig.affiliateDisclosure} 本页面中的“¥5.6/月”或“¥8.25/月”等起步价均保留了原始计费周期注解（多数为年付折算月均成本），并非单月充值价格；排位靠后的历史档案（灵动云、浪网、EdgeNova）及纯截图档案（快狸）请先阅读具体详情页中的待核实提示。
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('brand-search-input') as HTMLInputElement | null;
+  const priceSelect = document.getElementById('filter-price') as HTMLSelectElement | null;
+  const billingSelect = document.getElementById('filter-billing') as HTMLSelectElement | null;
+  const routeSelect = document.getElementById('filter-route') as HTMLSelectElement | null;
+  const clientSelect = document.getElementById('filter-client') as HTMLSelectElement | null;
+  const aiCheckbox = document.getElementById('filter-ai') as HTMLInputElement | null;
+  const streamingCheckbox = document.getElementById('filter-streaming') as HTMLInputElement | null;
+  const sortSelect = document.getElementById('filter-sort') as HTMLSelectElement | null;
+  const grid = document.getElementById('brand-grid');
+  const emptyState = document.getElementById('brand-empty-state');
+  const countEl = document.getElementById('filter-result-count');
+  const resetBtns = [document.getElementById('filter-reset-btn'), document.getElementById('empty-reset-btn')];
+
+  function applyFilters() {
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.brand-filter-card')) as HTMLElement[];
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    const price = priceSelect?.value || 'all';
+    const billing = billingSelect?.value || 'all';
+    const route = routeSelect?.value || 'all';
+    const client = clientSelect?.value || 'all';
+    const requireAi = aiCheckbox?.checked || false;
+    const requireStreaming = streamingCheckbox?.checked || false;
+    const sortBy = sortSelect?.value || 'priority';
+
+    // Sort first
+    cards.sort((a, b) => {
+      if (sortBy === 'price-asc') {
+        return Number(a.dataset.price || 999) - Number(b.dataset.price || 999);
+      }
+      if (sortBy === 'price-desc') {
+        const pa = Number(a.dataset.price || 999);
+        const pb = Number(b.dataset.price || 999);
+        return (pb === 999 ? -1 : pb) - (pa === 999 ? -1 : pa);
+      }
+      return Number(b.dataset.priority || 0) - Number(a.dataset.priority || 0);
+    });
+    cards.forEach((c) => grid.appendChild(c));
+
+    let visibleCount = 0;
+    for (const card of cards) {
+      let show = true;
+      const nameBlob = card.dataset.name || '';
+      const cardPrice = Number(card.dataset.price || 999);
+      const cardRoutes = card.dataset.routes || '';
+      const cardClientMode = card.dataset.clientMode || '';
+
+      if (q && !nameBlob.includes(q)) show = false;
+      if (price === '10' && cardPrice > 10) show = false;
+      if (price === '20' && cardPrice > 20) show = false;
+      if (price === '20plus' && (cardPrice <= 20 || cardPrice === 999)) show = false;
+
+      if (billing === 'monthly' && card.dataset.monthly !== '1') show = false;
+      if (billing === 'annual' && card.dataset.annual !== '1') show = false;
+      if (billing === 'unlimited' && card.dataset.unlimited !== '1') show = false;
+
+      if (route === 'iepl' && !cardRoutes.includes('iepl')) show = false;
+      if (route === 'iplc' && !cardRoutes.includes('iplc')) show = false;
+      if (route === 'bgp' && !cardRoutes.includes('bgp') && !cardRoutes.includes('中转')) show = false;
+
+      if (client === 'third-party' && cardClientMode !== 'third-party-supported' && cardClientMode !== 'self-built-and-third-party') show = false;
+      if (client === 'self-built-and-third-party' && cardClientMode !== 'self-built-and-third-party') show = false;
+      if (client === 'exclusive-client-only' && cardClientMode !== 'exclusive-client-only') show = false;
+
+      if (requireAi && card.dataset.ai !== '1') show = false;
+      if (requireStreaming && card.dataset.streaming !== '1') show = false;
+
+      card.classList.toggle('hidden', !show);
+      if (show) visibleCount++;
+    }
+
+    if (countEl) countEl.textContent = `显示 ${visibleCount} / ${cards.length} 个品牌`;
+    if (emptyState) emptyState.classList.toggle('hidden', visibleCount > 0);
+  }
+
+  [searchInput, priceSelect, billingSelect, routeSelect, clientSelect, aiCheckbox, streamingCheckbox, sortSelect].forEach(
+    (el) => el?.addEventListener('input', applyFilters)
+  );
+  [priceSelect, billingSelect, routeSelect, clientSelect, aiCheckbox, streamingCheckbox, sortSelect].forEach(
+    (el) => el?.addEventListener('change', applyFilters)
+  );
+
+  resetBtns.forEach((btn) =>
+    btn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (priceSelect) priceSelect.value = 'all';
+      if (billingSelect) billingSelect.value = 'all';
+      if (routeSelect) routeSelect.value = 'all';
+      if (clientSelect) clientSelect.value = 'all';
+      if (aiCheckbox) aiCheckbox.checked = false;
+      if (streamingCheckbox) streamingCheckbox.checked = false;
+      if (sortSelect) sortSelect.value = 'priority';
+      applyFilters();
+    })
+  );
+</script>

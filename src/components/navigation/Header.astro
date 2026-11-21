@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import { siteConfig } from '../../config/site';
+import { primaryNavigation } from '../../config/navigation';
+import siteAvatar from '../../assets/logos/site-avatar.webp';
+
+export interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
+  <!-- Top micro utility bar -->
+  <div class="border-b border-slate-100 bg-slate-50 text-xs text-slate-600">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-1.5 sm:px-6">
+      <div class="flex min-w-0 flex-1 items-center gap-3">
+        <span class="truncate font-medium text-slate-800">{siteConfig.branding.tagline}</span>
+        <span class="hidden md:inline text-slate-300">|</span>
+        <span class="hidden md:inline">最近资料核实：{siteConfig.lastUpdated}</span>
+      </div>
+      <div class="flex items-center gap-4 shrink-0">
+        <a href="/brands/" class="hover:text-brand font-medium">32 品牌数据库</a>
+        <a href="/disclosure/" class="hover:text-brand hidden sm:inline">推广披露</a>
+        <a href="/search/" class="inline-flex items-center gap-1 text-slate-700 hover:text-brand font-medium">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+          </svg>
+          全站搜索
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main navigation bar -->
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <a href="/" class="flex items-center gap-2.5 shrink-0 group">
+      <Image
+        src={siteAvatar}
+        alt={`${siteConfig.name} 站点头像`}
+        class="h-9 w-9 rounded-full object-cover border border-slate-200 shadow-sm group-hover:ring-2 group-hover:ring-brand/30 transition-all"
+      />
+      <div class="leading-tight">
+        <span class="block text-base font-bold tracking-tight text-slate-900">{siteConfig.name}</span>
+        <span class="block text-[11px] font-mono text-slate-500">SEO/GEO Lab</span>
+      </div>
+    </a>
+
+    <!-- Desktop 10-pillar nav -->
+    <nav aria-label="主导航" class="hidden xl:flex items-center gap-0.5">
+      {
+        primaryNavigation.map((cat) => {
+          const isActive = currentPath.startsWith(cat.href);
+          return (
+            <div class="relative nav-dropdown-group">
+              <div class="flex items-center">
+                <a
+                  href={cat.href}
+                  class:list={[
+                    'rounded-md px-2.5 py-2 text-[13.5px] font-medium whitespace-nowrap transition-colors',
+                    isActive
+                      ? 'bg-brand-soft text-brand font-semibold'
+                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900',
+                  ]}
+                >
+                  {cat.label}
+                </a>
+                <button
+                  type="button"
+                  class="nav-dropdown-trigger -ml-1 rounded p-1 text-slate-400 hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                  aria-expanded="false"
+                  aria-label={`展开${cat.label}二级菜单`}
+                >
+                  <svg class="h-3.5 w-3.5 transition-transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Dropdown Panel -->
+              <div
+                class="nav-dropdown-panel invisible opacity-0 pointer-events-none absolute left-0 top-full pt-2 w-80 transition-all duration-150 z-50"
+                role="menu"
+              >
+                <div class="rounded-xl border border-slate-200 bg-white p-3 shadow-xl">
+                  <div class="mb-2 border-b border-slate-100 px-2 pb-2">
+                    <a href={cat.href} class="text-xs font-semibold uppercase tracking-wider text-brand hover:underline">
+                      进入「{cat.label}」专题首页 →
+                    </a>
+                    <p class="mt-0.5 text-xs text-slate-500 line-clamp-2">{cat.summary}</p>
+                  </div>
+                  <ul class="space-y-1">
+                    {cat.children.map((sub) => (
+                      <li>
+                        <a
+                          href={sub.href}
+                          role="menuitem"
+                          class="block rounded-lg px-2.5 py-2 hover:bg-slate-50 transition-colors"
+                        >
+                          <span class="block text-sm font-medium text-slate-900">{sub.label}</span>
+                          <span class="block text-xs text-slate-500 line-clamp-1">{sub.description}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </nav>
+
+    <!-- Tablet / Mobile controls -->
+    <div class="flex items-center gap-2 xl:hidden">
+      <a
+        href="/search/"
+        class="inline-flex items-center justify-center rounded-lg border border-slate-200 p-2 text-slate-700 hover:bg-slate-50"
+        aria-label="搜索全站内容"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50"
+        aria-expanded="false"
+        aria-controls="mobile-nav-drawer"
+      >
+        <span>导航栏目</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile & Tablet Accordion Drawer -->
+  <div
+    id="mobile-nav-drawer"
+    class="hidden border-t border-slate-200 bg-white xl:hidden max-h-[82vh] overflow-y-auto"
+    aria-label="移动端主导航"
+  >
+    <div class="mx-auto max-w-7xl px-4 py-4 space-y-2">
+      <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-100">
+        <a href="/brands/" class="rounded-lg bg-brand-soft px-3 py-2 text-center text-sm font-semibold text-brand">
+          32 品牌数据库
+        </a>
+        <a href="/reviews/guangsuyun/" class="rounded-lg bg-slate-100 px-3 py-2 text-center text-sm font-semibold text-slate-800">
+          光速云实测评测
+        </a>
+      </div>
+      {
+        primaryNavigation.map((cat) => (
+          <details class="group rounded-lg border border-slate-200 bg-slate-50/50">
+            <summary class="flex cursor-pointer list-none items-center justify-between px-3.5 py-2.5 text-sm font-semibold text-slate-900">
+              <span>{cat.label}</span>
+              <span class="text-xs font-normal text-slate-500 group-open:hidden">展开 {cat.children.length} 项</span>
+              <span class="text-xs font-normal text-brand hidden group-open:inline">收起</span>
+            </summary>
+            <div class="border-t border-slate-200 bg-white px-3 py-2 space-y-1">
+              <a href={cat.href} class="block rounded px-2 py-1.5 text-xs font-semibold text-brand hover:bg-brand-soft">
+                进入「{cat.label}」专题首页 →
+              </a>
+              {cat.children.map((sub) => (
+                <a
+                  href={sub.href}
+                  class="block rounded px-2 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+                >
+                  {sub.label}
+                </a>
+              ))}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
+
+  toggleBtn?.addEventListener('click', () => {
+    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+    drawer?.classList.toggle('hidden');
+  });
+
+  // Desktop hover + click + keyboard accessibility for dropdowns
+  const groups = document.querySelectorAll('.nav-dropdown-group');
+  function closeAll(except?: Element) {
+    groups.forEach((g) => {
+      if (g === except) return;
+      const panel = g.querySelector('.nav-dropdown-panel');
+      const trigger = g.querySelector('.nav-dropdown-trigger');
+      panel?.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+      trigger?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  groups.forEach((group) => {
+    const trigger = group.querySelector('.nav-dropdown-trigger');
+    const panel = group.querySelector('.nav-dropdown-panel');
+    let closeTimer: number | undefined;
+
+    const openPanel = () => {
+      window.clearTimeout(closeTimer);
+      closeAll(group);
+      panel?.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+      trigger?.setAttribute('aria-expanded', 'true');
+    };
+
+    const scheduleClose = () => {
+      closeTimer = window.setTimeout(() => {
+        panel?.classList.add('invisible', 'opacity-0', 'pointer-events-none');
+        trigger?.setAttribute('aria-expanded', 'false');
+      }, 120);
+    };
+
+    group.addEventListener('mouseenter', openPanel);
+    group.addEventListener('mouseleave', scheduleClose);
+
+    trigger?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        closeAll();
+      } else {
+        openPanel();
+      }
+    });
+
+    group.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') {
+        closeAll();
+        (trigger as HTMLElement | null)?.focus();
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element)?.closest('.nav-dropdown-group')) {
+      closeAll();
+    }
+  });
+</script>

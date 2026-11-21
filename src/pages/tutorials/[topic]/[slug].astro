@@ -1,0 +1,254 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/navigation/Breadcrumbs.astro';
+import TechnicalDiagramSvg from '../../../components/charts/TechnicalDiagramSvg.astro';
+import { getBrandBySlug } from '../../../data/brands';
+import { siteConfig, getCanonicalUrl } from '../../../config/site';
+import { renderInlineMarkdown, stripInlineMarkdown } from '../../../lib/inlineMarkdown';
+import { findPillarCategory } from '../../../lib/contentLinks';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('tutorials', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { topic: entry.data.topic, slug: entry.data.slugName },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: Awaited<ReturnType<typeof getCollection<'tutorials'>>>[number];
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const pathname = `/tutorials/${entry.data.topic}/${entry.data.slugName}/`;
+
+const allTutorials = await getCollection('tutorials', ({ data }) => !data.draft);
+const parentPillar = findPillarCategory(entry.data.pillar);
+const defaultTopicHref =
+  entry.data.parentTopicHref ||
+  (entry.data.topic === 'subscription' || entry.data.topic === 'routing-rules' || entry.data.topic === 'tun-mode'
+    ? `/tutorials/${entry.data.topic}/`
+    : '/tutorials/');
+const defaultTopicLabel = entry.data.parentTopicLabel || '使用教程目录';
+
+const relatedBrands = entry.data.relatedBrandSlugs
+  .map((s) => getBrandBySlug(s))
+  .filter((b): b is NonNullable<typeof b> => Boolean(b));
+
+const siblingTutorials = allTutorials
+  .filter((t) => t.id !== entry.id && (t.data.topic === entry.data.topic || t.data.pillar === entry.data.pillar))
+  .slice(0, 4);
+
+const diagramVariant: 'tun-vs-proxy' | 'iepl-vs-transit' | 'dns-fakeip' | null =
+  entry.data.topic === 'tun-mode' || entry.data.slugName.includes('tun')
+    ? 'tun-vs-proxy'
+    : entry.data.slugName.includes('dns')
+    ? 'dns-fakeip'
+    : null;
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: parentPillar?.label || '使用教程', href: parentPillar?.href || '/tutorials/' },
+  ...(defaultTopicHref !== (parentPillar?.href || '/tutorials/')
+    ? [{ label: defaultTopicLabel, href: defaultTopicHref }]
+    : []),
+  { label: entry.data.primaryKeyword, href: pathname },
+];
+
+const cleanFaqs = entry.data.faqs.map((f) => ({
+  question: stripInlineMarkdown(f.question),
+  answer: stripInlineMarkdown(f.answer),
+}));
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: entry.data.h1 || entry.data.title,
+  description: entry.data.description,
+  image: `${siteConfig.siteUrl.replace(/\/+$/, '')}/og-default.png`,
+  articleSection: defaultTopicLabel,
+  keywords: [entry.data.primaryKeyword, ...entry.data.secondaryKeywords].filter(Boolean).join(', '),
+  datePublished: entry.data.pubDate.toISOString().slice(0, 10),
+  dateModified: entry.data.updatedDate.toISOString().slice(0, 10),
+  author: {
+    '@type': 'Organization',
+    name: entry.data.author,
+    url: getCanonicalUrl('/about/'),
+  },
+  mainEntityOfPage: getCanonicalUrl(pathname),
+  isPartOf: {
+    '@type': 'CollectionPage',
+    name: defaultTopicLabel,
+    url: getCanonicalUrl(defaultTopicHref),
+  },
+};
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  pathname={pathname}
+  ogType="article"
+  publishedTime={entry.data.pubDate.toISOString().slice(0, 10)}
+  modifiedTime={entry.data.updatedDate.toISOString().slice(0, 10)}
+  breadcrumbs={breadcrumbs}
+  faqs={cleanFaqs}
+  jsonLdExtra={articleSchema}
+>
+  <article class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="grid gap-8 lg:grid-cols-12">
+      <div class="lg:col-span-8 space-y-8 min-w-0">
+        <header class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <span class="rounded bg-brand-soft px-2.5 py-0.5 font-semibold text-brand">
+              教程 · {entry.data.difficulty} · {entry.data.platforms.join(' / ')}
+            </span>
+            <span class="text-slate-500">
+              发布：{entry.data.pubDate.toISOString().slice(0, 10)} · 更新：{entry.data.updatedDate.toISOString().slice(0, 10)}
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+            {entry.data.h1 || entry.data.title}
+          </h1>
+
+          <div class="rounded-xl border border-blue-200 bg-brand-soft/60 p-4">
+            <span class="block font-mono text-xs font-bold uppercase tracking-wider text-brand mb-1">
+              Answer-First · 操作核心结论
+            </span>
+            <p
+              class="text-sm sm:text-base leading-relaxed text-slate-800"
+              set:html={renderInlineMarkdown(entry.data.answerFirst)}
+            />
+          </div>
+
+          {entry.data.prerequisites.length > 0 && (
+            <div class="rounded-lg border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-700">
+              <strong class="block text-slate-900 mb-1">操作前提条件：</strong>
+              <ul class="list-disc pl-4 space-y-0.5">
+                {entry.data.prerequisites.map((p) => <li>{p}</li>)}
+              </ul>
+            </div>
+          )}
+
+          <div class="flex flex-wrap items-center gap-3 text-xs pt-1">
+            <a
+              href={defaultTopicHref}
+              class="rounded-lg border border-slate-300 bg-slate-50 px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand"
+            >
+              ← 返回专题：{defaultTopicLabel}
+            </a>
+          </div>
+        </header>
+
+        {headings.length > 0 && (
+          <details class="lg:hidden rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary class="cursor-pointer font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+              展开步骤目录（{headings.filter((h) => h.depth <= 3).length} 节）
+            </summary>
+            <ul class="mt-3 space-y-1.5 text-xs border-t border-slate-200 pt-3">
+              {headings.filter((h) => h.depth <= 3).map((h) => (
+                <li class={h.depth === 3 ? 'pl-3' : ''}>
+                  <a href={`#${h.slug}`} class="text-slate-700 hover:text-brand">{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+
+        {diagramVariant && <TechnicalDiagramSvg variant={diagramVariant} />}
+
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 prose-zh max-w-none">
+          <Content />
+        </section>
+
+        {entry.data.faqs.length > 0 && (
+          <section class="rounded-2xl border border-slate-200 bg-white p-6">
+            <h2 class="text-xl font-bold text-slate-900 mb-4">常见操作问答（{entry.data.faqs.length} 题）</h2>
+            <div class="space-y-3">
+              {entry.data.faqs.map((f, idx) => (
+                <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+                  <summary class="cursor-pointer font-semibold text-sm text-slate-900">{f.question}</summary>
+                  <p class="mt-2 text-sm leading-relaxed text-slate-600" set:html={renderInlineMarkdown(f.answer)} />
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {siblingTutorials.length > 0 && (
+          <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">同系列配置与排错教程</h2>
+            <div class="grid gap-3 sm:grid-cols-2">
+              {siblingTutorials.map((st) => (
+                <a href={`/tutorials/${st.data.topic}/${st.data.slugName}/`} class="rounded-xl border border-slate-200 bg-white p-4 hover:border-brand transition-colors">
+                  <span class="block text-xs font-mono text-brand">{st.data.difficulty} · {st.data.platforms[0]}</span>
+                  <span class="mt-1 block text-sm font-bold text-slate-900 line-clamp-2">{st.data.title}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <aside class="lg:col-span-4 space-y-5">
+        <div class="sticky top-24 space-y-5">
+          {headings.length > 0 && (
+            <nav aria-label="教程目录" class="hidden lg:block rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">本篇教程目录</h2>
+              <ul class="space-y-1.5 text-xs">
+                {headings.filter((h) => h.depth <= 3).map((h) => (
+                  <li class={h.depth === 3 ? 'pl-3' : ''}>
+                    <a href={`#${h.slug}`} class="text-slate-600 hover:text-brand">{h.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
+          {entry.data.relatedLinks.length > 0 && (
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 space-y-2.5">
+              <h2 class="text-sm font-bold text-slate-900">相关教程与排错入口</h2>
+              <ul class="space-y-2 text-xs">
+                {entry.data.relatedLinks.map((rl) => (
+                  <li><a href={rl.href} class="text-brand hover:underline">→ {rl.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {relatedBrands.length > 0 && (
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 space-y-2.5">
+              <h2 class="text-sm font-bold text-slate-900">支持通用订阅导入的参考品牌</h2>
+              <p class="text-[11px] text-slate-500 leading-relaxed">
+                以下品牌记录支持标准 Clash/Shadowrocket 订阅，具体兼容情况请点击评测页核验（注：纯专属客户端品牌不适用通用订阅）。
+              </p>
+              <ul class="space-y-1.5 text-xs">
+                {relatedBrands.slice(0, 4).map((b) => (
+                  <li>
+                    <a href={`/reviews/${b.slug}/`} class="text-brand hover:underline">
+                      → {b.name} 评测与订阅兼容说明
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {entry.data.sources.length > 0 && (
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-xs text-slate-600 space-y-1.5">
+              <h2 class="font-bold text-slate-900">版本与文档依据</h2>
+              <ul class="list-disc pl-4 space-y-1">
+                {entry.data.sources.map((s) => <li>{s}</li>)}
+              </ul>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

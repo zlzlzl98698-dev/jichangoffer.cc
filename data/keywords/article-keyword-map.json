@@ -1,0 +1,3681 @@
+{
+  "generatedAt": "2026-11-21",
+  "totalEntries": 204,
+  "entries": [
+    {
+      "keyword": "暮光加速评测",
+      "primaryKeyword": "暮光加速评测",
+      "secondaryKeywords": [
+        "暮光加速测速",
+        "暮光加速怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-muguang",
+      "targetUrl": "/reviews/muguang/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/muguang/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "大佬云评测",
+      "primaryKeyword": "大佬云评测",
+      "secondaryKeywords": [
+        "大佬云测速",
+        "大佬云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-dalaoyun",
+      "targetUrl": "/reviews/dalaoyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/dalaoyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "无忧链接评测",
+      "primaryKeyword": "无忧链接评测",
+      "secondaryKeywords": [
+        "无忧链接测速",
+        "无忧链接怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-wuyou",
+      "targetUrl": "/reviews/wuyou/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/wuyou/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Firefly（萤火虫）评测",
+      "primaryKeyword": "Firefly（萤火虫）评测",
+      "secondaryKeywords": [
+        "Firefly（萤火虫）测速",
+        "Firefly（萤火虫）怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-firefly",
+      "targetUrl": "/reviews/firefly/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/firefly/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "宇宙云评测",
+      "primaryKeyword": "宇宙云评测",
+      "secondaryKeywords": [
+        "宇宙云测速",
+        "宇宙云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-yuzhou",
+      "targetUrl": "/reviews/yuzhou/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/yuzhou/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "极连云评测",
+      "primaryKeyword": "极连云评测",
+      "secondaryKeywords": [
+        "极连云测速",
+        "极连云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-jilian",
+      "targetUrl": "/reviews/jilian/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/jilian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光年梯评测",
+      "primaryKeyword": "光年梯评测",
+      "secondaryKeywords": [
+        "光年梯测速",
+        "光年梯怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-guangnian",
+      "targetUrl": "/reviews/guangnian/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/guangnian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "速界评测",
+      "primaryKeyword": "速界评测",
+      "secondaryKeywords": [
+        "速界测速",
+        "速界怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-sujie",
+      "targetUrl": "/reviews/sujie/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/sujie/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪跃评测",
+      "primaryKeyword": "闪跃评测",
+      "secondaryKeywords": [
+        "闪跃测速",
+        "闪跃怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-shanyue",
+      "targetUrl": "/reviews/shanyue/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/shanyue/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪电鼠评测",
+      "primaryKeyword": "闪电鼠评测",
+      "secondaryKeywords": [
+        "闪电鼠测速",
+        "闪电鼠怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-shandianshu",
+      "targetUrl": "/reviews/shandianshu/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/shandianshu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "云界线评测",
+      "primaryKeyword": "云界线评测",
+      "secondaryKeywords": [
+        "云界线测速",
+        "云界线怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-yunjiexian",
+      "targetUrl": "/reviews/yunjiexian/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/yunjiexian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "榴莲云评测",
+      "primaryKeyword": "榴莲云评测",
+      "secondaryKeywords": [
+        "榴莲云测速",
+        "榴莲云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-liulianyun",
+      "targetUrl": "/reviews/liulianyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/liulianyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "神行加速评测",
+      "primaryKeyword": "神行加速评测",
+      "secondaryKeywords": [
+        "神行加速测速",
+        "神行加速怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-shenxing",
+      "targetUrl": "/reviews/shenxing/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/shenxing/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "环球梯评测",
+      "primaryKeyword": "环球梯评测",
+      "secondaryKeywords": [
+        "环球梯测速",
+        "环球梯怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-huanqiuti",
+      "targetUrl": "/reviews/huanqiuti/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/huanqiuti/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "隐形人评测",
+      "primaryKeyword": "隐形人评测",
+      "secondaryKeywords": [
+        "隐形人测速",
+        "隐形人怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-yinxingren",
+      "targetUrl": "/reviews/yinxingren/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/yinxingren/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "梯子云评测",
+      "primaryKeyword": "梯子云评测",
+      "secondaryKeywords": [
+        "梯子云测速",
+        "梯子云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-tiziyun",
+      "targetUrl": "/reviews/tiziyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.8,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/tiziyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云官网与套餐价格",
+      "primaryKeyword": "光速云官网与套餐价格",
+      "secondaryKeywords": [
+        "光速云优惠码",
+        "光速云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-guangsuyun",
+      "targetUrl": "/brands/guangsuyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.5,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云官网与优惠码",
+      "primaryKeyword": "光速云官网与优惠码",
+      "secondaryKeywords": [
+        "光速云套餐价格",
+        "AMM优惠码"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-guangsuyun",
+      "targetUrl": "/brands/guangsuyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.4,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场什么时候买年付",
+      "primaryKeyword": "机场什么时候买年付",
+      "secondaryKeywords": [
+        "从月付切去半年/年付或永久不限时包的最佳时机判断"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/monthly/",
+      "parentCluster": "pricing-monthly-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 9.3,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "2026 机场推荐",
+      "primaryKeyword": "2026 机场推荐",
+      "secondaryKeywords": [
+        "稳定机场",
+        "性价比机场"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/",
+      "parentCluster": "jichang-selection",
+      "targetUrl": "/jichang/recommend/",
+      "contentPriority": "P0",
+      "priorityScore": 9.2,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云评测",
+      "primaryKeyword": "光速云评测",
+      "secondaryKeywords": [
+        "光速云测速",
+        "光速云AI解锁"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-guangsuyun",
+      "targetUrl": "/reviews/guangsuyun/",
+      "contentPriority": "P0",
+      "priorityScore": 9.2,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "便宜机场推荐",
+      "primaryKeyword": "便宜机场推荐",
+      "secondaryKeywords": [
+        "低价机场",
+        "年付低价"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/cheap/",
+      "contentPriority": "P0",
+      "priorityScore": 8.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "ChatGPT 机场推荐与地区限制解决",
+      "primaryKeyword": "ChatGPT 机场推荐与地区限制解决",
+      "secondaryKeywords": [
+        "OpenAI解锁",
+        "香港节点受限"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/",
+      "parentCluster": "ai-access",
+      "targetUrl": "/ai-streaming/chatgpt/",
+      "contentPriority": "P0",
+      "priorityScore": 8.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/sujie/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "月付机场推荐",
+      "primaryKeyword": "月付机场推荐",
+      "secondaryKeywords": [
+        "灵活续费",
+        "机场避坑"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/monthly/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yifan/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云 vs 星岛梦",
+      "primaryKeyword": "光速云 vs 星岛梦",
+      "secondaryKeywords": [
+        "老牌 IEPL 专线、多设备与永久流量包成本对比"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-xingdaomeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云 vs 飞猫云",
+      "primaryKeyword": "光速云 vs 飞猫云",
+      "secondaryKeywords": [
+        "第三方订阅扩展性 vs 纯专属客户端零配置上手"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-feimao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云 vs 唯兔云",
+      "primaryKeyword": "光速云 vs 唯兔云",
+      "secondaryKeywords": [
+        "月付性价比与不限时包单位成本"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-weitu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "极连云 vs 光年梯",
+      "primaryKeyword": "极连云 vs 光年梯",
+      "secondaryKeywords": [
+        "18 元月付入门 IEPL 档位对比"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/jilian-vs-guangnian/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/jilian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云 vs SOGO 云",
+      "primaryKeyword": "一翻云 vs SOGO 云",
+      "secondaryKeywords": [
+        "多协议第三方客户端自由度 vs 多国节点广度"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/yifan-vs-sogo/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yifan/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪电鼠 vs 大佬云 vs 云界线",
+      "primaryKeyword": "闪电鼠 vs 大佬云 vs 云界线",
+      "secondaryKeywords": [
+        "5.6 元平价档规格同质化与链接核验"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/shandianshu-vs-dalaoyun/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/shandianshu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云 vs 唯兔云",
+      "primaryKeyword": "一翻云 vs 唯兔云",
+      "secondaryKeywords": [
+        "20元开放订阅月付性价比与协议栈差异"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/yifan-vs-weitu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yifan/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云 vs 梯子云",
+      "primaryKeyword": "飞猫云 vs 梯子云",
+      "secondaryKeywords": [
+        "新手零门槛客户端路线 vs 双支持未来扩展性"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/feimao-vs-tiziyun/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/feimao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云 vs 二猫云",
+      "primaryKeyword": "光速云 vs 二猫云",
+      "secondaryKeywords": [
+        "全周期套餐梯度、单位成本与节点实测验证完整度"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-ermao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云 vs 星岛梦",
+      "primaryKeyword": "飞猫云 vs 星岛梦",
+      "secondaryKeywords": [
+        "零门槛快速上手 vs 开放订阅多端兼容与永久包梯队"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/compare/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/feimao-vs-xingdaomeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/feimao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云vs梯子云",
+      "primaryKeyword": "飞猫云vs梯子云",
+      "secondaryKeywords": [
+        "飞猫云和梯子云对比",
+        "新手自研客户端机场",
+        "双支持机场vs纯专属客户端"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/feimao-vs-tiziyun/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云vs星岛梦",
+      "primaryKeyword": "飞猫云vs星岛梦",
+      "secondaryKeywords": [
+        "飞猫云和星岛梦对比",
+        "新手机场vs老牌机场",
+        "Trojan第三方机场推荐"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/feimao-vs-xingdaomeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云vs二猫云",
+      "primaryKeyword": "光速云vs二猫云",
+      "secondaryKeywords": [
+        "光速云和二猫云区别",
+        "二猫云怎么样",
+        "百元不限时包对比"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-ermao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云vs飞猫云",
+      "primaryKeyword": "光速云vs飞猫云",
+      "secondaryKeywords": [
+        "光速云和飞猫云区别",
+        "专属客户端机场好吗",
+        "学生新手机场怎么选"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-feimao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云vs唯兔云",
+      "primaryKeyword": "光速云vs唯兔云",
+      "secondaryKeywords": [
+        "唯兔云和光速云对比",
+        "19.9元和25元机场差别",
+        "IEPL vs IPLC选哪个"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-weitu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光速云vs星岛梦",
+      "primaryKeyword": "光速云vs星岛梦",
+      "secondaryKeywords": [
+        "光速云和星岛梦对比",
+        "2020老牌机场推荐",
+        "Trojan vs VLESS机场"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/guangsuyun-vs-xingdaomeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "极连云vs光年梯",
+      "primaryKeyword": "极连云vs光年梯",
+      "secondaryKeywords": [
+        "18元月付机场对比",
+        "极连云和光年梯哪个好",
+        "低价月付IEPL机场"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/jilian-vs-guangnian/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪电鼠vs大佬云",
+      "primaryKeyword": "闪电鼠vs大佬云",
+      "secondaryKeywords": [
+        "5.6元机场同质化",
+        "闪电鼠和云界线区别",
+        "平价年付机场风险"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/shandianshu-vs-dalaoyun/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云vsSOGO云",
+      "primaryKeyword": "一翻云vsSOGO云",
+      "secondaryKeywords": [
+        "一翻云和SOGO云对比",
+        "Hysteria2机场vs多国机场",
+        "开放订阅vs专属客户端"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/yifan-vs-sogo/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云vs唯兔云",
+      "primaryKeyword": "一翻云vs唯兔云",
+      "secondaryKeywords": [
+        "唯兔云和一翻云哪个好",
+        "20元150G机场对比",
+        "IPLC Trojan vs Hysteria2"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "comparison",
+      "parentTopic": "/",
+      "parentCluster": "brand-comparisons",
+      "targetUrl": "/compare/yifan-vs-weitu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.6,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场排行",
+      "primaryKeyword": "机场排行",
+      "secondaryKeywords": [
+        "机场评测",
+        "机场推荐"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/",
+      "parentCluster": "jichang-selection",
+      "targetUrl": "/jichang/ranking/",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "稳定机场推荐",
+      "primaryKeyword": "稳定机场推荐",
+      "secondaryKeywords": [
+        "IEPL专线",
+        "晚高峰稳定"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/",
+      "parentCluster": "jichang-selection",
+      "targetUrl": "/jichang/stable/",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "性价比机场",
+      "primaryKeyword": "性价比机场",
+      "secondaryKeywords": [
+        "单位流量成本",
+        "专线性价比"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/value/",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "节点 IP 送中原因",
+      "primaryKeyword": "节点 IP 送中原因",
+      "secondaryKeywords": [
+        "什么是 Google IP “送中”？它为什么让你的 Gemini 和 YouTube 一起失灵"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/gemini/",
+      "parentCluster": "ai-streaming-gemini-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Google账号所在国家怎么改",
+      "primaryKeyword": "Google账号所在国家怎么改",
+      "secondaryKeywords": [
+        "Google 账户所属国家地区查询与合法申诉改区标准流程"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/gemini/",
+      "parentCluster": "ai-streaming-gemini-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "怎么测节点能不能看奈飞非自制剧",
+      "primaryKeyword": "怎么测节点能不能看奈飞非自制剧",
+      "secondaryKeywords": [
+        "Netflix 自制剧 vs 非自制剧一键肉眼辨别自检法（绝不靠猜）"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/netflix/",
+      "parentCluster": "ai-streaming-netflix-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Netflix 电脑看不了 4K 原因",
+      "primaryKeyword": "Netflix 电脑看不了 4K 原因",
+      "secondaryKeywords": [
+        "为什么电脑 Chrome 看 Netflix 只有 720p 模糊画质（非机场网速锅的 DRM 解密真相）"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/netflix/",
+      "parentCluster": "ai-streaming-netflix-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "YouTube 4K 突然降画质",
+      "primaryKeyword": "YouTube 4K 突然降画质",
+      "secondaryKeywords": [
+        "Chrome 关闭 QUIC (HTTP/3) 为什么常能一键治愈 YouTube 转圈降到 360P"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/youtube/",
+      "parentCluster": "ai-streaming-youtube-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "怎么判断节点送中",
+      "primaryKeyword": "怎么判断节点送中",
+      "secondaryKeywords": [
+        "什么操作会害整台节点 IP “送中”？手机日常挂梯子的防污染习惯"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/youtube/",
+      "parentCluster": "ai-streaming-youtube-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash Meta 后台自动断开",
+      "primaryKeyword": "Clash Meta 后台自动断开",
+      "secondaryKeywords": [
+        "国产手机 HyperOS / HarmonyOS / ColorOS 防强杀后台 VPN 进程全流程"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/clients/clash-meta/",
+      "parentCluster": "client-clash-meta-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Hiddify 国内网站慢设置",
+      "primaryKeyword": "Hiddify 国内网站慢设置",
+      "secondaryKeywords": [
+        "Hiddify 连接上之后淘宝微信也慢了怎么把区域修正成 China 分流"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/clients/hiddify/",
+      "parentCluster": "client-hiddify-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Karing vs 小火箭",
+      "primaryKeyword": "Karing vs 小火箭",
+      "secondaryKeywords": [
+        "Shadowrocket 小火箭对比 Karing：什么场景才值得专门花 $2.99 买小火箭"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/clients/karing/",
+      "parentCluster": "client-karing-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "sing-box 版本配置报错",
+      "primaryKeyword": "sing-box 版本配置报错",
+      "secondaryKeywords": [
+        "官方 sing-box 1.11/1.12 版本废弃旧 DNS 与 inbound 参数升级报错修复清单"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/clients/sing-box/",
+      "parentCluster": "client-sing-box-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "v2rayNG 分应用代理怎么选",
+      "primaryKeyword": "v2rayNG 分应用代理怎么选",
+      "secondaryKeywords": [
+        "v2rayNG 分应用代理白名单与国产 ROM 电池白名单设置图解"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/clients/v2rayng/",
+      "parentCluster": "client-v2rayng-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "安卓好用代理软件",
+      "primaryKeyword": "安卓好用代理软件",
+      "secondaryKeywords": [
+        "Android 安卓手机 Clash Meta vs FlClash 省电后台防杀指南"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/best-to-use/",
+      "parentCluster": "jichang-best-to-use-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场排名可信吗",
+      "primaryKeyword": "机场排名可信吗",
+      "secondaryKeywords": [
+        "为什么不同评测网站的机场排行榜名次几乎一模一样或完全相反"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/ranking/",
+      "parentCluster": "jichang-ranking-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "冷门机场风险观察",
+      "primaryKeyword": "冷门机场风险观察",
+      "secondaryKeywords": [
+        "历史待核实档案池（灵动云 / 浪网 / EdgeNova / 快狸）观察说明"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/ranking/",
+      "parentCluster": "jichang-ranking-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "买机场注意事项",
+      "primaryKeyword": "买机场注意事项",
+      "secondaryKeywords": [
+        "机场买前防坑 6 条硬核检核表"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/recommend/",
+      "parentCluster": "jichang-recommend-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "怎么辨别机场是不是小作坊",
+      "primaryKeyword": "怎么辨别机场是不是小作坊",
+      "secondaryKeywords": [
+        "怎么验证陌生新机场网站到底是不是刚搭好的换皮小站"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/reliable/",
+      "parentCluster": "jichang-reliable-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash fallback 稳定配置",
+      "primaryKeyword": "Clash fallback 稳定配置",
+      "secondaryKeywords": [
+        "Clash Verge Rev 与小火箭如何设置自动故障切换而不影响 AI 风控"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/stable/",
+      "parentCluster": "jichang-stable-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一元机场试用限制",
+      "primaryKeyword": "一元机场试用限制",
+      "secondaryKeywords": [
+        "只买 1 块钱试用体验包最容易踩中的三大自动续费和限制坑"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/pricing/one-yuan/",
+      "parentCluster": "pricing-one-yuan-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "移动接IEPL选深圳还是上海",
+      "primaryKeyword": "移动接IEPL选深圳还是上海",
+      "secondaryKeywords": [
+        "国内三大运营商（移动/电信/联通）接 IEPL 深圳入口与上海入口的路由差异"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/iepl/",
+      "parentCluster": "routes-iepl-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "日本节点北方延迟",
+      "primaryKeyword": "日本节点北方延迟",
+      "secondaryKeywords": [
+        "北方联通/电信宽带与沪宁地区连日本直连/专线速度特点差异分析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/japan/",
+      "parentCluster": "routes-japan-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "关了代理没网怎么办",
+      "primaryKeyword": "关了代理没网怎么办",
+      "secondaryKeywords": [
+        "关闭软件后反而彻底断网？Windows 与 macOS 系统残余代理清除法"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/cannot-connect/",
+      "parentCluster": "troubleshooting-cannot-connect-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash rule 规则怎么读",
+      "primaryKeyword": "Clash rule 规则怎么读",
+      "secondaryKeywords": [
+        "客户端常见五大规则关键词（SUFFIX / KEYWORD / IP-CIDR / GEOIP / MATCH）详解"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/routing-rules/",
+      "parentCluster": "tutorials-routing-rules-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场订阅泄露怎么办",
+      "primaryKeyword": "机场订阅泄露怎么办",
+      "secondaryKeywords": [
+        "不小心把订阅截图发进交流群怎么瞬间作废并保护剩余月包额度"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/subscription/",
+      "parentCluster": "tutorials-subscription-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "安卓安装提示风险怎么办",
+      "primaryKeyword": "安卓安装提示风险怎么办",
+      "secondaryKeywords": [
+        "华为鸿蒙 / 小米澎湃 / OPPO 装开源 APK 报风险与纯洁安装操作法"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/vpn/android/",
+      "parentCluster": "vpn-android-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "分应用代理怎么设置",
+      "primaryKeyword": "分应用代理怎么设置",
+      "secondaryKeywords": [
+        "如何设定 Android 分应用代理白名单让手机既省电又不误耗机场流量"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/android/",
+      "parentCluster": "vpn-android-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "免费VPN安全吗",
+      "primaryKeyword": "免费VPN安全吗",
+      "secondaryKeywords": [
+        "安卓免费 VPN 权限滥用实录：为什么一个上网工具会索要读取联系人和位置"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/free/",
+      "parentCluster": "vpn-free-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "主机连OpenWrt机场和加速器共存",
+      "primaryKeyword": "主机连OpenWrt机场和加速器共存",
+      "secondaryKeywords": [
+        "Switch / PS5 下载补丁 vs 联机对战：软路由 OpenWrt 下的双轨旁路由搭配术"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/game-accelerator/",
+      "parentCluster": "vpn-game-accelerator-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Steam 社区打不开怎么配机场",
+      "primaryKeyword": "Steam 社区打不开怎么配机场",
+      "secondaryKeywords": [
+        "Steam 跨区商店浏览、R星/EA 平台登录与外服手游更新为什么常靠代理解决"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/game-accelerator/",
+      "parentCluster": "vpn-game-accelerator-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "安卓代理总是自动断开",
+      "primaryKeyword": "安卓代理总是自动断开",
+      "secondaryKeywords": [
+        "小米/华为/OPPO/vivo 安卓手机后台杀代理进程的通用保活设置教程"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/vpn/mobile/",
+      "parentCluster": "vpn-mobile-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "海外VPN国内连不上原因",
+      "primaryKeyword": "海外VPN国内连不上原因",
+      "secondaryKeywords": [
+        "为什么 OpenVPN 和标准 WireGuard 在国内晚高峰经常连不上"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/recommend/",
+      "parentCluster": "vpn-recommend-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "VPN平替机场",
+      "primaryKeyword": "VPN平替机场",
+      "secondaryKeywords": [
+        "从商业 VPN 平滑迁移到分流机场的 3 分钟成本核算清单"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/vpn/recommend/",
+      "parentCluster": "vpn-recommend-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Reality和WireGuard区别",
+      "primaryKeyword": "Reality和WireGuard区别",
+      "secondaryKeywords": [
+        "VLESS-Reality、Trojan 与 WireGuard 在深包检测下的传输握手差异"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/reviews/",
+      "parentCluster": "vpn-reviews-planned",
+      "targetUrl": "",
+      "contentPriority": "P0",
+      "priorityScore": 8.5,
+      "contentStatus": "planned",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "不限时机场推荐",
+      "primaryKeyword": "不限时机场推荐",
+      "secondaryKeywords": [
+        "永久流量包",
+        "备用机场"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/unlimited-time/",
+      "contentPriority": "P0",
+      "priorityScore": 8.4,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场停服替代方案怎么选",
+      "primaryKeyword": "机场停服替代方案怎么选",
+      "secondaryKeywords": [
+        "备用机场搭配",
+        "不限时流量包"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/risks/",
+      "parentCluster": "risk-management",
+      "targetUrl": "/risks/alternatives/",
+      "contentPriority": "P0",
+      "priorityScore": 8.4,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "靠谱机场推荐",
+      "primaryKeyword": "靠谱机场推荐",
+      "secondaryKeywords": [
+        "运营年限",
+        "老牌机场"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/",
+      "parentCluster": "jichang-selection",
+      "targetUrl": "/jichang/reliable/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/reviews/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Netflix 解锁机场与原生 IP 区别",
+      "primaryKeyword": "Netflix 解锁机场与原生 IP 区别",
+      "secondaryKeywords": [
+        "Disney+解锁",
+        "DNS解锁"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/",
+      "parentCluster": "streaming-unlock",
+      "targetUrl": "/ai-streaming/netflix/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云评测",
+      "primaryKeyword": "飞猫云评测",
+      "secondaryKeywords": [
+        "飞猫云测速",
+        "飞猫云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-feimao",
+      "targetUrl": "/reviews/feimao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/feimao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "微风网络评测",
+      "primaryKeyword": "微风网络评测",
+      "secondaryKeywords": [
+        "微风网络测速",
+        "微风网络怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-weifeng",
+      "targetUrl": "/reviews/weifeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/weifeng/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "星岛梦评测",
+      "primaryKeyword": "星岛梦评测",
+      "secondaryKeywords": [
+        "星岛梦测速",
+        "星岛梦怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-xingdaomeng",
+      "targetUrl": "/reviews/xingdaomeng/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/xingdaomeng/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "二猫云评测",
+      "primaryKeyword": "二猫云评测",
+      "secondaryKeywords": [
+        "二猫云测速",
+        "二猫云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-ermao",
+      "targetUrl": "/reviews/ermao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/ermao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "唯兔云评测",
+      "primaryKeyword": "唯兔云评测",
+      "secondaryKeywords": [
+        "唯兔云测速",
+        "唯兔云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-weitu",
+      "targetUrl": "/reviews/weitu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/weitu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "U1S1评测",
+      "primaryKeyword": "U1S1评测",
+      "secondaryKeywords": [
+        "U1S1测速",
+        "U1S1怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-u1s1",
+      "targetUrl": "/reviews/u1s1/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/u1s1/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "灵猫网络评测",
+      "primaryKeyword": "灵猫网络评测",
+      "secondaryKeywords": [
+        "灵猫网络测速",
+        "灵猫网络怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-lingmao",
+      "targetUrl": "/reviews/lingmao/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/lingmao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云评测",
+      "primaryKeyword": "一翻云评测",
+      "secondaryKeywords": [
+        "一翻云测速",
+        "一翻云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-yifan",
+      "targetUrl": "/reviews/yifan/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yifan/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "SOGO 云评测",
+      "primaryKeyword": "SOGO 云评测",
+      "secondaryKeywords": [
+        "SOGO 云测速",
+        "SOGO 云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-sogo",
+      "targetUrl": "/reviews/sogo/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/sogo/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "可信云评测",
+      "primaryKeyword": "可信云评测",
+      "secondaryKeywords": [
+        "可信云测速",
+        "可信云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-kexin",
+      "targetUrl": "/reviews/kexin/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/kexin/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "全球云评测",
+      "primaryKeyword": "全球云评测",
+      "secondaryKeywords": [
+        "全球云测速",
+        "全球云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-quanqiu",
+      "targetUrl": "/reviews/quanqiu/",
+      "contentPriority": "P0",
+      "priorityScore": 8.3,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/quanqiu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash Verge Rev 下载与使用教程",
+      "primaryKeyword": "Clash Verge Rev 下载与使用教程",
+      "secondaryKeywords": [
+        "Mihomo内核",
+        "TUN模式"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "client",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-desktop",
+      "targetUrl": "/clients/clash-verge-rev/",
+      "contentPriority": "P1",
+      "priorityScore": 8.1,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/subscription/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Shadowrocket 小火箭购买与导入教程",
+      "primaryKeyword": "Shadowrocket 小火箭购买与导入教程",
+      "secondaryKeywords": [
+        "iOS代理",
+        "海外Apple ID"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "client",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-mobile",
+      "targetUrl": "/clients/shadowrocket/",
+      "contentPriority": "P1",
+      "priorityScore": 8.1,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "VPN推荐与机场区别",
+      "primaryKeyword": "VPN推荐与机场区别",
+      "secondaryKeywords": [
+        "免费VPN风险",
+        "游戏加速器"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-comparison",
+      "targetUrl": "/vpn/recommend/",
+      "contentPriority": "P1",
+      "priorityScore": 8,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/recommend/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Claude 机场与原生 IP 要求",
+      "primaryKeyword": "Claude 机场与原生 IP 要求",
+      "secondaryKeywords": [
+        "Anthropic风控",
+        "美日节点"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/",
+      "parentCluster": "ai-access",
+      "targetUrl": "/ai-streaming/claude/",
+      "contentPriority": "P1",
+      "priorityScore": 8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangsuyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "好用的机场",
+      "primaryKeyword": "好用的机场",
+      "secondaryKeywords": [
+        "新手友好",
+        "自研客户端"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/",
+      "parentCluster": "jichang-selection",
+      "targetUrl": "/jichang/best-to-use/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/feimao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "暮光加速官网与套餐价格",
+      "primaryKeyword": "暮光加速官网与套餐价格",
+      "secondaryKeywords": [
+        "暮光加速优惠码",
+        "暮光加速替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-muguang",
+      "targetUrl": "/brands/muguang/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/muguang/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "飞猫云官网与套餐价格",
+      "primaryKeyword": "飞猫云官网与套餐价格",
+      "secondaryKeywords": [
+        "飞猫云优惠码",
+        "飞猫云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-feimao",
+      "targetUrl": "/brands/feimao/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/feimao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "微风网络官网与套餐价格",
+      "primaryKeyword": "微风网络官网与套餐价格",
+      "secondaryKeywords": [
+        "微风网络优惠码",
+        "微风网络替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-weifeng",
+      "targetUrl": "/brands/weifeng/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/weifeng/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "大佬云官网与套餐价格",
+      "primaryKeyword": "大佬云官网与套餐价格",
+      "secondaryKeywords": [
+        "大佬云优惠码",
+        "大佬云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-dalaoyun",
+      "targetUrl": "/brands/dalaoyun/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/dalaoyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "星岛梦官网与套餐价格",
+      "primaryKeyword": "星岛梦官网与套餐价格",
+      "secondaryKeywords": [
+        "星岛梦优惠码",
+        "星岛梦替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-xingdaomeng",
+      "targetUrl": "/brands/xingdaomeng/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/xingdaomeng/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "二猫云官网与套餐价格",
+      "primaryKeyword": "二猫云官网与套餐价格",
+      "secondaryKeywords": [
+        "二猫云优惠码",
+        "二猫云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-ermao",
+      "targetUrl": "/brands/ermao/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/ermao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "无忧链接官网与套餐价格",
+      "primaryKeyword": "无忧链接官网与套餐价格",
+      "secondaryKeywords": [
+        "无忧链接优惠码",
+        "无忧链接替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-wuyou",
+      "targetUrl": "/brands/wuyou/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/wuyou/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "唯兔云官网与套餐价格",
+      "primaryKeyword": "唯兔云官网与套餐价格",
+      "secondaryKeywords": [
+        "唯兔云优惠码",
+        "唯兔云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-weitu",
+      "targetUrl": "/brands/weitu/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/weitu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Firefly（萤火虫）官网与套餐价格",
+      "primaryKeyword": "Firefly（萤火虫）官网与套餐价格",
+      "secondaryKeywords": [
+        "Firefly（萤火虫）优惠码",
+        "Firefly（萤火虫）替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-firefly",
+      "targetUrl": "/brands/firefly/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/firefly/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "宇宙云官网与套餐价格",
+      "primaryKeyword": "宇宙云官网与套餐价格",
+      "secondaryKeywords": [
+        "宇宙云优惠码",
+        "宇宙云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-yuzhou",
+      "targetUrl": "/brands/yuzhou/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yuzhou/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "U1S1官网与套餐价格",
+      "primaryKeyword": "U1S1官网与套餐价格",
+      "secondaryKeywords": [
+        "U1S1优惠码",
+        "U1S1替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-u1s1",
+      "targetUrl": "/brands/u1s1/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/u1s1/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "灵猫网络官网与套餐价格",
+      "primaryKeyword": "灵猫网络官网与套餐价格",
+      "secondaryKeywords": [
+        "灵猫网络优惠码",
+        "灵猫网络替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-lingmao",
+      "targetUrl": "/brands/lingmao/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/lingmao/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "极连云官网与套餐价格",
+      "primaryKeyword": "极连云官网与套餐价格",
+      "secondaryKeywords": [
+        "极连云优惠码",
+        "极连云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-jilian",
+      "targetUrl": "/brands/jilian/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/jilian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "光年梯官网与套餐价格",
+      "primaryKeyword": "光年梯官网与套餐价格",
+      "secondaryKeywords": [
+        "光年梯优惠码",
+        "光年梯替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-guangnian",
+      "targetUrl": "/brands/guangnian/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/guangnian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一翻云官网与套餐价格",
+      "primaryKeyword": "一翻云官网与套餐价格",
+      "secondaryKeywords": [
+        "一翻云优惠码",
+        "一翻云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-yifan",
+      "targetUrl": "/brands/yifan/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yifan/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "SOGO 云官网与套餐价格",
+      "primaryKeyword": "SOGO 云官网与套餐价格",
+      "secondaryKeywords": [
+        "SOGO 云优惠码",
+        "SOGO 云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-sogo",
+      "targetUrl": "/brands/sogo/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/sogo/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "可信云官网与套餐价格",
+      "primaryKeyword": "可信云官网与套餐价格",
+      "secondaryKeywords": [
+        "可信云优惠码",
+        "可信云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-kexin",
+      "targetUrl": "/brands/kexin/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/kexin/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "速界官网与套餐价格",
+      "primaryKeyword": "速界官网与套餐价格",
+      "secondaryKeywords": [
+        "速界优惠码",
+        "速界替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-sujie",
+      "targetUrl": "/brands/sujie/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/sujie/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪跃官网与套餐价格",
+      "primaryKeyword": "闪跃官网与套餐价格",
+      "secondaryKeywords": [
+        "闪跃优惠码",
+        "闪跃替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-shanyue",
+      "targetUrl": "/brands/shanyue/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/shanyue/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "全球云官网与套餐价格",
+      "primaryKeyword": "全球云官网与套餐价格",
+      "secondaryKeywords": [
+        "全球云优惠码",
+        "全球云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-quanqiu",
+      "targetUrl": "/brands/quanqiu/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/quanqiu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "闪电鼠官网与套餐价格",
+      "primaryKeyword": "闪电鼠官网与套餐价格",
+      "secondaryKeywords": [
+        "闪电鼠优惠码",
+        "闪电鼠替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-shandianshu",
+      "targetUrl": "/brands/shandianshu/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/shandianshu/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "云界线官网与套餐价格",
+      "primaryKeyword": "云界线官网与套餐价格",
+      "secondaryKeywords": [
+        "云界线优惠码",
+        "云界线替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-yunjiexian",
+      "targetUrl": "/brands/yunjiexian/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yunjiexian/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "榴莲云官网与套餐价格",
+      "primaryKeyword": "榴莲云官网与套餐价格",
+      "secondaryKeywords": [
+        "榴莲云优惠码",
+        "榴莲云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-liulianyun",
+      "targetUrl": "/brands/liulianyun/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/liulianyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "神行加速官网与套餐价格",
+      "primaryKeyword": "神行加速官网与套餐价格",
+      "secondaryKeywords": [
+        "神行加速优惠码",
+        "神行加速替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-shenxing",
+      "targetUrl": "/brands/shenxing/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/shenxing/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "环球梯官网与套餐价格",
+      "primaryKeyword": "环球梯官网与套餐价格",
+      "secondaryKeywords": [
+        "环球梯优惠码",
+        "环球梯替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-huanqiuti",
+      "targetUrl": "/brands/huanqiuti/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/huanqiuti/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "隐形人官网与套餐价格",
+      "primaryKeyword": "隐形人官网与套餐价格",
+      "secondaryKeywords": [
+        "隐形人优惠码",
+        "隐形人替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-yinxingren",
+      "targetUrl": "/brands/yinxingren/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/yinxingren/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "梯子云官网与套餐价格",
+      "primaryKeyword": "梯子云官网与套餐价格",
+      "secondaryKeywords": [
+        "梯子云优惠码",
+        "梯子云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-tiziyun",
+      "targetUrl": "/brands/tiziyun/",
+      "contentPriority": "P1",
+      "priorityScore": 7.9,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/tiziyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "20元以内月付机场",
+      "primaryKeyword": "20元以内月付机场",
+      "secondaryKeywords": [
+        "20元月付机场推荐",
+        "唯兔云vs一翻云",
+        "极连云月付",
+        "低预算月付机场"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/monthly/",
+      "parentCluster": "monthly",
+      "targetUrl": "/articles/monthly-20-cny-comparison/",
+      "contentPriority": "P1",
+      "priorityScore": 7.8,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/monthly/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "学生党低预算机场怎么选",
+      "primaryKeyword": "学生党低预算机场怎么选",
+      "secondaryKeywords": [
+        "学生党机场怎么买",
+        "百元以内机场推荐",
+        "飞猫云学生版",
+        "轻办公机场预算"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/pricing/cheap/",
+      "parentCluster": "cheap",
+      "targetUrl": "/articles/student-budget-plan-calc/",
+      "contentPriority": "P1",
+      "priorityScore": 7.8,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/cheap/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "IEPL 专线机场是什么",
+      "primaryKeyword": "IEPL 专线机场是什么",
+      "secondaryKeywords": [
+        "IPLC专线",
+        "公网中转对比"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "network-routes",
+      "targetUrl": "/routes/iepl/",
+      "contentPriority": "P1",
+      "priorityScore": 7.6,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/stable/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场节点超时怎么办",
+      "primaryKeyword": "机场节点超时怎么办",
+      "secondaryKeywords": [
+        "连接不上",
+        "系统时间同步"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "troubleshooting",
+      "parentTopic": "/troubleshooting/",
+      "parentCluster": "troubleshooting-core",
+      "targetUrl": "/troubleshooting/node-timeout/",
+      "contentPriority": "P1",
+      "priorityScore": 7.6,
+      "contentStatus": "published",
+      "conversionTarget": "/risks/alternatives/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场订阅更新失败怎么解决",
+      "primaryKeyword": "机场订阅更新失败怎么解决",
+      "secondaryKeywords": [
+        "DNS劫持",
+        "UA拦截"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "troubleshooting",
+      "parentTopic": "/troubleshooting/",
+      "parentCluster": "troubleshooting-core",
+      "targetUrl": "/troubleshooting/subscription-failed/",
+      "contentPriority": "P1",
+      "priorityScore": 7.6,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/subscription/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场跑路征兆与避坑指南",
+      "primaryKeyword": "机场跑路征兆与避坑指南",
+      "secondaryKeywords": [
+        "退款问题",
+        "月付止损"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/risks/",
+      "parentCluster": "risk-management",
+      "targetUrl": "/risks/exit-scam/",
+      "contentPriority": "P1",
+      "priorityScore": 7.6,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/monthly/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一元机场",
+      "primaryKeyword": "一元机场",
+      "secondaryKeywords": [
+        "低价风险",
+        "平价替代"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/one-yuan/",
+      "contentPriority": "P1",
+      "priorityScore": 7.5,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/cheap/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "v2rayN 安装与订阅导入教程",
+      "primaryKeyword": "v2rayN 安装与订阅导入教程",
+      "secondaryKeywords": [
+        "Xray内核",
+        "VLESS客户端"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "client",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-desktop",
+      "targetUrl": "/clients/v2rayn/",
+      "contentPriority": "P1",
+      "priorityScore": 7.5,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场订阅怎么导入教程",
+      "primaryKeyword": "机场订阅怎么导入教程",
+      "secondaryKeywords": [
+        "Clash订阅",
+        "订阅转换"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/",
+      "parentCluster": "tutorials-basics",
+      "targetUrl": "/tutorials/subscription/",
+      "contentPriority": "P1",
+      "priorityScore": 7.5,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/clash-verge-rev/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "ChatGPT和Gemini机场节点选择",
+      "primaryKeyword": "ChatGPT和Gemini机场节点选择",
+      "secondaryKeywords": [
+        "香港节点用不了ChatGPT",
+        "Gemini失败原因",
+        "AI分流策略组",
+        "Cloudflare风控"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/chatgpt/",
+      "parentCluster": "chatgpt",
+      "targetUrl": "/articles/ai-unlock-node-selection/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/ai-streaming/chatgpt/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场跑路前兆与迁移指南",
+      "primaryKeyword": "机场跑路前兆与迁移指南",
+      "secondaryKeywords": [
+        "机场停服怎么办",
+        "机场备用方案",
+        "防跑路机场策略",
+        "主域名被墙判断"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/risks/exit-scam/",
+      "parentCluster": "exit-scam",
+      "targetUrl": "/articles/airport-exit-scam-migration-checklist/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/risks/exit-scam/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场优惠码失效与多版本价格冲突原因",
+      "primaryKeyword": "机场优惠码失效与多版本价格冲突原因",
+      "secondaryKeywords": [
+        "机场优惠码无法使用",
+        "机场官网真假判断",
+        "年付折算月价区别",
+        "Firefly同源品牌"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/reliable/",
+      "parentCluster": "reliable",
+      "targetUrl": "/articles/brand-data-conflict-guide/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/reliable/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "校园网连不上机场怎么办",
+      "primaryKeyword": "校园网连不上机场怎么办",
+      "secondaryKeywords": [
+        "公司内网代理协议",
+        "VLESS Reality优势",
+        "Hysteria2抗封锁",
+        "443端口节点"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/cannot-connect/",
+      "parentCluster": "cannot-connect",
+      "targetUrl": "/articles/campus-enterprise-network-protocols/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/cannot-connect/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "ChatGPT 1020错误与地区不支持排查",
+      "primaryKeyword": "ChatGPT 1020错误与地区不支持排查",
+      "secondaryKeywords": [
+        "ChatGPT地区不支持怎么办",
+        "Error 1020怎么解决",
+        "OpenAI提示不可用",
+        "ChatGPT过盾失败"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/chatgpt/",
+      "parentCluster": "chatgpt",
+      "targetUrl": "/articles/chatgpt-1020-region-fix/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/ai-streaming/chatgpt/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Claude防封号与节点固定规则",
+      "primaryKeyword": "Claude防封号与节点固定规则",
+      "secondaryKeywords": [
+        "Claude封号节点原因",
+        "Claude Code CLI代理",
+        "Anthropic防风控IP",
+        "Claude用什么节点"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/claude/",
+      "parentCluster": "claude",
+      "targetUrl": "/articles/claude-anti-ban-ip-rules/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/ai-streaming/claude/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "专属客户端和第三方订阅机场区别",
+      "primaryKeyword": "专属客户端和第三方订阅机场区别",
+      "secondaryKeywords": [
+        "专属客户端机场缺点",
+        "一键直连机场",
+        "开放订阅机场推荐",
+        "自研客户端机场好吗"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/best-to-use/",
+      "parentCluster": "best-to-use",
+      "targetUrl": "/articles/exclusive-client-vs-third-party/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/best-to-use/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Fake-IP和Redir-Host区别",
+      "primaryKeyword": "Fake-IP和Redir-Host区别",
+      "secondaryKeywords": [
+        "DNS泄漏怎么解决",
+        "浏览器安全DNS冲突",
+        "198.18.0.1打不开",
+        "Redir-Host模式"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/dns-error/",
+      "parentCluster": "dns-error",
+      "targetUrl": "/articles/fake-ip-vs-redir-host-dns-leak/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/dns-error/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "5.6元便宜机场对比",
+      "primaryKeyword": "5.6元便宜机场对比",
+      "secondaryKeywords": [
+        "闪电鼠评测",
+        "大佬云评测",
+        "云界线链接异常",
+        "榴莲云协议",
+        "5.6元机场可靠吗"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/pricing/cheap/",
+      "parentCluster": "cheap",
+      "targetUrl": "/articles/five-six-yuan-budget-tier-comparison/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/cheap/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "香港新加坡日本节点对比",
+      "primaryKeyword": "香港新加坡日本节点对比",
+      "secondaryKeywords": [
+        "香港节点延迟",
+        "新加坡节点Gemini",
+        "日本节点ChatGPT",
+        "亚太节点选择"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/hong-kong/",
+      "parentCluster": "hong-kong",
+      "targetUrl": "/articles/hong-kong-vs-singapore-vs-japan-nodes/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/hong-kong/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场测速图怎么看",
+      "primaryKeyword": "机场测速图怎么看",
+      "secondaryKeywords": [
+        "MB/s和Mbps换算",
+        "TLS RTT是什么意思",
+        "晚高峰测速",
+        "FullCone NAT怎么看"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/ranking/",
+      "parentCluster": "ranking",
+      "targetUrl": "/articles/how-to-read-speedtest-charts/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/ranking/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Hysteria2和VLESS和Trojan区别",
+      "primaryKeyword": "Hysteria2和VLESS和Trojan区别",
+      "secondaryKeywords": [
+        "Hysteria2稳吗",
+        "VLESS Reality原理",
+        "Trojan协议优点",
+        "机场协议选择"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/iepl/",
+      "parentCluster": "protocols",
+      "targetUrl": "/articles/hysteria2-vs-vless-vs-trojan/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/iepl/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "IEPL与IPLC区别",
+      "primaryKeyword": "IEPL与IPLC区别",
+      "secondaryKeywords": [
+        "IEPL专线机场",
+        "公网中转机场",
+        "晚高峰稳定性",
+        "IPLC机场原理"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/iepl/",
+      "parentCluster": "iepl",
+      "targetUrl": "/articles/iepl-vs-iplc-vs-transit/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/iepl/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "电信联通移动用什么机场稳",
+      "primaryKeyword": "电信联通移动用什么机场稳",
+      "secondaryKeywords": [
+        "移动宽带机场推荐",
+        "电信晚高峰丢包",
+        "北方联通选日本还是香港",
+        "三网BGP专线"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/jichang/stable/",
+      "parentCluster": "stable",
+      "targetUrl": "/articles/isp-telecom-unicom-mobile-routing/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/stable/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场月付和年付哪个划算",
+      "primaryKeyword": "机场月付和年付哪个划算",
+      "secondaryKeywords": [
+        "不限时流量包划算吗",
+        "机场预算规划",
+        "光速云147永久套餐",
+        "年付折算月价"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/pricing/monthly/",
+      "parentCluster": "monthly",
+      "targetUrl": "/articles/monthly-vs-annual-vs-unlimited/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/monthly/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "不限设备机场限制",
+      "primaryKeyword": "不限设备机场限制",
+      "secondaryKeywords": [
+        "机场多设备共用",
+        "家庭共享机场",
+        "机场设备数限制",
+        "订阅泄露防封"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/recommend/",
+      "parentCluster": "recommend",
+      "targetUrl": "/articles/multi-device-sharing-limits/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/recommend/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "OpenWrt 24.10 代理插件对比",
+      "primaryKeyword": "OpenWrt 24.10 代理插件对比",
+      "secondaryKeywords": [
+        "Nikki OpenWrt",
+        "OpenClash vs Nikki",
+        "HomeProxy对比",
+        "PassWall2优点"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients",
+      "targetUrl": "/articles/openwrt-nikki-vs-openclash/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "OpenWrt 软路由代理插件",
+      "primaryKeyword": "OpenWrt 软路由代理插件",
+      "secondaryKeywords": [
+        "OpenWrt旁路由设置",
+        "Apple TV挂代理方法",
+        "软路由断网急救",
+        "透明代理家庭拓扑"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients",
+      "targetUrl": "/articles/openwrt-proxy-guide/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "16家机场实测测速截图批次汇总",
+      "primaryKeyword": "16家机场实测测速截图批次汇总",
+      "secondaryKeywords": [
+        "2026-08-11机场测速",
+        "MAI-TEST-BOT实测说明",
+        "机场晚高峰测试区别",
+        "光速云三网实测"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/jichang/ranking/",
+      "parentCluster": "ranking",
+      "targetUrl": "/articles/speedtest-batch-2026-08-summary/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/jichang/ranking/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "VPN与代理机场和游戏加速器区别",
+      "primaryKeyword": "VPN与代理机场和游戏加速器区别",
+      "secondaryKeywords": [
+        "商业VPN对比机场",
+        "游戏加速器原理",
+        "FullCone NAT",
+        "VPN和机场可以同时开吗"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/game-accelerator/",
+      "parentCluster": "game-accelerator",
+      "targetUrl": "/articles/vpn-vs-airport-vs-game-accelerator/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/vpn/game-accelerator/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash Verge Rev 覆写教程",
+      "primaryKeyword": "Clash Verge Rev 覆写教程",
+      "secondaryKeywords": [
+        "Clash AI分流",
+        "ChatGPT分流规则",
+        "Clash Verge Script",
+        "Mihomo 覆写规则"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/routing-rules/",
+      "parentCluster": "routing-rules",
+      "targetUrl": "/tutorials/routing-rules/clash-verge-override-ai-routing/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/routing-rules/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash Verge Rev 使用教程",
+      "primaryKeyword": "Clash Verge Rev 使用教程",
+      "secondaryKeywords": [
+        "Clash Verge Rev 下载",
+        "Clash 订阅导入",
+        "Mihomo 客户端配置",
+        "Windows安装Clash"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/clash-config/",
+      "parentCluster": "clash-config",
+      "targetUrl": "/tutorials/clash-config/clash-verge-rev-guide/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/clash-config/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "iPhone 免费代理客户端",
+      "primaryKeyword": "iPhone 免费代理客户端",
+      "secondaryKeywords": [
+        "sing-box iOS SFI教程",
+        "Karing iOS教程",
+        "替代小火箭免费软件",
+        "iPhone免费用机场"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/subscription/",
+      "parentCluster": "subscription",
+      "targetUrl": "/tutorials/subscription/ios-free-sfi-karing-guide/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/subscription/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "不限时机场 Clash 省流量分流规则",
+      "primaryKeyword": "不限时机场 Clash 省流量分流规则",
+      "secondaryKeywords": [
+        "省流量分流规则",
+        "不限时机场怎么省流量",
+        "Clash 直连规则设置",
+        "防止偷跑代理流量"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/pricing/unlimited-time/",
+      "parentCluster": "unlimited-time",
+      "targetUrl": "/tutorials/routing-rules/save-unlimited-traffic-rules/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/unlimited-time/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Shadowrocket 使用教程",
+      "primaryKeyword": "Shadowrocket 使用教程",
+      "secondaryKeywords": [
+        "小火箭下载",
+        "iOS 机场客户端",
+        "Shadowrocket 订阅导入",
+        "小火箭全局路由设置"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/client-install/",
+      "parentCluster": "client-install",
+      "targetUrl": "/tutorials/client-install/shadowrocket-ios-setup/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/client-install/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Shadowrocket 分流与同步教程",
+      "primaryKeyword": "Shadowrocket 分流与同步教程",
+      "secondaryKeywords": [
+        "小火箭配置",
+        "Shadowrocket全局路由",
+        "小火箭iCloud同步",
+        "小火箭AI分流规则"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/client-install/",
+      "parentCluster": "client-install",
+      "targetUrl": "/tutorials/client-install/shadowrocket-remote-config-sync/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/client-install/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场节点超时排查",
+      "primaryKeyword": "机场节点超时排查",
+      "secondaryKeywords": [
+        "订阅更新失败",
+        "机场连不上怎么办",
+        "Fake-IP 断网",
+        "TLS handshake timeout"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "tutorial",
+      "parentTopic": "/troubleshooting/node-timeout/",
+      "parentCluster": "node-timeout",
+      "targetUrl": "/tutorials/subscription/subscription-troubleshooting/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/node-timeout/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "TUN 模式",
+      "primaryKeyword": "TUN 模式",
+      "secondaryKeywords": [
+        "虚拟网卡模式",
+        "终端走代理",
+        "Clash 服务模式",
+        "Git和Docker走代理"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/tutorials/tun-mode/",
+      "parentCluster": "tun-mode",
+      "targetUrl": "/tutorials/tun-mode/tun-mode-explained/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/tun-mode/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "v2rayN 导入订阅与路由规则教程",
+      "primaryKeyword": "v2rayN 导入订阅与路由规则教程",
+      "secondaryKeywords": [
+        "v2rayN教程",
+        "v2rayN下载设置",
+        "v2rayN和Clash区别",
+        "Windows VLESS客户端"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "tutorial",
+      "parentTopic": "/clients/v2rayn/",
+      "parentCluster": "subscription",
+      "targetUrl": "/tutorials/subscription/v2rayn-import-and-routing-guide/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/v2rayn/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "线路倍率是什么意思",
+      "primaryKeyword": "线路倍率是什么意思",
+      "secondaryKeywords": [
+        "流量扣费计算",
+        "1x倍率机场"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "network-routes",
+      "targetUrl": "/routes/multiplier/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/xingdaomeng/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "灵动云评测",
+      "primaryKeyword": "灵动云评测",
+      "secondaryKeywords": [
+        "灵动云测速",
+        "灵动云怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-lingdongyun",
+      "targetUrl": "/reviews/lingdongyun/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/lingdongyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "浪网评测",
+      "primaryKeyword": "浪网评测",
+      "secondaryKeywords": [
+        "浪网测速",
+        "浪网怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-langwang",
+      "targetUrl": "/reviews/langwang/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/langwang/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "边缘节点 EdgeNova评测",
+      "primaryKeyword": "边缘节点 EdgeNova评测",
+      "secondaryKeywords": [
+        "边缘节点 EdgeNova测速",
+        "边缘节点 EdgeNova怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-edgenova",
+      "targetUrl": "/reviews/edgenova/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/edgenova/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "快狸评测",
+      "primaryKeyword": "快狸评测",
+      "secondaryKeywords": [
+        "快狸测速",
+        "快狸怎么样"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "review",
+      "parentTopic": "/reviews/",
+      "parentCluster": "brand-kuaili",
+      "targetUrl": "/reviews/kuaili/",
+      "contentPriority": "P1",
+      "priorityScore": 7,
+      "contentStatus": "draft",
+      "conversionTarget": "/brands/kuaili/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "免费VPN有哪些风险",
+      "primaryKeyword": "免费VPN有哪些风险",
+      "secondaryKeywords": [
+        "隐私安全",
+        "带宽限制"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-comparison",
+      "targetUrl": "/vpn/free/",
+      "contentPriority": "P1",
+      "priorityScore": 6.9,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/cheap/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "sing-box 客户端与配置说明",
+      "primaryKeyword": "sing-box 客户端与配置说明",
+      "secondaryKeywords": [
+        "SFA",
+        "SFI",
+        "JSON配置"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "client",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-core",
+      "targetUrl": "/clients/sing-box/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash TUN 模式怎么开启与原理",
+      "primaryKeyword": "Clash TUN 模式怎么开启与原理",
+      "secondaryKeywords": [
+        "虚拟网卡模式",
+        "终端代理"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/",
+      "parentCluster": "tutorials-advanced",
+      "targetUrl": "/tutorials/tun-mode/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/clash-verge-rev/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场品牌大全",
+      "primaryKeyword": "机场品牌大全",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/brands/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场品牌评测",
+      "primaryKeyword": "机场品牌评测",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/reviews/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场官网导航",
+      "primaryKeyword": "机场官网导航",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/brands/official-links/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场套餐价格",
+      "primaryKeyword": "机场套餐价格",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/brands/pricing-table/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场优惠码",
+      "primaryKeyword": "机场优惠码",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Transactional",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/brands/coupons/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场替代方案",
+      "primaryKeyword": "机场替代方案",
+      "secondaryKeywords": [
+        "机场品牌数据库与深度评测中心"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/brands/",
+      "parentCluster": "brands-cluster",
+      "targetUrl": "/compare/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "手机 VPN",
+      "primaryKeyword": "手机 VPN",
+      "secondaryKeywords": [
+        "VPN、代理客户端与游戏加速器技术辨析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-cluster",
+      "targetUrl": "/vpn/mobile/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/vpn/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "安卓 VPN",
+      "primaryKeyword": "安卓 VPN",
+      "secondaryKeywords": [
+        "VPN、代理客户端与游戏加速器技术辨析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-cluster",
+      "targetUrl": "/vpn/android/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/vpn/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "VPN 软件评测",
+      "primaryKeyword": "VPN 软件评测",
+      "secondaryKeywords": [
+        "VPN、代理客户端与游戏加速器技术辨析"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-cluster",
+      "targetUrl": "/vpn/reviews/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/vpn/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "游戏加速器",
+      "primaryKeyword": "游戏加速器",
+      "secondaryKeywords": [
+        "VPN、代理客户端与游戏加速器技术辨析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/vpn/",
+      "parentCluster": "vpn-cluster",
+      "targetUrl": "/vpn/game-accelerator/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/vpn/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash Meta",
+      "primaryKeyword": "Clash Meta",
+      "secondaryKeywords": [
+        "第三方代理客户端下载、内核与配置库"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-cluster",
+      "targetUrl": "/clients/clash-meta/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Mihomo",
+      "primaryKeyword": "Mihomo",
+      "secondaryKeywords": [
+        "第三方代理客户端下载、内核与配置库"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/clients/",
+      "parentCluster": "clients-cluster",
+      "targetUrl": "/clients/mihomo/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/clients/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Gemini 机场",
+      "primaryKeyword": "Gemini 机场",
+      "secondaryKeywords": [
+        "AI 生产力工具与流媒体解锁专题"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/",
+      "parentCluster": "ai-streaming-cluster",
+      "targetUrl": "/ai-streaming/gemini/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/ai-streaming/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "YouTube 加速",
+      "primaryKeyword": "YouTube 加速",
+      "secondaryKeywords": [
+        "AI 生产力工具与流媒体解锁专题"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/ai-streaming/",
+      "parentCluster": "ai-streaming-cluster",
+      "targetUrl": "/ai-streaming/youtube/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/ai-streaming/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "IPLC 专线",
+      "primaryKeyword": "IPLC 专线",
+      "secondaryKeywords": [
+        "跨境网络线路架构与节点地区解析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "routes-cluster",
+      "targetUrl": "/routes/iplc/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "香港节点",
+      "primaryKeyword": "香港节点",
+      "secondaryKeywords": [
+        "跨境网络线路架构与节点地区解析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "routes-cluster",
+      "targetUrl": "/routes/hong-kong/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "日本节点",
+      "primaryKeyword": "日本节点",
+      "secondaryKeywords": [
+        "跨境网络线路架构与节点地区解析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "routes-cluster",
+      "targetUrl": "/routes/japan/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "低延迟节点",
+      "primaryKeyword": "低延迟节点",
+      "secondaryKeywords": [
+        "跨境网络线路架构与节点地区解析"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/routes/",
+      "parentCluster": "routes-cluster",
+      "targetUrl": "/routes/low-latency/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/routes/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "Clash 配置",
+      "primaryKeyword": "Clash 配置",
+      "secondaryKeywords": [
+        "代理配置实操教程与新手入门指南"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/",
+      "parentCluster": "tutorials-cluster",
+      "targetUrl": "/tutorials/clash-config/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "分流规则",
+      "primaryKeyword": "分流规则",
+      "secondaryKeywords": [
+        "代理配置实操教程与新手入门指南"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/",
+      "parentCluster": "tutorials-cluster",
+      "targetUrl": "/tutorials/routing-rules/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "客户端安装",
+      "primaryKeyword": "客户端安装",
+      "secondaryKeywords": [
+        "代理配置实操教程与新手入门指南"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/tutorials/",
+      "parentCluster": "tutorials-cluster",
+      "targetUrl": "/tutorials/client-install/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/tutorials/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "连接不上",
+      "primaryKeyword": "连接不上",
+      "secondaryKeywords": [
+        "代理连接故障诊断与异常排查手册"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/",
+      "parentCluster": "troubleshooting-cluster",
+      "targetUrl": "/troubleshooting/cannot-connect/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "DNS 错误",
+      "primaryKeyword": "DNS 错误",
+      "secondaryKeywords": [
+        "代理连接故障诊断与异常排查手册"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/",
+      "parentCluster": "troubleshooting-cluster",
+      "targetUrl": "/troubleshooting/dns-error/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "客户端无法启动",
+      "primaryKeyword": "客户端无法启动",
+      "secondaryKeywords": [
+        "代理连接故障诊断与异常排查手册"
+      ],
+      "searchIntent": "Troubleshooting",
+      "contentType": "topic",
+      "parentTopic": "/troubleshooting/",
+      "parentCluster": "troubleshooting-cluster",
+      "targetUrl": "/troubleshooting/client-wont-start/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/troubleshooting/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场避坑",
+      "primaryKeyword": "机场避坑",
+      "secondaryKeywords": [
+        "机场风险评估、避坑指南与替代选择"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/risks/",
+      "parentCluster": "risks-cluster",
+      "targetUrl": "/risks/avoid-traps/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/risks/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "退款问题",
+      "primaryKeyword": "退款问题",
+      "secondaryKeywords": [
+        "机场风险评估、避坑指南与替代选择"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/risks/",
+      "parentCluster": "risks-cluster",
+      "targetUrl": "/risks/refund-issues/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/risks/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "机场安全性",
+      "primaryKeyword": "机场安全性",
+      "secondaryKeywords": [
+        "机场风险评估、避坑指南与替代选择"
+      ],
+      "searchIntent": "Informational",
+      "contentType": "topic",
+      "parentTopic": "/risks/",
+      "parentCluster": "risks-cluster",
+      "targetUrl": "/risks/security/",
+      "contentPriority": "P1",
+      "priorityScore": 6.8,
+      "contentStatus": "published",
+      "conversionTarget": "/risks/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "一分机场",
+      "primaryKeyword": "一分机场",
+      "secondaryKeywords": [
+        "低价引流辨析"
+      ],
+      "searchIntent": "Commercial Investigation",
+      "contentType": "topic",
+      "parentTopic": "/pricing/",
+      "parentCluster": "pricing-tiers",
+      "targetUrl": "/pricing/one-cent/",
+      "contentPriority": "P2",
+      "priorityScore": 6.4,
+      "contentStatus": "published",
+      "conversionTarget": "/pricing/cheap/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "灵动云官网与套餐价格",
+      "primaryKeyword": "灵动云官网与套餐价格",
+      "secondaryKeywords": [
+        "灵动云优惠码",
+        "灵动云替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-lingdongyun",
+      "targetUrl": "/brands/lingdongyun/",
+      "contentPriority": "P3",
+      "priorityScore": 5.1,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/lingdongyun/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "浪网官网与套餐价格",
+      "primaryKeyword": "浪网官网与套餐价格",
+      "secondaryKeywords": [
+        "浪网优惠码",
+        "浪网替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-langwang",
+      "targetUrl": "/brands/langwang/",
+      "contentPriority": "P3",
+      "priorityScore": 5.1,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/langwang/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "边缘节点 EdgeNova官网与套餐价格",
+      "primaryKeyword": "边缘节点 EdgeNova官网与套餐价格",
+      "secondaryKeywords": [
+        "边缘节点 EdgeNova优惠码",
+        "边缘节点 EdgeNova替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-edgenova",
+      "targetUrl": "/brands/edgenova/",
+      "contentPriority": "P3",
+      "priorityScore": 5.1,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/edgenova/",
+      "lastReviewedAt": "2026-11-21"
+    },
+    {
+      "keyword": "快狸官网与套餐价格",
+      "primaryKeyword": "快狸官网与套餐价格",
+      "secondaryKeywords": [
+        "快狸优惠码",
+        "快狸替代方案"
+      ],
+      "searchIntent": "Navigational",
+      "contentType": "brand-detail",
+      "parentTopic": "/brands/",
+      "parentCluster": "brand-kuaili",
+      "targetUrl": "/brands/kuaili/",
+      "contentPriority": "P3",
+      "priorityScore": 5.1,
+      "contentStatus": "published",
+      "conversionTarget": "/brands/kuaili/",
+      "lastReviewedAt": "2026-11-21"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { siteConfig } from '../../config/site';
+import { primaryNavigation } from '../../config/navigation';
+import siteAvatar from '../../assets/logos/site-avatar.webp';
+---
+
+<footer class="mt-20 border-t border-slate-200 bg-slate-50 text-slate-600">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-12">
+      <!-- Brand Summary & Disclosure -->
+      <div class="lg:col-span-4 space-y-4">
+        <div class="flex items-center gap-2.5">
+          <Image
+            src={siteAvatar}
+            alt={`${siteConfig.name} 站点头像`}
+            class="h-9 w-9 rounded-full object-cover border border-slate-200 shadow-sm"
+          />
+          <span class="text-base font-bold text-slate-900">{siteConfig.name}</span>
+        </div>
+        <p class="text-sm leading-relaxed text-slate-600">
+          {siteConfig.description}
+        </p>
+        <div class="rounded-lg border border-slate-200 bg-white p-3.5 text-xs leading-relaxed text-slate-600">
+          <strong class="block font-semibold text-slate-800 mb-1">商业推广与客观数据分离声明</strong>
+          {siteConfig.affiliateDisclosure}
+        </div>
+      </div>
+
+      <!-- 10 Pillars Directory -->
+      <div class="lg:col-span-5">
+        <h3 class="text-sm font-bold text-slate-900 mb-3">全站十大内容专题</h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+          {
+            primaryNavigation.map((cat) => (
+              <a href={cat.href} class="hover:text-brand transition-colors py-0.5">
+                {cat.label}
+              </a>
+            ))
+          }
+        </div>
+        <h3 class="text-sm font-bold text-slate-900 mt-6 mb-2.5">核心数据库与对比</h3>
+        <div class="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+          <a href="/brands/" class="hover:text-brand">品牌库筛选</a>
+          <a href="/reviews/" class="hover:text-brand">品牌深度评测</a>
+          <a href="/compare/" class="hover:text-brand">品牌横向对比</a>
+          <a href="/clients/" class="hover:text-brand">客户端知识库</a>
+          <a href="/search/" class="hover:text-brand">站内全文搜索</a>
+        </div>
+      </div>
+
+      <!-- Governance & Trust Links -->
+      <div class="lg:col-span-3 space-y-2.5 text-sm">
+        <h3 class="text-sm font-bold text-slate-900 mb-3">站点治理与说明</h3>
+        <ul class="space-y-2">
+          <li><a href="/about/" class="hover:text-brand">关于我们与评测方法</a></li>
+          <li><a href="/disclosure/" class="hover:text-brand">推广链接披露规范</a></li>
+          <li><a href="/privacy/" class="hover:text-brand">隐私政策</a></li>
+          <li><a href="/contact/" class="hover:text-brand">联系编辑部与勘误反馈</a></li>
+          <li><a href="/map/" class="hover:text-brand">HTML 网站地图</a></li>
+          <li><a href="/rss.xml" class="hover:text-brand">RSS 内容订阅</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <p>© 2026 {siteConfig.name} ({siteConfig.siteUrl.replace(/^https?:\/\//, '')}) · {siteConfig.editorialEntity}</p>
+      <p>资料核实基准日期：{siteConfig.lastUpdated} · 仅作网络技术与消费决策参考</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,91 @@
+---
+import type { BrandRecord } from '../../data/brands';
+
+export interface Props {
+  brand: BrandRecord;
+}
+
+const { brand } = Astro.props;
+
+const routeText = brand.routeTypes.join(' ').toUpperCase();
+const hasIepl = routeText.includes('IEPL');
+const hasIplc = routeText.includes('IPLC');
+const hasVerifiedRouteLabel = hasIepl || hasIplc || brand.routeTypes.some((r) => r.includes('中转') || r.includes('BGP'));
+const transportLabel = hasIepl && hasIplc
+  ? 'IEPL / IPLC 专线架构（资料标注）'
+  : hasIepl
+  ? 'IEPL 国际以太网专线（资料标注）'
+  : hasIplc
+  ? 'IPLC 国际私有专线（资料标注）'
+  : '常规中转/路由传输（原理示意）';
+---
+
+<section
+  class="rounded-2xl border border-observatory-border bg-observatory text-slate-100 p-5 sm:p-7 observatory-grid"
+  aria-label={`${brand.name} 网络路径与线路架构示意`}
+>
+  <div class="flex flex-col gap-2 border-b border-slate-800 pb-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <span class="font-mono text-xs uppercase tracking-wider text-slate-400">
+        Network Path Observatory · 线路链路结构
+      </span>
+      <h2 class="mt-1 text-lg sm:text-xl font-bold text-white">
+        {brand.name} 跨境传输路径说明
+      </h2>
+    </div>
+    <span
+      class:list={[
+        'rounded-full border px-3 py-1 font-mono text-xs',
+        hasVerifiedRouteLabel
+          ? 'border-sky-500/40 bg-sky-500/10 text-sky-300'
+          : 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+      ]}
+    >
+      {hasVerifiedRouteLabel ? '依据品牌公开线路资料（原理架构）' : '通用原理示意（待核实细节）'}
+    </span>
+  </div>
+
+  <!-- Responsive 5-stage horizontal/vertical topology flow -->
+  <div class="mt-5 grid gap-3 lg:grid-cols-5 items-stretch">
+    <div class="rounded-xl border border-slate-800 bg-observatory-surface p-3.5">
+      <span class="font-mono text-[10px] uppercase text-slate-400">01 · Client</span>
+      <p class="mt-1 text-sm font-bold text-white">用户设备</p>
+      <p class="mt-1 text-xs text-slate-300">{brand.clientModeLabel}</p>
+    </div>
+
+    <div class="rounded-xl border border-slate-800 bg-observatory-surface p-3.5">
+      <span class="font-mono text-[10px] uppercase text-slate-400">02 · Ingress</span>
+      <p class="mt-1 text-sm font-bold text-white">国内接入入口</p>
+      <p class="mt-1 text-xs text-slate-300">
+        协议：{brand.protocols.slice(0, 2).join(' / ')}
+      </p>
+    </div>
+
+    <div
+      class="rounded-xl border p-3.5 bg-slate-900"
+      style={`border-color: ${brand.brandColor};`}
+    >
+      <span class="font-mono text-[10px] uppercase text-blue-300">03 · Cross-Border</span>
+      <p class="mt-1 text-sm font-bold text-white">跨境传输通道</p>
+      <p class="mt-1 text-xs text-blue-200">{transportLabel}</p>
+    </div>
+
+    <div class="rounded-xl border border-slate-800 bg-observatory-surface p-3.5">
+      <span class="font-mono text-[10px] uppercase text-slate-400">04 · Egress</span>
+      <p class="mt-1 text-sm font-bold text-white">海外落地节点</p>
+      <p class="mt-1 text-xs text-slate-300">
+        {brand.nodeRegions.slice(0, 5).join('、')}
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-slate-800 bg-observatory-surface p-3.5">
+      <span class="font-mono text-[10px] uppercase text-slate-400">05 · Target</span>
+      <p class="mt-1 text-sm font-bold text-white">目标网络服务</p>
+      <p class="mt-1 text-xs text-slate-300">AI 工具 / 海外流媒体 / 常规 Web</p>
+    </div>
+  </div>
+
+  <p class="mt-4 text-xs leading-relaxed text-slate-400">
+    架构提示：本图仅根据品牌资料公开的线路声明（{brand.routeTypes.join('、')}）生成原理级路径示意，不代表可脱离独立路由探测验证其后台物理拓扑；实际体验仍受本地运营商与晚高峰负载影响。
+  </p>
+</section>

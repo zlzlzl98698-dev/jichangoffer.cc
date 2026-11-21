@@ -1,0 +1,291 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import SecondaryTopicShell from '../../components/topics/SecondaryTopicShell.astro';
+import { allClients, type ClientRecord } from '../../data/clients';
+import { allBrands, getBrandBySlug } from '../../data/brands';
+import { siteConfig, getCanonicalUrl } from '../../config/site';
+import { renderInlineMarkdown, stripInlineMarkdown } from '../../lib/inlineMarkdown';
+
+export function getStaticPaths() {
+  return allClients.map((client) => ({
+    params: { slug: client.slug },
+    props: { client },
+  }));
+}
+
+interface Props {
+  client: ClientRecord;
+}
+
+const { client } = Astro.props;
+
+const allTopicEntries = await getCollection('topics', ({ data }) => !data.draft);
+const topicEntry = allTopicEntries.find(
+  (t) => t.data.categoryId === 'clients' && t.data.topicSlug === client.slug
+);
+const rendered = topicEntry ? await render(topicEntry) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings ?? [];
+
+const compatibleBrands = allBrands
+  .filter(
+    (b) =>
+      b.clientMode === 'self-built-and-third-party' ||
+      b.clientMode === 'third-party-supported'
+  )
+  .slice(0, 6);
+
+const recommendedBrands = topicEntry?.data.recommendedBrandSlugs.length
+  ? topicEntry.data.recommendedBrandSlugs
+      .map((s) => getBrandBySlug(s))
+      .filter((b): b is NonNullable<typeof b> => Boolean(b))
+  : compatibleBrands;
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '客户端软件', href: '/clients/' },
+  { label: client.name, href: `/clients/${client.slug}/` },
+];
+
+const pageTitle = topicEntry?.data.title ?? `${client.name} 下载渠道、安装步骤与机场订阅使用教程`;
+const pageDescription =
+  topicEntry?.data.description ??
+  `${client.name} 完整说明：支持平台 ${client.platforms.join('/')}，内核 ${client.coreEngine}，涵盖正版下载来源、安装步骤与常见踩坑排查。`;
+const pageH1 = topicEntry?.data.h1 ?? `${client.name} 下载、安装与配置教程`;
+const pageUpdated = topicEntry?.data.updatedDate
+  ? topicEntry.data.updatedDate.toISOString().slice(0, 10)
+  : client.verifiedAt;
+
+const defaultFaqs = [
+  {
+    question: `${client.name} 软件本身包含免费节点或流量吗？`,
+    answer: `不包含。${client.name} 只是本地代理客户端或内核工具，必须导入支持对应格式（${client.subscriptionFormats.join(' / ')}）的机场订阅才能正常使用。`,
+  },
+  {
+    question: `购买“仅专属客户端”的机场能导入 ${client.name} 吗？`,
+    answer: `不能。诸如 SOGO 云、Firefly 等不提供第三方订阅链接的封闭端品牌只能使用其官方 App，如需在 ${client.name} 中使用，请选择光速云、星岛梦、一翻云、唯兔云或飞猫云等支持标准通用订阅的品牌。`,
+  },
+];
+
+const rawFaqs = topicEntry?.data.faqs.length ? topicEntry.data.faqs : defaultFaqs;
+const faqs = rawFaqs.map((f) => ({
+  question: stripInlineMarkdown(f.question),
+  answer: stripInlineMarkdown(f.answer),
+}));
+
+const softwareSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: client.name,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: client.platforms.join(', '),
+    description: client.summary,
+    url: getCanonicalUrl(`/clients/${client.slug}/`),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: pageH1,
+    description: pageDescription,
+    dateModified: pageUpdated,
+    author: {
+      '@type': 'Organization',
+      name: siteConfig.editorialEntity,
+      url: getCanonicalUrl('/about/'),
+    },
+    mainEntityOfPage: getCanonicalUrl(`/clients/${client.slug}/`),
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  pathname={`/clients/${client.slug}/`}
+  ogType="article"
+  modifiedTime={pageUpdated}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={softwareSchemas}
+>
+  <article class="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+        <span class="rounded bg-brand-soft px-2.5 py-0.5 font-semibold text-brand">
+          {client.category === 'core' ? 'Core Engine · 核心引擎' : 'Proxy Client · 第三方客户端'}
+        </span>
+        <span class="text-slate-500">最近核实：{pageUpdated}</span>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        {pageH1}
+      </h1>
+
+      {
+        topicEntry?.data.answerFirst ? (
+          <div class="rounded-xl border border-blue-200 bg-brand-soft/60 p-4 sm:p-5">
+            <span class="block font-mono text-xs font-bold uppercase tracking-wider text-brand mb-1.5">
+              Answer-First · 核心配置摘要
+            </span>
+            <p class="text-sm sm:text-base leading-relaxed text-slate-800" set:html={renderInlineMarkdown(topicEntry.data.answerFirst)} />
+          </div>
+        ) : (
+          <p class="text-sm sm:text-base leading-relaxed text-slate-700">{client.summary}</p>
+        )
+      }
+
+      {
+        topicEntry?.data.entityChain && topicEntry.data.entityChain.length > 0 && (
+          <div class="flex flex-wrap items-center gap-1.5 text-xs">
+            <span class="font-semibold text-slate-500 mr-1">架构链路：</span>
+            {topicEntry.data.entityChain.map((item, idx) => (
+              <>
+                <span class="rounded-md bg-slate-50 border border-slate-200 px-2.5 py-1 text-slate-700 font-medium">
+                  {item}
+                </span>
+                {idx < topicEntry.data.entityChain.length - 1 && (
+                  <span class="text-slate-400 font-mono">→</span>
+                )}
+              </>
+            ))}
+          </div>
+        )
+      }
+
+      <div
+        class:list={[
+          'rounded-xl border p-4 text-xs sm:text-sm',
+          client.maintenanceStatus === 'caution-verify'
+            ? 'border-rose-200 bg-rose-50 text-rose-900'
+            : client.maintenanceStatus === 'paid-appstore'
+            ? 'border-amber-200 bg-amber-50 text-amber-900'
+            : 'border-emerald-200 bg-emerald-50 text-emerald-900',
+        ]}
+      >
+        <strong>维护与获取状态：</strong>{client.maintenanceNote}
+      </div>
+
+      <dl class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 pt-2 text-xs">
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">支持平台</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{client.platforms.join(' / ')}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">底层内核</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{client.coreEngine}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">支持协议</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{client.protocols.join('、')}</dd>
+        </div>
+        <div class="rounded-lg bg-slate-50 p-3 border border-slate-100">
+          <dt class="text-slate-500">收费方式</dt>
+          <dd class="mt-1 font-semibold text-slate-900">{client.pricingModel}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <!-- Official Source -->
+    <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-base font-bold text-slate-900">官方安全下载与项目主页</h2>
+        <p class="mt-1 text-xs text-slate-600">
+          切勿从搜索引擎竞价广告站点下载来路不明的改包，请认准：{client.officialSourceLabel}
+        </p>
+      </div>
+      <a
+        href={client.officialSourceUrl}
+        target="_blank"
+        rel="nofollow noopener"
+        class="inline-flex items-center justify-center rounded-lg bg-observatory px-4 py-2.5 text-xs font-semibold text-white hover:bg-brand transition-colors shrink-0"
+      >
+        前往官方来源页 ↗
+      </a>
+    </section>
+
+    <!-- Key Features & Steps -->
+    <section class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">核心功能特性</h2>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+          {client.keyFeatures.map((k) => <li>{k}</li>)}
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 space-y-3">
+        <h2 class="text-lg font-bold text-slate-900">常见错误与安全警示</h2>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+          {client.commonPitfalls.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">标准安装与订阅导入步骤</h2>
+      <ol class="list-decimal pl-5 space-y-2.5 text-sm leading-relaxed text-slate-700">
+        {client.installSteps.map((s) => <li>{s}</li>)}
+      </ol>
+      <div class="pt-3 border-t border-slate-100 flex flex-wrap gap-3 text-xs">
+        <a href="/tutorials/subscription/" class="font-semibold text-brand hover:underline">查看机场订阅导入专题 →</a>
+        <a href="/tutorials/tun-mode/" class="font-semibold text-brand hover:underline">查看 TUN 模式详解 →</a>
+        <a href="/troubleshooting/client-wont-start/" class="font-semibold text-slate-700 hover:text-brand">打不开/闪退排查 →</a>
+      </div>
+    </section>
+
+    <!-- Long-Form Markdown Guide (if upgraded via topics collection) -->
+    {
+      topicEntry && Content && (
+        <SecondaryTopicShell
+          headings={headings}
+          recommendedBrands={recommendedBrands}
+          articleClusters={topicEntry.data.articleClusters}
+          crossTopicLinks={topicEntry.data.crossTopicLinks}
+          decisionCriteria={topicEntry.data.decisionCriteria}
+          dataGapNotes={topicEntry.data.dataGapNotes}
+          sources={topicEntry.data.sources}
+          topicLabel={topicEntry.data.primaryKeyword}
+          parentHref="/clients/"
+          parentLabel="客户端软件"
+          updatedAt={pageUpdated}
+        >
+          <Content />
+        </SecondaryTopicShell>
+      )
+    }
+
+    <!-- Compatible Brands -->
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">兼容第三方通用订阅的推荐机场样本</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          compatibleBrands.map((b) => (
+            <a href={`/brands/${b.slug}/`} class="rounded-lg border border-slate-200 p-3.5 hover:border-brand transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-slate-900">{b.name}</span>
+                <span class="font-mono text-xs text-slate-600">{b.lowestMonthlyCny !== null ? `¥${b.lowestMonthlyCny}/月起` : ''}</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-500">{b.protocols.slice(0, 2).join(' / ')}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="topic-faq" class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 scroll-mt-24">
+      <h2 class="text-lg font-bold text-slate-900 mb-3">常见问题（{faqs.length} 题）</h2>
+      <div class="space-y-3">
+        {rawFaqs.map((f, idx) => (
+          <details open={idx < 2} class="rounded-lg border border-slate-200 p-4">
+            <summary class="cursor-pointer font-semibold text-sm text-slate-900">{idx + 1}. {f.question}</summary>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600" set:html={renderInlineMarkdown(f.answer)} />
+          </details>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>

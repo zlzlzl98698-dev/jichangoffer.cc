@@ -1,0 +1,210 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import PillarIntentModules from '../../components/pillars/PillarIntentModules.astro';
+import PillarGuideSection from '../../components/pillars/PillarGuideSection.astro';
+import { allClients, platformMatrices } from '../../data/clients';
+import { getBrandBySlug } from '../../data/brands';
+import { getCanonicalUrl } from '../../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '客户端软件', href: '/clients/' },
+];
+
+const allPillars = await getCollection('pillars', ({ data }) => !data.draft);
+const clientsPillar = allPillars.find((p) => p.data.pillarId === 'clients');
+const rendered = clientsPillar ? await render(clientsPillar) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings ?? [];
+const recommendedBrands = clientsPillar?.data.recommendedBrandSlugs.length
+  ? clientsPillar.data.recommendedBrandSlugs
+      .map((s) => getBrandBySlug(s))
+      .filter((b): b is NonNullable<typeof b> => Boolean(b))
+  : [];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: clientsPillar?.data.title ?? '2026 代理客户端软件大全：Windows / macOS / Android / iOS / Linux / OpenWrt',
+    description:
+      clientsPillar?.data.description ??
+      '整理 2026 年主流第三方代理客户端（Clash Verge Rev、v2rayN、Shadowrocket、FlClash、Hiddify、Karing、Mihomo、sing-box）的维护状态、内核、平台与安全安装渠道。',
+    url: getCanonicalUrl('/clients/'),
+    inLanguage: 'zh-CN',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '2026 主流第三方代理客户端与底层内核档案（11 款）',
+    numberOfItems: allClients.length,
+    itemListElement: allClients.map((c, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: c.name,
+      url: getCanonicalUrl(`/clients/${c.slug}/`),
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={clientsPillar?.data.title ?? '2026 代理客户端软件大全：Windows / macOS / Android / iOS / Linux / OpenWrt'}
+  description={
+    clientsPillar?.data.description ??
+    '整理 2026 年主流第三方代理客户端（Clash Verge Rev、v2rayN、Shadowrocket、FlClash、Hiddify、Karing、Mihomo、sing-box）的维护状态、内核、平台与安全安装渠道。'
+  }
+  pathname="/clients/"
+  breadcrumbs={breadcrumbs}
+  faqs={clientsPillar?.data.faqs ?? []}
+  jsonLdExtra={schemas}
+  publishedTime={clientsPillar?.data.pubDate.toISOString().slice(0, 10)}
+  modifiedTime={clientsPillar?.data.updatedDate?.toISOString().slice(0, 10)}
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-10">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-3">
+      <span class="inline-block rounded bg-brand-soft px-2.5 py-0.5 font-mono text-xs font-semibold text-brand">
+        System A · 客户端软件知识库
+      </span>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        2026 代理客户端软件与全平台安装矩阵
+      </h1>
+      <p class="max-w-3xl text-sm sm:text-base leading-relaxed text-slate-600">
+        机场代理客户端分为两类：<strong>第三方通用客户端</strong>（如 Clash Verge Rev、v2rayN、Shadowrocket、FlClash、Hiddify，可导入兼容订阅）与<strong>机场专属客户端</strong>（部分仅支持账号登录，不提供订阅链接）。本页按六大操作系统梳理官方正版渠道、维护状态与避坑警示。
+      </p>
+    </header>
+
+    <!-- Featured Clients Grid -->
+    <section>
+      <h2 class="text-xl font-bold text-slate-900 mb-4">核心客户端与底层内核档案（11 个专题页）</h2>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          allClients.map((c) => (
+            <article class="rounded-xl border border-slate-200 bg-white p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div>
+                <div class="flex items-start justify-between gap-2">
+                  <h3 class="text-base font-bold text-slate-900">
+                    <a href={`/clients/${c.slug}/`} class="hover:text-brand">{c.name}</a>
+                  </h3>
+                  <span
+                    class:list={[
+                      'shrink-0 rounded-full px-2 py-0.5 text-[10px] font-mono border',
+                      c.maintenanceStatus === 'active'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : c.maintenanceStatus === 'paid-appstore'
+                        ? 'bg-amber-50 text-amber-800 border-amber-200'
+                        : 'bg-rose-50 text-rose-700 border-rose-200',
+                    ]}
+                  >
+                    {c.maintenanceStatus === 'active'
+                      ? '活跃维护'
+                      : c.maintenanceStatus === 'paid-appstore'
+                      ? '海外区付费'
+                      : '维护有限/需注意'}
+                  </span>
+                </div>
+                <p class="mt-1 font-mono text-[11px] text-slate-500">
+                  内核：{c.coreEngine} · 平台：{c.platforms.join('/')}
+                </p>
+                <p class="mt-2.5 text-sm leading-relaxed text-slate-600 line-clamp-3">{c.summary}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <a href={`/clients/${c.slug}/`} class="font-semibold text-brand hover:underline">查看安装与排错指南 →</a>
+                <span class="text-slate-400">{c.pricingModel}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 6 OS Matrices -->
+    <section>
+      <h2 class="text-xl font-bold text-slate-900 mb-4">六大操作系统客户端适配指南</h2>
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          platformMatrices.map((m) => (
+            <div class="rounded-xl border border-slate-200 bg-white p-5 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <h3 class="text-base font-bold text-slate-900">{m.title}</h3>
+                <span class="rounded bg-slate-100 px-2 py-0.5 font-mono text-xs text-slate-700">{m.platform}</span>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-slate-700">主力推荐：</span>
+                <div class="mt-1 flex flex-wrap gap-1.5">
+                  {m.recommendedClients.map((rc) => (
+                    <span class="rounded bg-brand-soft px-2 py-0.5 text-xs font-medium text-brand">{rc}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-slate-700">其他可选：</span>
+                <p class="mt-1 text-xs text-slate-600">{m.additionalClients.join('、')}</p>
+              </div>
+              <p class="rounded-lg bg-slate-50 p-2.5 text-xs leading-relaxed text-slate-600 border border-slate-100">
+                {m.platformTip}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      clientsPillar && (
+        <div class="space-y-8 pt-4">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+            <div class="rounded-xl border border-brand/20 bg-white p-4 sm:p-5 space-y-2 shadow-xs">
+              <div class="font-mono text-[11px] font-bold uppercase tracking-wider text-brand">
+                Answer-First · 客户端选型与正版安全原则
+              </div>
+              <p class="text-sm sm:text-[15px] leading-relaxed text-slate-700">
+                {clientsPillar.data.answerFirst}
+              </p>
+            </div>
+            {clientsPillar.data.entityChain.length > 0 && (
+              <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <span class="font-semibold text-slate-500 mr-1">知识实体链：</span>
+                {clientsPillar.data.entityChain.map((item, idx) => (
+                  <>
+                    <span class="rounded-md bg-white border border-slate-200 px-2.5 py-1 text-slate-700 font-medium">
+                      {item}
+                    </span>
+                    {idx < clientsPillar.data.entityChain.length - 1 && (
+                      <span class="text-slate-400 font-mono">→</span>
+                    )}
+                  </>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <PillarIntentModules
+            layoutMode="client-operations"
+            brands={recommendedBrands}
+            pillarLabel="客户端软件"
+          />
+
+          {Content && (
+            <PillarGuideSection
+              headings={headings}
+              recommendedBrands={recommendedBrands}
+              crossPillarLinks={clientsPillar.data.crossPillarLinks}
+              faqs={clientsPillar.data.faqs}
+              dataGapNotes={clientsPillar.data.dataGapNotes}
+              sources={clientsPillar.data.sources}
+              pillarLabel="客户端软件"
+              updatedAt={clientsPillar.data.updatedDate?.toISOString().slice(0, 10)}
+            >
+              <Content />
+            </PillarGuideSection>
+          )}
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

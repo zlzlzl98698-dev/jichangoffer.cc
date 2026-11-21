@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import { brandComparisons, getBrandBySlug } from '../../data/brands';
+import { getCanonicalUrl } from '../../config/site';
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '机场品牌', href: '/brands/' },
+  { label: '品牌对比与替代方案', href: '/compare/' },
+];
+
+const faqs = [
+  {
+    question: '同价位或同热门品牌放在一起横向对比，最核心需要比哪三项？',
+    answer:
+      '第一比“实际付出去的最短起步账期及单 GB 倍率后真价”；第二比“客户端自由度（支持第三方通用订阅 vs 纯独占软件）”；第三比“是否具备可验证实测图记录与运营存续时间”。这三项决定后期能不能顺手用到老、而不只是图第一眼面板美观。',
+  },
+  {
+    question: '如果对比后想要找替代方案（老机场涨价或断流），怎样避开连环踩同一个上游的坑？',
+    answer:
+      '务必查看两边品牌的线路架构与价格档位是否过度重合（例如警惕多款同规格 ¥5.6/月无图年付群）。建议把主力与备用选在不同协议路线、且不同建站历史的独立运营品牌上，并首选真月付或百元不限时冷备降低风险。',
+  },
+  {
+    question: '如果我想自己对任意 32 家品牌做多条件组合对比怎么办？',
+    answer:
+      '本页展示已拆解好的两两深度强对比篇目；若需多品牌条件交叉过滤，直接前往全站「机场品牌大全 (/brands/)」利用搜索框与价格/线路/客户端/AI 筛选器或前往「价格总表 (/brands/pricing-table/)」一键对照全库。',
+  },
+];
+
+const jsonLdExtra = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '2026 机场品牌横向对比与替代方案决策中心',
+  description: '聚焦同价位热门机场两两横向拆解，助力筛选高匹配度的平替或主力选项。',
+  url: getCanonicalUrl('/compare/'),
+};
+---
+
+<BaseLayout
+  title="机场品牌横向对比与替代方案专题"
+  description="按同价位、专线架构、客户端模式（开放第三方订阅 vs 纯专属客户端）逐项拆解热门机场品牌的真实差异。"
+  pathname="/compare/"
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={jsonLdExtra}
+>
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 space-y-8">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        机场品牌横向对比与替代方案决策中心
+      </h1>
+      <p class="mt-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
+        不靠主观打分，直接把两家品牌的价格门槛、单 GB 成本、协议兼容、客户端限制和实测证据摆在同一张表里比较。
+      </p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      {
+        brandComparisons.map((cmp) => {
+          const brandA = getBrandBySlug(cmp.brandASlug);
+          const brandB = getBrandBySlug(cmp.brandBSlug);
+          return (
+            <article class="rounded-xl border border-slate-200 bg-white p-6 flex flex-col justify-between hover:shadow-md transition-shadow">
+              <div>
+                <span class="inline-block rounded bg-brand-soft px-2.5 py-0.5 font-mono text-xs font-semibold text-brand">
+                  {brandA?.name} vs {brandB?.name}
+                </span>
+                <h2 class="mt-3 text-lg font-bold text-slate-900">
+                  <a href={`/compare/${cmp.slug}/`} class="hover:text-brand">{cmp.title}</a>
+                </h2>
+                <p class="mt-2 text-sm text-slate-600 leading-relaxed">{cmp.description}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="text-slate-500">核心维度：{cmp.focusDimension}</span>
+                <a href={`/compare/${cmp.slug}/`} class="font-semibold text-brand hover:underline shrink-0">查看对比 →</a>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">两两品牌对比时的四大核心评估维度</h2>
+        <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <li><strong>付费门槛与有效流量</strong>：不混淆年付均价与真单月付价；同时结合节点倍率看真实可用单 GB 费率。</li>
+          <li><strong>线路架构与协议兼容性</strong>：对照 IEPL / IPLC 专线 vs 公网中转及 Hysteria2 / Trojan / VLESS 支持度。</li>
+          <li><strong>客户端权限边界</strong>：明确划分“双支持”与“仅独占封闭客户端”，直接影响能否上软路由与写 AI 分流规则。</li>
+          <li><strong>实测证据完备度</strong>：区分带 2026-08 批次实测 PNG / 08-19 解锁矩阵图选手与资料待核实选手。</li>
+        </ul>
+      </section>
+      <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-2.5">
+        <h2 class="text-lg font-bold text-slate-900">延伸选型与替代工具入口</h2>
+        <ul class="space-y-2 text-xs sm:text-sm">
+          <li><a href="/risks/alternatives/" class="font-semibold text-brand hover:underline">→ 老机场停服或降速后的 1 对 1 平替选择专题</a></li>
+          <li><a href="/brands/" class="font-semibold text-brand hover:underline">→ 32 家机场品牌实时筛选库（按预算、专线与场景过滤）</a></li>
+          <li><a href="/brands/pricing-table/" class="font-semibold text-brand hover:underline">→ 全站套餐价格对照总表（一目了然比月付/年付/永久包）</a></li>
+          <li><a href="/reviews/" class="font-semibold text-brand hover:underline">→ 机场品牌深度评测矩阵（读单品牌完整实测记录）</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-6 space-y-4">
+      <h2 class="text-lg font-bold text-slate-900">品牌对比常见问题</h2>
+      <div class="space-y-2.5">
+        {faqs.map((f, idx) => (
+          <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-900">{idx + 1}. {f.question}</summary>
+            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,377 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/navigation/Breadcrumbs.astro';
+import BrandCtaBanner from '../../components/conversion/BrandCtaBanner.astro';
+import SpeedtestObservatory from '../../components/charts/SpeedtestObservatory.astro';
+import UnlockMatrixObservatory from '../../components/charts/UnlockMatrixObservatory.astro';
+import RouteTopologyObservatory from '../../components/charts/RouteTopologyObservatory.astro';
+import { allBrands, getSimilarBrands, type BrandRecord } from '../../data/brands';
+import { getBrandLink } from '../../data/links/brands';
+import { getCanonicalUrl } from '../../config/site';
+import { renderInlineMarkdown, stripInlineMarkdown } from '../../lib/inlineMarkdown';
+import { findBrandComparisons } from '../../lib/contentLinks';
+
+export async function getStaticPaths() {
+  const mdReviews = await getCollection('reviews', ({ data }) => !data.draft);
+  const mdBySlug = new Map(mdReviews.map((entry) => [entry.data.brandSlug, entry]));
+
+  return allBrands.map((brand) => ({
+    params: { slug: brand.slug },
+    props: {
+      brand,
+      reviewEntry: mdBySlug.get(brand.slug) || null,
+    },
+  }));
+}
+
+interface Props {
+  brand: BrandRecord;
+  reviewEntry: Awaited<ReturnType<typeof getCollection<'reviews'>>>[number] | null;
+}
+
+const { brand, reviewEntry } = Astro.props;
+const rendered = reviewEntry ? await render(reviewEntry) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings || [];
+const link = getBrandLink(brand.slug);
+const similar = getSimilarBrands(brand.slug, 3);
+const relatedComparisons = findBrandComparisons(brand.slug);
+const upstreamTopics = reviewEntry?.data.upstreamTopics?.length
+  ? reviewEntry.data.upstreamTopics
+  : [
+      { label: '2026 机场综合推荐与选型矩阵', href: '/jichang/recommend/' },
+      { label: '高性价比机场单 GB 成本测算', href: '/pricing/value/' },
+      { label: 'IEPL 专线架构原理与对比', href: '/routes/iepl/' },
+    ];
+
+const breadcrumbs = [
+  { label: '首页', href: '/' },
+  { label: '品牌评测中心', href: '/reviews/' },
+  { label: `${brand.name}评测`, href: `/reviews/${brand.slug}/` },
+];
+
+const pageTitle = reviewEntry
+  ? reviewEntry.data.title
+  : `${brand.name}深度评测（2026）：套餐成本、线路架构、实测证据与适合人群分析`;
+const pageDescription = reviewEntry
+  ? reviewEntry.data.description
+  : `${brand.name}客观评测报告：基于${brand.sourceReferences.join('、')}核验，拆解其${brand.routeTypes.join('/')}特性、${brand.lowestMonthlyLabel}定价结构、客户端限制与实测状态。`;
+const answerFirst = reviewEntry ? reviewEntry.data.answerFirst : brand.summary;
+
+const rawFaqs = reviewEntry?.data.faqs?.length
+  ? reviewEntry.data.faqs
+  : [
+      {
+        question: `${brand.name} 的评测数据是实测还是品牌宣传？`,
+        answer:
+          brand.testReports.length > 0
+            ? `本页明确区分两类数据：测速模块中的 ${brand.testReports.map((t) => t.date).join('、')} 记录属于真实测速快照或原始 PNG 截图（Measured）；套餐价格、无限速/修复承诺等描述则标注为品牌资料（Vendor），二者不会混为一谈。`
+            : `当前资料库尚未收录 ${brand.name} 的独立节点测速截图，因此本页所有线路与解锁描述均诚实标注为“品牌资料（Vendor）”或“尚未测试（Not Tested）”，购买前建议先小额验证。`,
+      },
+      {
+        question: `${brand.name} 适合哪些用户，不适合哪些用户？`,
+        answer: `优势在于：${brand.advantages.join('；')}。主要局限在于：${brand.limitations.join('；')}。`,
+      },
+    ];
+
+const faqs = rawFaqs.map((f) => ({
+  question: stripInlineMarkdown(f.question),
+  answer: stripInlineMarkdown(f.answer),
+}));
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: reviewEntry?.data.h1 || `${brand.name}评测：真实配置、价格成本、实测数据与买前避坑`,
+  description: pageDescription,
+  datePublished: brand.verifiedAt,
+  dateModified: brand.updatedAt,
+  author: {
+    '@type': 'Organization',
+    name: '机场优惠评测编辑部',
+    url: getCanonicalUrl('/about/'),
+  },
+  mainEntityOfPage: getCanonicalUrl(`/reviews/${brand.slug}/`),
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  pathname={`/reviews/${brand.slug}/`}
+  ogType="article"
+  publishedTime={brand.verifiedAt}
+  modifiedTime={brand.updatedAt}
+  breadcrumbs={breadcrumbs}
+  faqs={faqs}
+  jsonLdExtra={articleSchema}
+>
+  <article class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <div class="grid gap-8 lg:grid-cols-12">
+      <!-- Main Long-Form Content -->
+      <div class="lg:col-span-8 space-y-8 min-w-0">
+        <!-- Header & Answer-First -->
+        <header class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <span class="rounded bg-brand-soft px-2.5 py-0.5 font-semibold text-brand">
+              {reviewEntry?.data.reviewDepthStatus === 'deep-completed'
+                ? '万字级深度评测完稿'
+                : brand.testReports.length > 0
+                ? '结构化实证评测（含实测证据 · 持续扩写中）'
+                : '结构化资料评测（待补独立实测）'}
+            </span>
+            <span class="text-slate-500">最后更新：{brand.updatedAt} · 核验：{brand.verifiedAt}</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+            {reviewEntry?.data.h1 || `${brand.name}评测：真实配置、价格成本、实测数据与买前避坑`}
+          </h1>
+
+          <div class="rounded-xl border border-blue-200 bg-brand-soft/60 p-4 sm:p-5">
+            <span class="block font-mono text-xs font-bold uppercase tracking-wider text-brand mb-1.5">
+              Answer-First · 核心评测结论
+            </span>
+            <p class="text-sm sm:text-base leading-relaxed text-slate-800" set:html={renderInlineMarkdown(answerFirst)} />
+          </div>
+
+          <div class="flex flex-wrap gap-3 text-xs">
+            <a href={`/brands/${brand.slug}/`} class="rounded-lg border border-slate-300 px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+              查看{brand.name}完整套餐与优惠码档案 →
+            </a>
+            <a href="/compare/" class="rounded-lg border border-slate-300 px-3 py-1.5 font-semibold text-slate-800 hover:border-brand hover:text-brand">
+              同价位横向对比 →
+            </a>
+          </div>
+        </header>
+
+        {headings.length > 0 && (
+          <details class="lg:hidden rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <summary class="cursor-pointer font-mono text-xs font-bold uppercase tracking-wider text-slate-800">
+              展开{brand.name}评测目录（{headings.filter((h) => h.depth <= 3).length} 节）
+            </summary>
+            <ul class="mt-3 space-y-1.5 text-xs border-t border-slate-200 pt-3">
+              {headings.filter((h) => h.depth <= 3).map((h) => (
+                <li class={h.depth === 3 ? 'pl-3' : ''}>
+                  <a href={`#${h.slug}`} class="text-slate-700 hover:text-brand">{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+
+        <!-- Observatory Visualizations -->
+        <SpeedtestObservatory brand={brand} />
+        <UnlockMatrixObservatory brand={brand} />
+        <RouteTopologyObservatory brand={brand} />
+
+        <!-- Prose Body: Full Markdown or Brand-Specific Evidence Review -->
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 prose-zh max-w-none">
+          {Content ? (
+            <Content />
+          ) : (
+            <div class="space-y-6">
+              <h2>一、{brand.name}基础定位与运营背景核查</h2>
+              <p>
+                {brand.name}（标识：<code>{brand.slug}</code>
+                {brand.aliases.length > 0 ? `，常见别名：${brand.aliases.join('、')}` : ''}）在当前资料库中记录的成立/运营时间为
+                <strong>{brand.foundedYear ? `${brand.foundedYear} 年` : brand.foundedYearNote || '待核实'}</strong>。
+                线路方面主要标注为 <strong>{brand.routeTypes.join('、')}</strong>，协议支持{' '}
+                <strong>{brand.protocols.join('、')}</strong>，节点覆盖范围：{brand.nodeRegions.join('、')}（{brand.nodeCountLabel}）。
+              </p>
+
+              <h2>二、客户端兼容与设备支持门槛</h2>
+              <p>
+                客户端形态直接决定你买回去能不能在自己的设备上用。{brand.name} 当前的适配方式为：
+                <strong>{brand.clientModeLabel}</strong>。适配软件列表包括：{brand.clients.join('、')}。
+                {brand.clientMode === 'exclusive-client-only'
+                  ? '请注意：由于该品牌不提供第三方通用订阅链接，习惯使用 Clash Verge Rev、Shadowrocket 或 OpenWrt 软路由的进阶用户将无法直接导入节点。'
+                  : brand.clientMode === 'self-built-and-third-party'
+                  ? '这种“自研一键客户端 + 第三方通用订阅”双支持模式，既能让零基础新手快速上手，也给后期折腾分流规则留出了退路。'
+                  : '建议购入前再次在后台确认所需格式的订阅接口。'}
+              </p>
+
+              <h2>三、套餐价格与计费周期成本分析</h2>
+              <p>
+                {brand.name} 的最低参考门槛为：<strong>{brand.lowestMonthlyLabel}</strong>。
+                {brand.pricingPlans.length > 0 ? (
+                  `目前资料库核实收录了 ${brand.pricingPlans.length} 档套餐（包含${brand.hasMonthlyPlan ? '月付' : ''}${brand.hasAnnualPlan ? '、年付' : ''}${brand.hasUnlimitedTimePlan ? '及永久不限时包' : ''}）。`
+                ) : (
+                  '由于该品牌目前缺少完整公开套餐文本，本页不虚构补齐虚拟档位，仅保留已验证信息。'
+                )}
+              </p>
+
+              {brand.pricingPlans.length > 0 && (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>套餐名称</th>
+                      <th>周期</th>
+                      <th>标价</th>
+                      <th>流量</th>
+                      <th>备注</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {brand.pricingPlans.map((p) => (
+                      <tr>
+                        <td>{p.name}</td>
+                        <td>{p.billingLabel}</td>
+                        <td>¥{p.priceCny}</td>
+                        <td>{p.trafficDisplay}（{p.trafficCycle}）</td>
+                        <td>{[p.multiplier, p.deviceLimit, p.suitableFor].filter(Boolean).join(' · ') || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+
+              <h2>四、客观优势、限制及资料冲突核验</h2>
+              <h3>主要优势</h3>
+              <ul>
+                {brand.advantages.map((item) => <li>{item}</li>)}
+              </ul>
+              <h3>已知短板与待核实项</h3>
+              <ul>
+                {brand.limitations.map((item) => <li>{item}</li>)}
+                {brand.riskNotes.map((item) => <li>{item}</li>)}
+              </ul>
+
+              {brand.conflictNotes.length > 0 && (
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+                  <strong>跨资料冲突提示：</strong>
+                  <ul class="mt-2 mb-0">
+                    {brand.conflictNotes.map((c) => <li>{c}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              <h2>五、深度评测扩写与后续复测计划</h2>
+              <p>
+                本站目标为每个唯一品牌建设万字级深入评测，但严禁靠重复段落或虚构体验充数。目前 {brand.name} 已完成真实结构化资料审计与现有证据入库；后续待补充任务包括：连续 7 天晚高峰（20:30–22:30）三网延迟/丢包采样、Claude/Gemini/Netflix 逐节点实测矩阵及支付退款流程复核。
+              </p>
+            </div>
+          )}
+        </section>
+
+        <!-- Transparent CTA -->
+        <BrandCtaBanner
+          brandSlug={brand.slug}
+          placement="review-bottom-cta"
+          contentType="brand-review"
+          brandColor={brand.brandColor}
+          lowestMonthlyLabel={brand.lowestMonthlyLabel}
+        />
+
+        <!-- FAQ Section -->
+        <section class="rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 class="text-xl font-bold text-slate-900 mb-4">{brand.name} 评测常见问题（{rawFaqs.length} 题）</h2>
+          <div class="space-y-3">
+            {rawFaqs.map((f, idx) => (
+              <details open={idx === 0} class="rounded-lg border border-slate-200 p-4">
+                <summary class="cursor-pointer font-semibold text-sm text-slate-900">{f.question}</summary>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600" set:html={renderInlineMarkdown(f.answer)} />
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {relatedComparisons.length > 0 && (
+          <section class="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3">
+            <h2 class="text-lg font-bold text-slate-900">{brand.name} 相关横向对比专题</h2>
+            <div class="grid gap-3 sm:grid-cols-2">
+              {relatedComparisons.map((cmp) => (
+                <a href={`/compare/${cmp.slug}/`} class="rounded-xl border border-slate-200 bg-white p-4 hover:border-brand transition-colors">
+                  <span class="block text-xs font-mono text-brand">{cmp.focusDimension}</span>
+                  <span class="mt-1 block text-sm font-bold text-slate-900">{cmp.title}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <!-- Sticky Desktop Sidebar: Quick Info + TOC + Related -->
+      <aside class="lg:col-span-4 space-y-6">
+        <div class="sticky top-24 space-y-5">
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-lg font-mono text-sm font-bold text-white"
+                style={`background-color: ${brand.brandColor};`}
+              >
+                {brand.logoMonogram}
+              </span>
+              <div>
+                <h2 class="text-base font-bold text-slate-900">{brand.name} 快速档案</h2>
+                <p class="text-xs text-slate-500">优惠码：{link?.couponCode || '待核实'}</p>
+              </div>
+            </div>
+
+            <dl class="space-y-2 text-xs border-t border-slate-100 pt-3">
+              <div class="flex justify-between gap-2">
+                <dt class="text-slate-500">最低参考</dt>
+                <dd class="font-mono font-semibold text-slate-900 text-right">{brand.lowestMonthlyCny !== null ? `¥${brand.lowestMonthlyCny}/月起` : '待核实'}</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="text-slate-500">路线</dt>
+                <dd class="font-medium text-slate-800 text-right">{brand.routeTypes[0]}</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="text-slate-500">客户端</dt>
+                <dd class="font-medium text-slate-800 text-right">{brand.clientMode === 'exclusive-client-only' ? '专属客户端' : '支持第三方'}</dd>
+              </div>
+            </dl>
+
+            <a
+              href={`/brands/${brand.slug}/`}
+              class="block w-full rounded-lg bg-slate-900 px-4 py-2.5 text-center text-xs font-semibold text-white hover:bg-brand transition-colors"
+            >
+              查看完整价格表与注册入口
+            </a>
+          </div>
+
+          {headings.length > 0 && (
+            <nav aria-label="文章目录" class="hidden lg:block rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">评测目录</h2>
+              <ul class="space-y-1.5 text-xs">
+                {headings
+                  .filter((h) => h.depth <= 3)
+                  .map((h) => (
+                    <li class={h.depth === 3 ? 'pl-3' : ''}>
+                      <a href={`#${h.slug}`} class="text-slate-600 hover:text-brand line-clamp-1">
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </nav>
+          )}
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 space-y-2.5">
+            <h2 class="text-sm font-bold text-slate-900">上游专题与前置背景</h2>
+            <ul class="space-y-1.5 text-xs">
+              {upstreamTopics.map((ut) => (
+                <li><a href={ut.href} class="text-brand hover:underline">↑ {ut.label}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
+            <h2 class="text-sm font-bold text-slate-900">同价位相似评测</h2>
+            <div class="space-y-2">
+              {similar.map((s) => (
+                <a href={`/reviews/${s.slug}/`} class="block rounded-lg border border-slate-200 p-2.5 hover:border-brand transition-colors">
+                  <span class="block text-xs font-bold text-slate-900">{s.name}评测</span>
+                  <span class="block text-[11px] text-slate-500 mt-0.5">{s.lowestMonthlyLabel}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

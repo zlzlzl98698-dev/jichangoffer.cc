@@ -1,0 +1,56 @@
+# Apache 静态站点部署配置 (jichangoffer.cc)
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 强制将 www 子域 301 重定向至正式裸域 + HTTPS
+  RewriteCond %{HTTP_HOST} ^www\.jichangoffer\.cc$ [NC]
+  RewriteRule ^ https://jichangoffer.cc%{REQUEST_URI} [L,R=301]
+
+  # 强制 HTTPS（如由上游 CDN/反代终止 TLS 可结合 X-Forwarded-Proto 调整）
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 统一末尾斜杠（排除真实文件与带扩展名静态资源）
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{1,6}$
+  RewriteRule ^ %{REQUEST_URI}/ [L,R=301]
+
+  # 历史路径与别名 301 重定向示例（新站点扩展时在此追加）
+  RedirectMatch 301 ^/brand/([^/]+)/?$ /brands/$1/
+  RedirectMatch 301 ^/review/([^/]+)/?$ /reviews/$1/
+  RedirectMatch 301 ^/tutorial/(.*)$ /tutorials/$1
+</IfModule>
+
+ErrorDocument 404 /404.html
+
+# 压缩传输
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# 缓存策略
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 10 minutes"
+  ExpiresByType application/xml "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+# 基础安全响应头
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

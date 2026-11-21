@@ -1,0 +1,33 @@
+---
+import type { BreadcrumbItem } from '../seo/SEOHead.astro';
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="面包屑导航" class="mb-5 text-sm text-slate-500">
+  <ol class="flex flex-wrap items-center gap-1.5">
+    {
+      items.map((item, idx) => {
+        const isLast = idx === items.length - 1;
+        return (
+          <li class="flex items-center gap-1.5">
+            {idx > 0 && <span class="text-slate-300" aria-hidden="true">/</span>}
+            {isLast ? (
+              <span class="font-medium text-slate-800" aria-current="page">
+                {item.label}
+              </span>
+            ) : (
+              <a href={item.href} class="hover:text-brand transition-colors">
+                {item.label}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

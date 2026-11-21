@@ -1,0 +1,33 @@
+{
+  "name": "jichangoffer.cc",
+  "type": "module",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist",
+    "build:astro": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "keywords:update": "npx tsx scripts/keywords/run-pipeline.ts",
+    "validate": "npx tsx scripts/validation/run-qa.ts"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.0",
+    "@astrojs/rss": "^4.0.17",
+    "@astrojs/sitemap": "^3.7.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^7.4.13",
+    "pagefind": "^1.4.0",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@tailwindcss/typography": "^0.5.16",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
